@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CAB83F852927CEC800BB1D30 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F842927CEC800BB1D30 /* CustomColors.swift */; };
 		CACE542A2927C25100A37F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE54292927C25100A37F5A /* AppDelegate.swift */; };
 		CACE542C2927C25100A37F5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE542B2927C25100A37F5A /* SceneDelegate.swift */; };
 		CACE542E2927C25100A37F5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE542D2927C25100A37F5A /* ViewController.swift */; };
@@ -14,8 +15,6 @@
 		CACE54332927C25200A37F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CACE54322927C25200A37F5A /* Assets.xcassets */; };
 		CACE54362927C25200A37F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CACE54342927C25200A37F5A /* LaunchScreen.storyboard */; };
 		CACE54412927C25200A37F5A /* Le_BaluchonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE54402927C25200A37F5A /* Le_BaluchonTests.swift */; };
-		CACE544B2927C25200A37F5A /* Le_BaluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE544A2927C25200A37F5A /* Le_BaluchonUITests.swift */; };
-		CACE544D2927C25200A37F5A /* Le_BaluchonUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE544C2927C25200A37F5A /* Le_BaluchonUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +25,11 @@
 			remoteGlobalIDString = CACE54252927C25100A37F5A;
 			remoteInfo = "Le Baluchon";
 		};
-		CACE54472927C25200A37F5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CACE541E2927C25100A37F5A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CACE54252927C25100A37F5A;
-			remoteInfo = "Le Baluchon";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CAB83F7F2927C89000BB1D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Le Baluchon/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
+		CAB83F842927CEC800BB1D30 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		CACE54262927C25100A37F5A /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CACE54292927C25100A37F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CACE542B2927C25100A37F5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,12 +37,8 @@
 		CACE54302927C25100A37F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CACE54322927C25200A37F5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CACE54352927C25200A37F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CACE54372927C25200A37F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CACE543C2927C25200A37F5A /* Le BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Le BaluchonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CACE54402927C25200A37F5A /* Le_BaluchonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Le_BaluchonTests.swift; sourceTree = "<group>"; };
-		CACE54462927C25200A37F5A /* Le BaluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Le BaluchonUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CACE544A2927C25200A37F5A /* Le_BaluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Le_BaluchonUITests.swift; sourceTree = "<group>"; };
-		CACE544C2927C25200A37F5A /* Le_BaluchonUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Le_BaluchonUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +56,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CACE54432927C25200A37F5A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,7 +64,6 @@
 			children = (
 				CACE54282927C25100A37F5A /* Le Baluchon */,
 				CACE543F2927C25200A37F5A /* Le BaluchonTests */,
-				CACE54492927C25200A37F5A /* Le BaluchonUITests */,
 				CACE54272927C25100A37F5A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +73,6 @@
 			children = (
 				CACE54262927C25100A37F5A /* Le Baluchon.app */,
 				CACE543C2927C25200A37F5A /* Le BaluchonTests.xctest */,
-				CACE54462927C25200A37F5A /* Le BaluchonUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,13 +80,11 @@
 		CACE54282927C25100A37F5A /* Le Baluchon */ = {
 			isa = PBXGroup;
 			children = (
-				CACE54292927C25100A37F5A /* AppDelegate.swift */,
-				CACE542B2927C25100A37F5A /* SceneDelegate.swift */,
-				CACE542D2927C25100A37F5A /* ViewController.swift */,
-				CACE542F2927C25100A37F5A /* Main.storyboard */,
-				CACE54322927C25200A37F5A /* Assets.xcassets */,
-				CACE54342927C25200A37F5A /* LaunchScreen.storyboard */,
-				CACE54372927C25200A37F5A /* Info.plist */,
+				CACE545C2927C33A00A37F5A /* Repositories */,
+				CACE54592927C31400A37F5A /* Models */,
+				CACE545A2927C31E00A37F5A /* ViewControllers */,
+				CACE545B2927C32D00A37F5A /* Views */,
+				CACE545D2927C37800A37F5A /* Supporting Files */,
 			);
 			path = "Le Baluchon";
 			sourceTree = "<group>";
@@ -118,13 +97,47 @@
 			path = "Le BaluchonTests";
 			sourceTree = "<group>";
 		};
-		CACE54492927C25200A37F5A /* Le BaluchonUITests */ = {
+		CACE54592927C31400A37F5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CACE544A2927C25200A37F5A /* Le_BaluchonUITests.swift */,
-				CACE544C2927C25200A37F5A /* Le_BaluchonUITestsLaunchTests.swift */,
 			);
-			path = "Le BaluchonUITests";
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CACE545A2927C31E00A37F5A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CACE542D2927C25100A37F5A /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CACE545B2927C32D00A37F5A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CACE54342927C25200A37F5A /* LaunchScreen.storyboard */,
+				CACE542F2927C25100A37F5A /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CACE545C2927C33A00A37F5A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		CACE545D2927C37800A37F5A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAB83F7F2927C89000BB1D30 /* Info.plist */,
+				CACE54292927C25100A37F5A /* AppDelegate.swift */,
+				CACE542B2927C25100A37F5A /* SceneDelegate.swift */,
+				CAB83F842927CEC800BB1D30 /* CustomColors.swift */,
+				CACE54322927C25200A37F5A /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +150,7 @@
 				CACE54222927C25100A37F5A /* Sources */,
 				CACE54232927C25100A37F5A /* Frameworks */,
 				CACE54242927C25100A37F5A /* Resources */,
+				CACE545E2927C50D00A37F5A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -165,24 +179,6 @@
 			productReference = CACE543C2927C25200A37F5A /* Le BaluchonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CACE54452927C25200A37F5A /* Le BaluchonUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CACE54562927C25200A37F5A /* Build configuration list for PBXNativeTarget "Le BaluchonUITests" */;
-			buildPhases = (
-				CACE54422927C25200A37F5A /* Sources */,
-				CACE54432927C25200A37F5A /* Frameworks */,
-				CACE54442927C25200A37F5A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CACE54482927C25200A37F5A /* PBXTargetDependency */,
-			);
-			name = "Le BaluchonUITests";
-			productName = "Le BaluchonUITests";
-			productReference = CACE54462927C25200A37F5A /* Le BaluchonUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +193,6 @@
 						CreatedOnToolsVersion = 14.0.1;
 					};
 					CACE543B2927C25200A37F5A = {
-						CreatedOnToolsVersion = 14.0.1;
-						TestTargetID = CACE54252927C25100A37F5A;
-					};
-					CACE54452927C25200A37F5A = {
 						CreatedOnToolsVersion = 14.0.1;
 						TestTargetID = CACE54252927C25100A37F5A;
 					};
@@ -221,7 +213,6 @@
 			targets = (
 				CACE54252927C25100A37F5A /* Le Baluchon */,
 				CACE543B2927C25200A37F5A /* Le BaluchonTests */,
-				CACE54452927C25200A37F5A /* Le BaluchonUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -244,14 +235,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CACE54442927C25200A37F5A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CACE545E2927C50D00A37F5A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CACE54222927C25100A37F5A /* Sources */ = {
@@ -260,6 +264,7 @@
 			files = (
 				CACE542E2927C25100A37F5A /* ViewController.swift in Sources */,
 				CACE542A2927C25100A37F5A /* AppDelegate.swift in Sources */,
+				CAB83F852927CEC800BB1D30 /* CustomColors.swift in Sources */,
 				CACE542C2927C25100A37F5A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,15 +277,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CACE54422927C25200A37F5A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CACE544B2927C25200A37F5A /* Le_BaluchonUITests.swift in Sources */,
-				CACE544D2927C25200A37F5A /* Le_BaluchonUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -288,11 +284,6 @@
 			isa = PBXTargetDependency;
 			target = CACE54252927C25100A37F5A /* Le Baluchon */;
 			targetProxy = CACE543D2927C25200A37F5A /* PBXContainerItemProxy */;
-		};
-		CACE54482927C25200A37F5A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CACE54252927C25100A37F5A /* Le Baluchon */;
-			targetProxy = CACE54472927C25200A37F5A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -439,12 +430,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3SQYF6L285;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Le Baluchon/Info.plist";
+				INFOPLIST_FILE = "Le Baluchon/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,12 +458,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3SQYF6L285;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Le Baluchon/Info.plist";
+				INFOPLIST_FILE = "Le Baluchon/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,42 +517,6 @@
 			};
 			name = Release;
 		};
-		CACE54572927C25200A37F5A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3SQYF6L285;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.maximepoint.Le-BaluchonUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Le Baluchon";
-			};
-			name = Debug;
-		};
-		CACE54582927C25200A37F5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3SQYF6L285;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.maximepoint.Le-BaluchonUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Le Baluchon";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -588,15 +543,6 @@
 			buildConfigurations = (
 				CACE54542927C25200A37F5A /* Debug */,
 				CACE54552927C25200A37F5A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CACE54562927C25200A37F5A /* Build configuration list for PBXNativeTarget "Le BaluchonUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CACE54572927C25200A37F5A /* Debug */,
-				CACE54582927C25200A37F5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
