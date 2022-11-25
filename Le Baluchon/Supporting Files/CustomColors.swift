@@ -9,9 +9,8 @@ import Foundation
 import UIKit
 
 extension UIColor {
-
     public class var lightGreen: UIColor {
-        return UIColor(red: 207/255, green: 245/255, blue: 231/255, alpha: 1.0)
+        return UIColor(named: "lightGreen")!
     }
 
     public class var mediumGreen: UIColor {
