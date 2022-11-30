@@ -1,0 +1,9 @@
+# rule identifiers to exclude from running
+disabled_rules:
+  - trailing_newline
+  - trailing_whitespace
+  - force_try
+  - force_umwrapping
+  - force_cast
+  - vertical_whitespace
+  - identifier_name
