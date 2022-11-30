@@ -12,7 +12,7 @@ class LocationService {
     static var shared = LocationService()
     private init() {}
 
-    private let numberOfLocation = 5
+    let numberOfLocation = 5
     var city = ""
 
     private var locationUrl: URL {

@@ -12,8 +12,18 @@ class UserSettings {
     static var shared = UserSettings()
     private init() {}
 
-    var language: String = languages["fr"] ?? "French"
+    var userLanguageKeys: String = "en"
+    
+    var userLanguageValue: String {
+        if let index = languages.index(forKey: userLanguageKeys) {
+            return languages[index].value
+        }
+        return "English"
+    }
+    
     var currentCity: City = City()
     var destinationCity: City = City()
+    
+    var temperatureUnitPreference: TemperatureUnitPreference = .Celsius
 
 }

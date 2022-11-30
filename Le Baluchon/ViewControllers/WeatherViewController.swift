@@ -11,7 +11,9 @@ import UIKit
 class WeatherViewController: UIViewController {
 
     @IBOutlet weak var skyLabel: UILabel!
-
+    @IBOutlet weak var currentCityLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,12 +21,19 @@ class WeatherViewController: UIViewController {
     @IBAction func getWeather(_ sender: Any) {
         WeatherService.shared.lat = UserSettings.shared.currentCity.lat ?? 0
         WeatherService.shared.lon = UserSettings.shared.currentCity.lon ?? 0
+        WeatherService.shared.lang = UserSettings.shared.userLanguageKeys
         WeatherService.shared.getWeather { success, weather in
             guard let weather = weather, success == true else {
                 self.presentAlert()
                 return
             }
-            self.skyLabel.text = weather.weather[0].main  // attention temporaire : à modifier car si il y a pas de valeur ca plante
+            self.skyLabel.text = weather.weather[0].description  // attention temporaire : à modifier car si il y a pas de valeur ca plante
+            self.currentCityLabel.text = UserSettings.shared.currentCity.name
+            if let tempPreference = weather.main?.tempPreference {
+                self.temperatureLabel.text = String(format: "%.1f %@", tempPreference, UserSettings.shared.temperatureUnitPreference.rawValue)
+            } else {
+                self.temperatureLabel.text = "- \(UserSettings.shared.temperatureUnitPreference.rawValue)"
+            }
         }
     }
 }

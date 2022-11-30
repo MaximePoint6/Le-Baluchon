@@ -8,7 +8,7 @@
 import Foundation
 
 struct Weather: Decodable {
-
+    
     var coord: Coord?
     var weather: [WeatherDescription]
     var base: String?
@@ -16,25 +16,25 @@ struct Weather: Decodable {
     var visibility: Int?
     var wind: Wind?
     var clouds: Clouds?
-    // var dt: Int?
+    var dt: Int?
     var sys: Sys?
     var timezone: Int?
     var id: Int?
     var name: String?
     var cod: Int?
-
+    
     struct Coord: Decodable {
         var lon: Double?
         var lat: Double?
     }
-
+    
     struct WeatherDescription: Decodable {
         var id: Int?
         var main: String?
         var description: String?
         var icon: String?
     }
-
+    
     struct Main: Decodable {
         var temp: Double?
         var feelsLike: Double?
@@ -44,18 +44,29 @@ struct Weather: Decodable {
         var humidity: Int?
         var seaLevel: Int?
         var grndLevel: Int?
+        
+        var tempPreference: Float? {
+            guard let temp = self.temp else {
+                return nil
+            }
+            switch UserSettings.shared.temperatureUnitPreference {
+            case .Celsius: return Float((temp) - 273.15)
+            case .Fahrenheit: return Float((temp - 273.15) * (9/5) + 32)
+            case .Kelvin: return Float(temp)
+            }
+        }
     }
-
+    
     struct Wind: Decodable {
         var speed: Double?
         var deg: Int?
         var gust: Double?
     }
-
+    
     struct Clouds: Decodable {
         var all: Int?
     }
-
+    
     struct Sys: Decodable {
         var type: Int?
         var id: Int?
