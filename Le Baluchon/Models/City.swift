@@ -69,4 +69,19 @@ struct City: Decodable {
         var zhTw: String?
         var zu: String?
     }
+    
+    func localName(languageKeys: String) -> String {
+        guard let name = name else {
+            return ""
+        }
+        if languageKeys == "fr" {
+            if let localName = localNames?.fr {
+                return localName
+            } else {
+                return name
+            }
+        } else {
+            return name
+        }
+    }
 }

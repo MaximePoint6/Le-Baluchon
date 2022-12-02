@@ -46,6 +46,7 @@ struct Weather: Decodable {
         var grndLevel: Int?
         
         var tempPreference: Float? {
+            // Kelvin by default
             guard let temp = self.temp else {
                 return nil
             }

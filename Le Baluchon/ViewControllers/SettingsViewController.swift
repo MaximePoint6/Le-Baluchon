@@ -39,6 +39,7 @@ class SettingsViewController: UIViewController {
         // UI setup
         currentCityAutocompletion.isHidden = true
         destinationCityAutocompletion.isHidden = true
+        setupUI()
         setupContent()
     }
     
@@ -46,14 +47,20 @@ class SettingsViewController: UIViewController {
         if currentCity.text!.count != 0 {
             currentCityAutocompletion.isHidden = false
             LocationService.shared.city = currentCity.text!
-            getCurrentCitiesList()
+            getCitiesList()
         } else {
             currentCityAutocompletion.isHidden = true
         }
     }
     
     @IBAction func destinationCityChange(_ sender: Any) {
-        // TODO: faire cette partie, mais attention savoir gérer 2 tableView différents, voir fonction dans delegate
+        if destinationCity.text!.count != 0 {
+            destinationCityAutocompletion.isHidden = false
+            LocationService.shared.city = destinationCity.text!
+            getCitiesList()
+        } else {
+            destinationCityAutocompletion.isHidden = true
+        }
     }
     
     @IBAction func temperatureUnitChange(_ sender: Any) {
@@ -84,17 +91,24 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func getCurrentCitiesList() {
+    private func setupUI(){
+        // code
+    }
+    
+    private func getCitiesList() {
         LocationService.shared.getLocation { success, cities in
             guard let cities = cities, success == true else {
                 let retry = UIAlertAction(title: "Retry", style: .default) { _ in
-                    self.getCurrentCitiesList()
+                    self.getCitiesList()
                 }
                 self.alertUser(title: "Error", message: "The Locations download failed", actions: [retry])
                 return
             }
+            // TODO: Moyen, à changer
             self.resultsOfCurrentCityAutocompletion = cities
             self.currentCityAutocompletion.reloadData()
+            self.resultsOfDestinationCityAutocompletion = cities
+            self.destinationCityAutocompletion.reloadData()
         }
     }
     
@@ -107,56 +121,62 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resultsOfCurrentCityAutocompletion.count // number of cells in each section
+        if tableView.tag == 0 {
+            return resultsOfCurrentCityAutocompletion.count // number of cells in each section
+        } else {
+            return resultsOfDestinationCityAutocompletion.count // number of cells in each section
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: currentCityCellIdentifier, for: indexPath)
-        if resultsOfCurrentCityAutocompletion.count != 0 {
-            let city = resultsOfCurrentCityAutocompletion[indexPath.row]
-            if let cityName = city.name {
-                cell.textLabel?.text = cityName
-            } else {
-                cell.textLabel?.text = ""
+        var city: City
+        var cell: UITableViewCell
+        
+        if tableView.tag == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: currentCityCellIdentifier, for: indexPath)
+            if resultsOfCurrentCityAutocompletion.count == 0 {
+                return cell
             }
-            if let stateOfTheCity = city.state {
-                if let countryOfTheCity = city.country {
-                    cell.detailTextLabel?.text = "\(stateOfTheCity) - \(countryOfTheCity)"
-                } else {
-                    cell.detailTextLabel?.text = stateOfTheCity
-                }
+            city = resultsOfCurrentCityAutocompletion[indexPath.row]
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: destinationCityCellIdentifier, for: indexPath)
+            if resultsOfDestinationCityAutocompletion.count == 0 {
+                return cell
+            }
+            city = resultsOfDestinationCityAutocompletion[indexPath.row]
+        }
+        
+        cell.textLabel?.text = city.localName(languageKeys: UserSettings.shared.userLanguageKeys)
+        
+        if let stateOfTheCity = city.state {
+            if let countryOfTheCity = city.country {
+                cell.detailTextLabel?.text = "\(stateOfTheCity) - \(countryOfTheCity)"
             } else {
-                if let countryOfTheCity = city.country {
-                    cell.detailTextLabel?.text = countryOfTheCity
-                } else {
-                    cell.detailTextLabel?.text = ""
-                }
+                cell.detailTextLabel?.text = stateOfTheCity
             }
         } else {
-            cell.textLabel?.text = ""
+            if let countryOfTheCity = city.country {
+                cell.detailTextLabel?.text = countryOfTheCity
+            } else {
+                cell.detailTextLabel?.text = ""
+            }
         }
+        
         return cell
     }
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentCityAutocompletion.isHidden = true
-        currentCity.text = resultsOfCurrentCityAutocompletion[indexPath.row].name
-        UserSettings.shared.currentCity = resultsOfCurrentCityAutocompletion[indexPath.row]
-    }
-}
-
-// MARK: UIAlertController
-extension SettingsViewController {
-    func alertUser(title: String, message: String, actions: [UIAlertAction]? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        if let actions = actions {
-            actions.forEach { alert.addAction($0) }
+        if tableView.tag == 0 {
+            currentCityAutocompletion.isHidden = true
+            currentCity.text = resultsOfCurrentCityAutocompletion[indexPath.row].localName(languageKeys: UserSettings.shared.userLanguageKeys)
+            UserSettings.shared.currentCity = resultsOfCurrentCityAutocompletion[indexPath.row]
         } else {
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            destinationCityAutocompletion.isHidden = true
+            destinationCity.text = resultsOfDestinationCityAutocompletion[indexPath.row].localName(languageKeys: UserSettings.shared.userLanguageKeys)
+            UserSettings.shared.destinationCity = resultsOfDestinationCityAutocompletion[indexPath.row]
         }
-        present(alert, animated: true)
     }
 }
 

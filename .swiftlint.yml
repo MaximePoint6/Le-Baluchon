@@ -4,6 +4,6 @@ disabled_rules:
   - trailing_whitespace
   - force_try
   - force_umwrapping
-  - force_cast
   - vertical_whitespace
   - identifier_name
+  - switch_case_alignment

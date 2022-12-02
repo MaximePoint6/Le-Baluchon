@@ -15,9 +15,11 @@ class LocationService {
     let numberOfLocation = 5
     var city = ""
 
-    private var locationUrl: URL {
-        let cityForUrl = self.city.replaceWithSpaceForUrl()
-        return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(weatherAPIKey)")!
+    private var locationUrl: URL? {
+        if let cityForUrl = self.city.encodingURL() {
+            return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(ApiKey.openWeather)")
+        }
+        return nil
     }
 
     private var session = URLSession(configuration: .default)
@@ -25,7 +27,10 @@ class LocationService {
 
     func getLocation(callback: @escaping (Bool, [City]?) -> Void) {
         task?.cancel()
-        task = session.dataTask(with: locationUrl) { (data, response, error) in
+        guard let url = locationUrl else {
+            return callback(false, nil)
+        }
+        task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
 //                    callback(false, nil)

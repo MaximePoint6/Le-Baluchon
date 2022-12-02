@@ -10,41 +10,75 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
-    @IBOutlet weak var skyLabel: UILabel!
-    @IBOutlet weak var currentCityLabel: UILabel!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var iconWeather: UIImageView!
+    @IBOutlet weak var currentCitySkyLabel: UILabel!
+    @IBOutlet weak var currentCityNameLabel: UILabel!
+    @IBOutlet weak var currentCityTemperatureLabel: UILabel!
+    @IBOutlet weak var currentCityIconWeather: UIImageView!
+    
+    @IBOutlet weak var destinationCitySkyLabel: UILabel!
+    @IBOutlet weak var destinationCityNameLabel: UILabel!
+    @IBOutlet weak var destinationCityTemperatureLabel: UILabel!
+    @IBOutlet weak var destinationCityIconWeather: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     @IBAction func getWeather(_ sender: Any) {
-        WeatherService.shared.lat = UserSettings.shared.currentCity.lat ?? 0
-        WeatherService.shared.lon = UserSettings.shared.currentCity.lon ?? 0
+        getWeatherCurrentCity()
+        getWeatherDestinationCity()
+    }
+    
+    
+    private func getWeatherCurrentCity() {
+        guard let currentCityLat = UserSettings.shared.currentCity.lat,
+                let currentCityLon = UserSettings.shared.currentCity.lon else {
+            return
+        }
+        
+        WeatherService.shared.lat = currentCityLat
+        WeatherService.shared.lon = currentCityLon
         WeatherService.shared.lang = UserSettings.shared.userLanguageKeys
+        
         WeatherService.shared.getWeather { success, weather in
             guard let weather = weather, success == true else {
-                self.presentAlert()
+                let retry = UIAlertAction(title: "Retry", style: .default) { _ in
+                    self.getWeatherCurrentCity()
+                }
+                self.alertUser(title: "Error", message: "The Weather download failed", actions: [retry])
                 return
             }
-            self.skyLabel.text = weather.weather[0].description  // attention temporaire : à modifier car si il y a pas de valeur ca plante
-            self.currentCityLabel.text = UserSettings.shared.currentCity.name
-            self.iconWeather.downloaded(from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weather.weather[0].icon!))
-            if let tempPreference = weather.main?.tempPreference {
-                self.temperatureLabel.text = String(format: "%.1f %@", tempPreference, UserSettings.shared.temperatureUnitPreference.rawValue)
+            
+            self.currentCityNameLabel.text = UserSettings.shared.currentCity.localName(languageKeys: UserSettings.shared.userLanguageKeys)
+            
+            if weather.weather.count > 0 {
+                if let weatherDescription = weather.weather[0].description {
+                    self.currentCitySkyLabel.text = weatherDescription
+                } else {
+                    self.currentCitySkyLabel.text = "-"
+                }
+                if let weatherIcon = weather.weather[0].icon {
+                    self.currentCityIconWeather.downloaded(from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
+                } else {
+                    self.currentCityIconWeather.image = UIImage.emptyImage
+                }
             } else {
-                self.temperatureLabel.text = "- \(UserSettings.shared.temperatureUnitPreference.rawValue)"
+                self.currentCitySkyLabel.text = "-"
+                self.currentCityIconWeather.image = UIImage.emptyImage
+            }
+            
+            if let tempPreference = weather.main?.tempPreference {
+                self.currentCityTemperatureLabel.text = String(format: "%.1f %@", tempPreference, UserSettings.shared.temperatureUnitPreference.rawValue)
+            } else {
+                self.currentCityTemperatureLabel.text = "- \(UserSettings.shared.temperatureUnitPreference.rawValue)"
             }
         }
     }
-}
-
-extension WeatherViewController {
-    func presentAlert() {
-        let alertVC = UIAlertController(title: "Error", message: "The Weather download failed", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .cancel)
-        alertVC.addAction(action)
-        present(alertVC, animated: true)
+    
+    private func getWeatherDestinationCity() {
+        // code
     }
+    
+    
+    
 }

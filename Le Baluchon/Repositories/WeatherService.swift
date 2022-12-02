@@ -17,13 +17,16 @@ class WeatherService {
     var lang = "fr"
 
     private var weatherUrl: URL {
-            return URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(String(lat))&lon=\(String(lon))&appid=\(weatherAPIKey)&lang=\(lang)")!
+        return URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(String(lat))&lon=\(String(lon))&appid=\(ApiKey.openWeather)&lang=\(lang)")!
     }
 
     private var session = URLSession(configuration: .default)
     private var task: URLSessionDataTask?
 
     func getWeather(callback: @escaping (Bool, Weather?) -> Void) {
+        
+        // faire peut etre ici les guard let de lat et lon
+        
         task?.cancel()
         task = session.dataTask(with: weatherUrl) { (data, response, error) in
             DispatchQueue.main.async {

@@ -21,8 +21,8 @@ class UserSettings {
         return "English"
     }
     
-    var currentCity: City = City()
-    var destinationCity: City = City()
+    var currentCity: City = City() // Mettre optionel ici plutot que city vide
+    var destinationCity: City = City() // Mettre optionel ici
     
     var temperatureUnitPreference: TemperatureUnitPreference = .Celsius
 
