@@ -16,6 +16,8 @@
 		CA8E640129310EC400CF0440 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E640029310EC400CF0440 /* UserSettings.swift */; };
 		CA8E640329376F9800CF0440 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E640229376F9800CF0440 /* Dictionary.swift */; };
 		CA8E64052937931600CF0440 /* TemperatureUnitPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E64042937931600CF0440 /* TemperatureUnitPreference.swift */; };
+		CA8E64072939338700CF0440 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E64062939338700CF0440 /* UIImageView.swift */; };
+		CA8E6409293940B000CF0440 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E6408293940B000CF0440 /* String.swift */; };
 		CAB83F852927CEC800BB1D30 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F842927CEC800BB1D30 /* CustomColors.swift */; };
 		CAB83F89292A686700BB1D30 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F88292A686700BB1D30 /* Keys.swift */; };
 		CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F8A292A6EDB00BB1D30 /* WeatherService.swift */; };
@@ -48,6 +50,8 @@
 		CA8E640029310EC400CF0440 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		CA8E640229376F9800CF0440 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		CA8E64042937931600CF0440 /* TemperatureUnitPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnitPreference.swift; sourceTree = "<group>"; };
+		CA8E64062939338700CF0440 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		CA8E6408293940B000CF0440 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CAB83F7F2927C89000BB1D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Le Baluchon/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		CAB83F842927CEC800BB1D30 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		CAB83F88292A686700BB1D30 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -81,6 +85,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA8E640A29394D1C00CF0440 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CA8E64062939338700CF0440 /* UIImageView.swift */,
+				CA8E6408293940B000CF0440 /* String.swift */,
+				CAB83F842927CEC800BB1D30 /* CustomColors.swift */,
+				CA8E640229376F9800CF0440 /* Dictionary.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CACE541D2927C25100A37F5A = {
 			isa = PBXGroup;
 			children = (
@@ -163,11 +178,10 @@
 		CACE545D2927C37800A37F5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CA8E640A29394D1C00CF0440 /* Extensions */,
 				CAB83F7F2927C89000BB1D30 /* Info.plist */,
 				CACE54292927C25100A37F5A /* AppDelegate.swift */,
 				CACE542B2927C25100A37F5A /* SceneDelegate.swift */,
-				CA8E640229376F9800CF0440 /* Dictionary.swift */,
-				CAB83F842927CEC800BB1D30 /* CustomColors.swift */,
 				CACE54322927C25200A37F5A /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
@@ -304,10 +318,12 @@
 				CA8E63FB2930BC9B00CF0440 /* Languages.swift in Sources */,
 				CA8E63FD2930C26800CF0440 /* LocationService.swift in Sources */,
 				CAB83F852927CEC800BB1D30 /* CustomColors.swift in Sources */,
+				CA8E64072939338700CF0440 /* UIImageView.swift in Sources */,
 				CAB83F8D292A875300BB1D30 /* WeatherViewController.swift in Sources */,
 				CACE542C2927C25100A37F5A /* SceneDelegate.swift in Sources */,
 				CA8E64052937931600CF0440 /* TemperatureUnitPreference.swift in Sources */,
 				CA8E640329376F9800CF0440 /* Dictionary.swift in Sources */,
+				CA8E6409293940B000CF0440 /* String.swift in Sources */,
 				CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */,
 				CA8E63FF2931062A00CF0440 /* SettingsViewController.swift in Sources */,
 			);

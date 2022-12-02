@@ -13,6 +13,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var skyLabel: UILabel!
     @IBOutlet weak var currentCityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var iconWeather: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class WeatherViewController: UIViewController {
             }
             self.skyLabel.text = weather.weather[0].description  // attention temporaire : à modifier car si il y a pas de valeur ca plante
             self.currentCityLabel.text = UserSettings.shared.currentCity.name
+            self.iconWeather.downloaded(from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weather.weather[0].icon!))
             if let tempPreference = weather.main?.tempPreference {
                 self.temperatureLabel.text = String(format: "%.1f %@", tempPreference, UserSettings.shared.temperatureUnitPreference.rawValue)
             } else {

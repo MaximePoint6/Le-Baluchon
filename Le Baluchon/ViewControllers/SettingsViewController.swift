@@ -70,16 +70,17 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupContent() {
+        // TextField
         self.currentCity.text = UserSettings.shared.currentCity.name
         self.destinationCity.text = UserSettings.shared.destinationCity.name
-        
+        // Picker
         let indexUserLanguage = languagesList.firstIndex(of: UserSettings.shared.userLanguageValue)!
         self.language.selectRow(indexUserLanguage, inComponent: 0, animated: true)
-        
+        // SelectedSegment
         switch UserSettings.shared.temperatureUnitPreference {
-        case .Kelvin: temperatureUnitLabel.selectedSegmentIndex = 0
-        case .Celsius: temperatureUnitLabel.selectedSegmentIndex = 1
-        case .Fahrenheit: temperatureUnitLabel.selectedSegmentIndex = 2
+            case .Kelvin: self.temperatureUnitLabel.selectedSegmentIndex = 0
+            case .Celsius: self.temperatureUnitLabel.selectedSegmentIndex = 1
+            case .Fahrenheit: self.temperatureUnitLabel.selectedSegmentIndex = 2
         }
     }
     
@@ -113,8 +114,24 @@ extension SettingsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: currentCityCellIdentifier, for: indexPath)
         if resultsOfCurrentCityAutocompletion.count != 0 {
             let city = resultsOfCurrentCityAutocompletion[indexPath.row]
-            cell.textLabel?.text = city.name
-            cell.detailTextLabel?.text = "\(city.state) - \(city.country)"
+            if let cityName = city.name {
+                cell.textLabel?.text = cityName
+            } else {
+                cell.textLabel?.text = ""
+            }
+            if let stateOfTheCity = city.state {
+                if let countryOfTheCity = city.country {
+                    cell.detailTextLabel?.text = "\(stateOfTheCity) - \(countryOfTheCity)"
+                } else {
+                    cell.detailTextLabel?.text = stateOfTheCity
+                }
+            } else {
+                if let countryOfTheCity = city.country {
+                    cell.detailTextLabel?.text = countryOfTheCity
+                } else {
+                    cell.detailTextLabel?.text = ""
+                }
+            }
         } else {
             cell.textLabel?.text = ""
         }
