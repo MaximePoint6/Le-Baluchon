@@ -12,18 +12,11 @@ class UserSettings {
     static var shared = UserSettings()
     private init() {}
 
-    var userLanguageKeys: String = "en"
+    var userLanguage: Languages = .en
     
-    var userLanguageValue: String {
-        if let index = languages.index(forKey: userLanguageKeys) {
-            return languages[index].value
-        }
-        return "English"
-    }
+    // TODO: Mettre optionel ici plutot que city vide (pour les deux), et du coup si City vide, mettre une alerte pour que l'utilisateur puisse choisir
+    var currentCity: City = City()
+    var destinationCity: City = City()
     
-    var currentCity: City = City() // Mettre optionel ici plutot que city vide
-    var destinationCity: City = City() // Mettre optionel ici
-    
-    var temperatureUnitPreference: TemperatureUnitPreference = .Celsius
-
+    var temperatureUnit: TemperatureUnit = .Celsius
 }

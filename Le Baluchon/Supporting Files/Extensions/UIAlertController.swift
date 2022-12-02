@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-// MARK: UIAlertController
 extension UIViewController {
     func alertUser(title: String, message: String, actions: [UIAlertAction]? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

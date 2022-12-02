@@ -12,11 +12,12 @@ class LocationService {
     static var shared = LocationService()
     private init() {}
 
-    let numberOfLocation = 5
+    private let numberOfLocation = 5
     var city = ""
 
     private var locationUrl: URL? {
         if let cityForUrl = self.city.encodingURL() {
+            // TODO: encodingURL juste sur city... et si APIKey n'est pas conforme au type URL par exemple ca va crasher
             return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(ApiKey.openWeather)")
         }
         return nil

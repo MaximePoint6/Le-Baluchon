@@ -12,6 +12,7 @@ class WeatherService {
     static var shared = WeatherService()
     private init() {}
 
+    // TODO: on peut pas aller récupérer directement dans un autre model les datas ? par exemple dans UserSettings
     var lat = 44.34
     var lon = 10.99
     var lang = "fr"

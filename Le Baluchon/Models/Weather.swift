@@ -46,11 +46,11 @@ struct Weather: Decodable {
         var grndLevel: Int?
         
         var tempPreference: Float? {
-            // Kelvin by default
+            // temperature unit is Kelvin by default
             guard let temp = self.temp else {
                 return nil
             }
-            switch UserSettings.shared.temperatureUnitPreference {
+            switch UserSettings.shared.temperatureUnit {
             case .Celsius: return Float((temp) - 273.15)
             case .Fahrenheit: return Float((temp - 273.15) * (9/5) + 32)
             case .Kelvin: return Float(temp)

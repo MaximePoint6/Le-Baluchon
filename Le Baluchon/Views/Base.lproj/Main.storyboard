@@ -297,9 +297,9 @@
                                     <constraint firstAttribute="height" constant="30" id="ZLR-oV-2Bc"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Kelvin"/>
+                                    <segment title="K"/>
                                     <segment title="Celsius"/>
-                                    <segment title="Fahrenheit"/>
+                                    <segment title="F"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" name="MediumGreenColor"/>
                                 <connections>
@@ -357,11 +357,11 @@
                     </view>
                     <connections>
                         <outlet property="currentCity" destination="7HN-WY-lPD" id="ZuK-45-0kJ"/>
-                        <outlet property="currentCityAutocompletion" destination="aQY-2l-awB" id="GVd-r2-4gt"/>
+                        <outlet property="currentCityTableView" destination="aQY-2l-awB" id="GVd-r2-4gt"/>
                         <outlet property="destinationCity" destination="ArM-nH-fVl" id="xSt-VA-Eiq"/>
-                        <outlet property="destinationCityAutocompletion" destination="oxY-Id-s1J" id="NWw-tX-Oux"/>
-                        <outlet property="language" destination="yjd-GX-aqp" id="BM8-03-k7x"/>
-                        <outlet property="temperatureUnitLabel" destination="Bog-gm-ij4" id="RhC-wU-J9x"/>
+                        <outlet property="destinationCityTableView" destination="oxY-Id-s1J" id="NWw-tX-Oux"/>
+                        <outlet property="languagePickerView" destination="yjd-GX-aqp" id="BM8-03-k7x"/>
+                        <outlet property="temperatureUnitSegmentedControl" destination="Bog-gm-ij4" id="RhC-wU-J9x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M72-8Z-7Ul" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

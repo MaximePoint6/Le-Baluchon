@@ -38,7 +38,7 @@ class WeatherViewController: UIViewController {
         
         WeatherService.shared.lat = currentCityLat
         WeatherService.shared.lon = currentCityLon
-        WeatherService.shared.lang = UserSettings.shared.userLanguageKeys
+        WeatherService.shared.lang = UserSettings.shared.userLanguage.rawValue
         
         WeatherService.shared.getWeather { success, weather in
             guard let weather = weather, success == true else {
@@ -49,7 +49,7 @@ class WeatherViewController: UIViewController {
                 return
             }
             
-            self.currentCityNameLabel.text = UserSettings.shared.currentCity.localName(languageKeys: UserSettings.shared.userLanguageKeys)
+            self.currentCityNameLabel.text = UserSettings.shared.currentCity.getLocalName(languageKeys: UserSettings.shared.userLanguage)
             
             if weather.weather.count > 0 {
                 if let weatherDescription = weather.weather[0].description {
@@ -68,9 +68,9 @@ class WeatherViewController: UIViewController {
             }
             
             if let tempPreference = weather.main?.tempPreference {
-                self.currentCityTemperatureLabel.text = String(format: "%.1f %@", tempPreference, UserSettings.shared.temperatureUnitPreference.rawValue)
+                self.currentCityTemperatureLabel.text = String(format: "%.1f %@", tempPreference, UserSettings.shared.temperatureUnit.unit)
             } else {
-                self.currentCityTemperatureLabel.text = "- \(UserSettings.shared.temperatureUnitPreference.rawValue)"
+                self.currentCityTemperatureLabel.text = "- \(UserSettings.shared.temperatureUnit.unit)"
             }
         }
     }

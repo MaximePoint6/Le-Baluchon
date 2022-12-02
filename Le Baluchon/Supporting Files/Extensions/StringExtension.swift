@@ -16,10 +16,6 @@ extension String {
         return self.replace(string: " ", replacement: "")
     }
     
-    func replaceWithSpaceForUrl() -> String {
-        return self.replace(string: " ", replacement: "%20")
-    }
-    
     func encodingURL() -> String? {
         return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
     }

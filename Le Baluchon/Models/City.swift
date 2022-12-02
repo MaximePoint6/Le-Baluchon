@@ -70,11 +70,13 @@ struct City: Decodable {
         var zu: String?
     }
     
-    func localName(languageKeys: String) -> String {
+    
+    // TODO: A modifier
+    func getLocalName(languageKeys: Languages) -> String {
         guard let name = name else {
             return ""
         }
-        if languageKeys == "fr" {
+        if languageKeys == .fr {
             if let localName = localNames?.fr {
                 return localName
             } else {
