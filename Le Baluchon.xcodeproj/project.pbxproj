@@ -30,6 +30,7 @@
 		CAF07482293A1D4A00F0FC74 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07481293A1D4A00F0FC74 /* UIAlertController.swift */; };
 		CAF07484293A3DA800F0FC74 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07483293A3DA800F0FC74 /* UIImageExtension.swift */; };
 		CAF07486293A9C6400F0FC74 /* CityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07485293A9C6400F0FC74 /* CityType.swift */; };
+		CAF074882940BEF100F0FC74 /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF074872940BEF100F0FC74 /* SearchCityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		CAF07481293A1D4A00F0FC74 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		CAF07483293A3DA800F0FC74 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CAF07485293A9C6400F0FC74 /* CityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityType.swift; sourceTree = "<group>"; };
+		CAF074872940BEF100F0FC74 /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			children = (
 				CAB83F8C292A875200BB1D30 /* WeatherViewController.swift */,
 				CA8E63FE2931062A00CF0440 /* SettingsViewController.swift */,
+				CAF074872940BEF100F0FC74 /* SearchCityViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				CA8E63FD2930C26800CF0440 /* LocationService.swift in Sources */,
 				CAB83F852927CEC800BB1D30 /* UIColorExtension.swift in Sources */,
 				CA8E64072939338700CF0440 /* UIImageViewExtension.swift in Sources */,
+				CAF074882940BEF100F0FC74 /* SearchCityViewController.swift in Sources */,
 				CAB83F8D292A875300BB1D30 /* WeatherViewController.swift in Sources */,
 				CACE542C2927C25100A37F5A /* SceneDelegate.swift in Sources */,
 				CAF07482293A1D4A00F0FC74 /* UIAlertController.swift in Sources */,

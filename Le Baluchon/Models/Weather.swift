@@ -45,15 +45,15 @@ struct Weather: Decodable {
         var seaLevel: Int?
         var grndLevel: Int?
         
-        var tempPreference: Float? {
-            // temperature unit is Kelvin by default
-            guard let temp = self.temp else {
-                return nil
-            }
+        /// Returns the temperature with the user's preferred unit.
+        /// The returned temperature contains 1 decimal, and is of type string.
+        var tempWithPreferredUnit: String? {
+            guard let temp = self.temp else { return nil }
+            // Temperature unit in "temp" variable is Kelvin by default
             switch UserSettings.shared.temperatureUnit {
-            case .Celsius: return Float((temp) - 273.15)
-            case .Fahrenheit: return Float((temp - 273.15) * (9/5) + 32)
-            case .Kelvin: return Float(temp)
+                case .Celsius: return String(format: "%.1f", Float((temp) - 273.15))
+                case .Fahrenheit: return String(format: "%.1f", Float((temp - 273.15) * (9/5) + 32))
+                case .Kelvin: return String(format: "%.1f", Float(temp))
             }
         }
     }
@@ -75,4 +75,28 @@ struct Weather: Decodable {
         var sunrise: Int?
         var sunset: Int?
     }
+    
+    
+    // MARK: Tools for ViewControllers
+    /// Returns the main weather description as a String type. If this description does't exist, it returns "-".
+    var mainWeatherDescription: String {
+        if self.weather.count > 0 {
+            if let weatherDescription = self.weather[0].description {
+                return weatherDescription
+            }
+        }
+        return "-"
+    }
+    
+    /// Returns the main weather icon as a optional String type. If this icon does't exist, it returns nil.
+    var mainWeatherIcon: String? {
+        if self.weather.count > 0 {
+            if let weatherIcon = self.weather[0].icon {
+                return weatherIcon
+            }
+        }
+        return nil
+    }
+
+    
 }
