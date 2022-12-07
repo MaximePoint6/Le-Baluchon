@@ -12,14 +12,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
     @IBOutlet weak var languagePickerView: UIPickerView!
-    @IBOutlet weak var currentCity: UITextField!
-    @IBOutlet weak var currentCityTableView: UITableView!
-    @IBOutlet weak var destinationCity: UITextField!
-    @IBOutlet weak var destinationCityTableView: UITableView!
     @IBOutlet weak var settingsTableView: UITableView!
     
-    private let currentCityCellIdentifier = "CurrentCityCell"
-    private let destinationCityCellIdentifier = "DestinationCityCell"
     private let settingCellIdentifier = "SettingCell"
     
     private var datasOfCurrentCityTableView = [City]()
@@ -35,22 +29,15 @@ class SettingsViewController: UIViewController {
         // language UIPickerView
         self.languagePickerView.dataSource = self
         self.languagePickerView.delegate = self
-        // current city table view
-        self.currentCityTableView.dataSource = self
-        self.currentCityTableView.delegate = self
-        // destination city table view
-        self.destinationCityTableView.dataSource = self
-        self.destinationCityTableView.delegate = self
         // settings table view
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
         // UI setup
         setupUI()
-        setupUserSettings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.settingsTableView.reloadData()
+        setupUserSettings()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,28 +45,6 @@ class SettingsViewController: UIViewController {
             let VC = segue.destination as? SearchCityViewController
             let cityType = sender as? CityType
             VC?.cityType = cityType ?? .current
-        }
-    }
-    
-    
-    // MARK: @IBAction
-    @IBAction func currentCityChange(_ sender: Any) {
-        if !(currentCity.text?.isEmpty ?? true) {
-            currentCityTableView.isHidden = false
-            LocationService.shared.city = currentCity.text!
-            getCitiesList(cityType: .current)
-        } else {
-            currentCityTableView.isHidden = true
-        }
-    }
-    
-    @IBAction func destinationCityChange(_ sender: Any) {
-        if !(destinationCity.text?.isEmpty ?? true) {
-            destinationCityTableView.isHidden = false
-            LocationService.shared.city = destinationCity.text!
-            getCitiesList(cityType: .destination)
-        } else {
-            destinationCityTableView.isHidden = true
         }
     }
     
@@ -104,9 +69,6 @@ class SettingsViewController: UIViewController {
     
     // MARK: function
     private func setupUI() {
-        // TableView
-        currentCityTableView.isHidden = true
-        destinationCityTableView.isHidden = true
         // SegmentControl
         temperatureUnitSegmentedControl.removeAllSegments()
         TemperatureUnit.allCases.forEach {
@@ -120,9 +82,6 @@ class SettingsViewController: UIViewController {
         // Picker
         let indexUserLanguage = languagesList.firstIndex(of: UserSettings.shared.userLanguage)!
         self.languagePickerView.selectRow(indexUserLanguage, inComponent: 0, animated: true)
-        // TextField
-        self.currentCity.text = UserSettings.shared.currentCity?.getLocalName(languageKeys: UserSettings.shared.userLanguage)
-        self.destinationCity.text = UserSettings.shared.destinationCity?.getLocalName(languageKeys: UserSettings.shared.userLanguage)
         // TableView
         settingsTableView.reloadData()
         // SelectedSegment
@@ -133,28 +92,6 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func getCitiesList(cityType: CityType) {
-        LocationService.shared.getLocation { success, cities in
-            guard let cities = cities, success == true else {
-                let retry = UIAlertAction(title: "Retry", style: .default) { _ in
-                    self.getCitiesList(cityType: cityType)
-                }
-                self.alertUser(title: "Error", message: "The Locations download failed", actions: [retry])
-                return
-            }
-            switch cityType {
-                case .current:
-                    self.datasOfCurrentCityTableView = cities
-                    self.currentCityTableView.reloadData()
-                    return
-                case .destination:
-                    self.datasOfDestinationCityTableView = cities
-                    self.destinationCityTableView.reloadData()
-                    return
-            }
-        }
-    }
-   
 }
 
 
@@ -176,63 +113,28 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cell: UITableViewCell
-       let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
-//        if tableView.tag == 0 {
-//            cell = tableView.dequeueReusableCell(withIdentifier: currentCityCellIdentifier, for: indexPath)
-//            if datasOfCurrentCityTableView.count == 0 {
-//                return cell
-//            }
-//            city = datasOfCurrentCityTableView[indexPath.row]
-//        } else if tableView.tag == 1 {
-//            cell = tableView.dequeueReusableCell(withIdentifier: destinationCityCellIdentifier, for: indexPath)
-//            if datasOfDestinationCityTableView.count == 0 {
-//                return cell
-//            }
-//            city = datasOfDestinationCityTableView[indexPath.row]
-//        } else {
-            if indexPath.row == 0 {
-                cell.textLabel?.text = "Current City"
-                if let city = UserSettings.shared.currentCity {
-                    cell.detailTextLabel?.text = city.getNameWithStateAndCountry(languageKeys: UserSettings.shared.userLanguage)
-                } else {
-                    cell.detailTextLabel?.text = "City name not specified"
-                }
+        let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Current City"
+            if let city = UserSettings.shared.currentCity {
+                cell.detailTextLabel?.text = city.getNameWithStateAndCountry(languageKeys: UserSettings.shared.userLanguage)
             } else {
-                cell.textLabel?.text = "Destination City"
-                if let city = UserSettings.shared.destinationCity {
-                    cell.detailTextLabel?.text = city.getNameWithStateAndCountry(languageKeys: UserSettings.shared.userLanguage)
-                } else {
-                    cell.detailTextLabel?.text = "City name not specified"
-                }
+                cell.detailTextLabel?.text = "City name not specified"
             }
+        } else {
+            cell.textLabel?.text = "Destination City"
+            if let city = UserSettings.shared.destinationCity {
+                cell.detailTextLabel?.text = city.getNameWithStateAndCountry(languageKeys: UserSettings.shared.userLanguage)
+            } else {
+                cell.detailTextLabel?.text = "City name not specified"
+            }
+        }
         return cell
-//        }
-        
-//        cell.textLabel?.text = city.getLocalName(languageKeys: UserSettings.shared.userLanguage)
-//        cell.detailTextLabel?.text = city.stateAndCountryDetails
-        
-//        return cell
     }
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        if tableView.tag == 0 {
-//            performSegue(withIdentifier: "segueToSearchCity", sender: CityType.current)
-////            currentCityTableView.isHidden = true
-////            currentCity.text = datasOfCurrentCityTableView[indexPath.row].getLocalName(languageKeys: UserSettings.shared.userLanguage)
-////            UserSettings.shared.currentCity = datasOfCurrentCityTableView[indexPath.row]
-//        } else if tableView.tag == 1{
-//            performSegue(withIdentifier: "segueToSearchCity", sender: CityType.destination)
-////            destinationCityTableView.isHidden = true
-////            destinationCity.text = datasOfDestinationCityTableView[indexPath.row].getLocalName(languageKeys: UserSettings.shared.userLanguage)
-////            UserSettings.shared.destinationCity = datasOfDestinationCityTableView[indexPath.row]
-//        } else {
-//            performSegue(withIdentifier: "segueToSearchCity", sender: CityType.current)
-//        }
-        
         if indexPath.row == 0 {
             performSegue(withIdentifier: "segueToSearchCity", sender: CityType.current)
         } else if indexPath.row == 1 {
