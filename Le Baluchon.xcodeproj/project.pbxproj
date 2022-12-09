@@ -26,11 +26,16 @@
 		CACE54312927C25100A37F5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CACE542F2927C25100A37F5A /* Main.storyboard */; };
 		CACE54332927C25200A37F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CACE54322927C25200A37F5A /* Assets.xcassets */; };
 		CACE54362927C25200A37F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CACE54342927C25200A37F5A /* LaunchScreen.storyboard */; };
-		CACE54412927C25200A37F5A /* Le_BaluchonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE54402927C25200A37F5A /* Le_BaluchonTests.swift */; };
+		CACE54412927C25200A37F5A /* WeatherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACE54402927C25200A37F5A /* WeatherServiceTests.swift */; };
 		CAF07482293A1D4A00F0FC74 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07481293A1D4A00F0FC74 /* UIAlertController.swift */; };
 		CAF07484293A3DA800F0FC74 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07483293A3DA800F0FC74 /* UIImageExtension.swift */; };
 		CAF07486293A9C6400F0FC74 /* CityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07485293A9C6400F0FC74 /* CityType.swift */; };
 		CAF074882940BEF100F0FC74 /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF074872940BEF100F0FC74 /* SearchCityViewController.swift */; };
+		CAF0748C29432A6B00F0FC74 /* Location.json in Resources */ = {isa = PBXBuildFile; fileRef = CAF0748B29432A6B00F0FC74 /* Location.json */; };
+		CAF0748E29432A8800F0FC74 /* Weather.json in Resources */ = {isa = PBXBuildFile; fileRef = CAF0748D29432A8800F0FC74 /* Weather.json */; };
+		CAF0749029432B2300F0FC74 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0748F29432B2300F0FC74 /* FakeResponseData.swift */; };
+		CAF0749229433C2900F0FC74 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0749129433C2900F0FC74 /* URLSessionFake.swift */; };
+		CAF0749429438C4800F0FC74 /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0749329438C4800F0FC74 /* LocationServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,11 +71,16 @@
 		CACE54322927C25200A37F5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CACE54352927C25200A37F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CACE543C2927C25200A37F5A /* Le BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Le BaluchonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CACE54402927C25200A37F5A /* Le_BaluchonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Le_BaluchonTests.swift; sourceTree = "<group>"; };
+		CACE54402927C25200A37F5A /* WeatherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTests.swift; sourceTree = "<group>"; };
 		CAF07481293A1D4A00F0FC74 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		CAF07483293A3DA800F0FC74 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		CAF07485293A9C6400F0FC74 /* CityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityType.swift; sourceTree = "<group>"; };
 		CAF074872940BEF100F0FC74 /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
+		CAF0748B29432A6B00F0FC74 /* Location.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Location.json; sourceTree = "<group>"; };
+		CAF0748D29432A8800F0FC74 /* Weather.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Weather.json; sourceTree = "<group>"; };
+		CAF0748F29432B2300F0FC74 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
+		CAF0749129433C2900F0FC74 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
+		CAF0749329438C4800F0FC74 /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +146,12 @@
 		CACE543F2927C25200A37F5A /* Le BaluchonTests */ = {
 			isa = PBXGroup;
 			children = (
-				CACE54402927C25200A37F5A /* Le_BaluchonTests.swift */,
+				CACE54402927C25200A37F5A /* WeatherServiceTests.swift */,
+				CAF0749329438C4800F0FC74 /* LocationServiceTests.swift */,
+				CAF0748F29432B2300F0FC74 /* FakeResponseData.swift */,
+				CAF0749129433C2900F0FC74 /* URLSessionFake.swift */,
+				CAF0748B29432A6B00F0FC74 /* Location.json */,
+				CAF0748D29432A8800F0FC74 /* Weather.json */,
 			);
 			path = "Le BaluchonTests";
 			sourceTree = "<group>";
@@ -288,6 +303,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF0748C29432A6B00F0FC74 /* Location.json in Resources */,
+				CAF0748E29432A8800F0FC74 /* Weather.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +363,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CACE54412927C25200A37F5A /* Le_BaluchonTests.swift in Sources */,
+				CACE54412927C25200A37F5A /* WeatherServiceTests.swift in Sources */,
+				CAF0749229433C2900F0FC74 /* URLSessionFake.swift in Sources */,
+				CAF0749429438C4800F0FC74 /* LocationServiceTests.swift in Sources */,
+				CAF0749029432B2300F0FC74 /* FakeResponseData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

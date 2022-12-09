@@ -11,15 +11,18 @@ class LocationService {
 
     static var shared = LocationService()
     private init() {}
-
+    
     private var session = URLSession(configuration: .default)
+    init (session: URLSession) {
+        self.session = session
+    }
+    
     private var task: URLSessionDataTask?
 
     func getLocation(city: String, callback: @escaping (Bool, [City]?) -> Void) {
         task?.cancel()
         
         let numberOfLocation = 5
-//        var city = UserSettings.shared.userLanguage.rawValue
 
         var locationUrl: URL? {
             if let cityForUrl = city.encodingURL() {
@@ -34,7 +37,8 @@ class LocationService {
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-//                    callback(false, nil)
+                    // TODO: j'ai remis le callBack pour que les tests fonctionnent, mais mettre une erreur particuliere et la gerer dans le viewController pour régler le bug ?
+                    callback(false, nil)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {

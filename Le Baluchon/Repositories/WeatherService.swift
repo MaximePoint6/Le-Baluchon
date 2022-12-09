@@ -13,6 +13,10 @@ class WeatherService {
     private init() {}
     
     private var session = URLSession(configuration: .default)
+    init (session: URLSession) {
+        self.session = session
+    }
+    
     private var task: URLSessionDataTask?
     
     func getWeather(cityType: CityType, callback: @escaping (Bool, Weather?) -> Void) {
