@@ -117,14 +117,16 @@ extension SettingsViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             cell.textLabel?.text = "Current City"
             if let city = UserSettings.shared.currentCity {
-                cell.detailTextLabel?.text = city.getNameWithStateAndCountry(languageKeys: UserSettings.shared.userLanguage)
+                cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
+                    languageKeys: UserSettings.shared.userLanguage)
             } else {
                 cell.detailTextLabel?.text = "City name not specified"
             }
         } else {
             cell.textLabel?.text = "Destination City"
             if let city = UserSettings.shared.destinationCity {
-                cell.detailTextLabel?.text = city.getNameWithStateAndCountry(languageKeys: UserSettings.shared.userLanguage)
+                cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
+                    languageKeys: UserSettings.shared.userLanguage)
             } else {
                 cell.detailTextLabel?.text = "City name not specified"
             }

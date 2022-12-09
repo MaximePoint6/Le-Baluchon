@@ -34,55 +34,47 @@ class WeatherViewController: UIViewController {
 //                           actions: [okButton])
 //            return
 //        }
-        getWeatherCurrentCity()
+        getWeatherCities()
     }
     
-    private func getWeatherCurrentCity() {
-        guard let currentCity = UserSettings.shared.currentCity,
-              let currentCityLat = currentCity.lat,
-              let currentCityLon = currentCity.lon else {
+    private func getWeatherCities() {
+        // Get Weather Current City
+        guard let currentCity = UserSettings.shared.currentCity else {
             return
         }
-        WeatherService.shared.lat = currentCityLat
-        WeatherService.shared.lon = currentCityLon
-        WeatherService.shared.lang = UserSettings.shared.userLanguage.rawValue
-        
         // Function making network call
-        WeatherService.shared.getWeather { success, weather in
+        WeatherService.shared.getWeather(cityType: .current) { success, weather in
             guard let weather = weather, success == true else {
                 let retry = UIAlertAction(title: "Retry", style: .default) { _ in
-                    self.getWeatherCurrentCity()
+                    self.getWeatherCities()
                 }
                 self.alertUser(title: "Error", message: "The Weather download failed", actions: [retry])
                 return
             }
-            // update UI
+            // Update UI
             self.currentCityNameLabel.text = currentCity.getLocalName(languageKeys: UserSettings.shared.userLanguage)
             self.currentCitySkyLabel.text = weather.mainWeatherDescription
-            self.currentCityTemperatureLabel.text = "\(weather.main?.tempWithPreferredUnit ?? "-") \(UserSettings.shared.temperatureUnit.unit)"
+            self.currentCityTemperatureLabel.text = weather.tempLabel
             
             if let weatherIcon = weather.mainWeatherIcon {
-                self.currentCityIconWeather.downloaded(from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
+                self.currentCityIconWeather.downloaded(
+                    from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
             } else {
                 self.currentCityIconWeather.image = UIImage.emptyImage
             }
-            // TODO: à déplacer, pas terrible ici pour enchainement des requêtes
+            
+            // Get Weather Destination City
             self.getWeatherDestinationCity()
         }
     }
     
     private func getWeatherDestinationCity() {
-        guard let destinationCity = UserSettings.shared.destinationCity,
-              let destinationCityLat = destinationCity.lat,
-              let destinationCityLon = destinationCity.lon else {
+        // Get Weather Destination City
+        guard let destinationCity = UserSettings.shared.destinationCity else {
             return
         }
-        WeatherService.shared.lat = destinationCityLat
-        WeatherService.shared.lon = destinationCityLon
-        WeatherService.shared.lang = UserSettings.shared.userLanguage.rawValue
-        
         // Function making network call
-        WeatherService.shared.getWeather { success, weather in
+        WeatherService.shared.getWeather(cityType: .destination) { success, weather in
             guard let weather = weather, success == true else {
                 let retry = UIAlertAction(title: "Retry", style: .default) { _ in
                     self.getWeatherDestinationCity()
@@ -90,19 +82,19 @@ class WeatherViewController: UIViewController {
                 self.alertUser(title: "Error", message: "The Weather download failed", actions: [retry])
                 return
             }
-            // update UI
-            self.destinationCityNameLabel.text = destinationCity.getLocalName(languageKeys: UserSettings.shared.userLanguage)
+            // Update UI
+            self.destinationCityNameLabel.text = destinationCity.getLocalName(
+                languageKeys: UserSettings.shared.userLanguage)
             self.destinationCitySkyLabel.text = weather.mainWeatherDescription
-            self.destinationCityTemperatureLabel.text = "\(weather.main?.tempWithPreferredUnit ?? "-") \(UserSettings.shared.temperatureUnit.unit)"
+            self.destinationCityTemperatureLabel.text = weather.tempLabel
             
             if let weatherIcon = weather.mainWeatherIcon {
-                self.destinationCityIconWeather.downloaded(from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
+                self.destinationCityIconWeather.downloaded(
+                    from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
             } else {
                 self.destinationCityIconWeather.image = UIImage.emptyImage
             }
         }
     }
-    
-    
     
 }

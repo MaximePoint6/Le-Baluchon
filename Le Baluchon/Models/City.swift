@@ -70,6 +70,7 @@ struct City: Decodable {
         var zu: String?
     }
     
+    // MARK: Tools for ViewControllers
     var stateAndCountryDetails: String {
         if let stateOfTheCity = self.state {
             if let countryOfTheCity = self.country {
@@ -104,16 +105,16 @@ struct City: Decodable {
         }
     }
     
+    // MARK: swiftLint, cyclomatic_complexity rule disable
     // swiftlint:disable cyclomatic_complexity
+
     
-    // TODO: Obliger de faire ça ?
     /// Function that returns the city name based on the user's language.
     /// - Parameter languageKeys: user's language key
     /// - Returns: city name based on the user's language
     func getLocalName(languageKeys: Languages) -> String {
         guard let name = name else { return "City name not specified" }
         var localName: String?
-        
         switch languageKeys {
             case .fr: localName = localNames?.fr
             case .af: localName = localNames?.af
@@ -165,9 +166,9 @@ struct City: Decodable {
             case .zh_tw: localName = localNames?.zhTw
             case .zu: localName = localNames?.zu
         }
-        
         if let localName = localName { return localName } else { return name }
-        
     }
+
+    // MARK: swiftLint, cyclomatic_complexity rule enable
     // swiftlint:enable cyclomatic_complexity
 }

@@ -44,18 +44,6 @@ struct Weather: Decodable {
         var humidity: Int?
         var seaLevel: Int?
         var grndLevel: Int?
-        
-        /// Returns the temperature with the user's preferred unit.
-        /// The returned temperature contains 1 decimal, and is of type string.
-        var tempWithPreferredUnit: String? {
-            guard let temp = self.temp else { return nil }
-            // Temperature unit in "temp" variable is Kelvin by default
-            switch UserSettings.shared.temperatureUnit {
-                case .Celsius: return String(format: "%.1f", Float((temp) - 273.15))
-                case .Fahrenheit: return String(format: "%.1f", Float((temp - 273.15) * (9/5) + 32))
-                case .Kelvin: return String(format: "%.1f", Float(temp))
-            }
-        }
     }
     
     struct Wind: Decodable {
@@ -96,6 +84,27 @@ struct Weather: Decodable {
             }
         }
         return nil
+    }
+    
+    
+    /// Returns the temperature with the user's preferred unit.
+    /// The returned temperature contains 1 decimal, and is of type string.
+    var tempWithPreferredUnit: String? {
+        guard let temp = self.main?.temp else { return nil }
+        // Temperature unit in "temp" variable is Kelvin by default
+        switch UserSettings.shared.temperatureUnit {
+            case .Celsius: return String(format: "%.1f", Float((temp) - 273.15))
+            case .Fahrenheit: return String(format: "%.1f", Float((temp - 273.15) * (9/5) + 32))
+            case .Kelvin: return String(format: "%.1f", Float(temp))
+        }
+    }
+    
+    var tempLabel: String {
+        guard let tempWithPreferredUnit = self.tempWithPreferredUnit else {
+            return "- \(UserSettings.shared.temperatureUnit.unit)"
+        }
+        // Temperature unit in "temp" variable is Kelvin by default
+        return "\(tempWithPreferredUnit) \(UserSettings.shared.temperatureUnit.unit)"
     }
 
     

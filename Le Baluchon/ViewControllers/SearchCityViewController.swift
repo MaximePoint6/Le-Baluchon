@@ -18,7 +18,6 @@ class SearchCityViewController: UIViewController {
     private var datasOfCityTableView = [City]()
     var cityType: CityType = .current
     
-    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchBar.delegate = self
@@ -27,11 +26,15 @@ class SearchCityViewController: UIViewController {
         self.cityTableView.delegate = self
     }
     
-    private func getCitiesList(cityType: CityType) {
-        LocationService.shared.getLocation { success, cities in
+    @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    private func getCitiesList(city: String) {
+        LocationService.shared.getLocation(city: city) { success, cities in
             guard let cities = cities, success == true else {
                 let retry = UIAlertAction(title: "Retry", style: .default) { _ in
-                    self.getCitiesList(cityType: cityType)
+                    self.getCitiesList(city: city)
                 }
                 self.alertUser(title: "Error", message: "The Locations download failed", actions: [retry])
                 return
@@ -41,19 +44,13 @@ class SearchCityViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func closeButton(_ sender: Any) {
-        dismiss(animated: true)
-    }
-    
 }
 
 // MARK: UISearchBar
 extension SearchCityViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !(searchBar.text?.isEmpty ?? true) {
-            LocationService.shared.city = searchBar.text!
-            getCitiesList(cityType: .current)
+            getCitiesList(city: searchBar.text!)
         } else { }
     }
 }
@@ -89,12 +86,12 @@ extension SearchCityViewController: UITableViewDataSource {
 extension SearchCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch cityType {
-        case .current:
-            UserSettings.shared.currentCity = datasOfCityTableView[indexPath.row]
-            dismiss(animated: true)
-        case .destination:
-            UserSettings.shared.destinationCity = datasOfCityTableView[indexPath.row]
-            dismiss(animated: true)
+            case .current:
+                UserSettings.shared.currentCity = datasOfCityTableView[indexPath.row]
+                dismiss(animated: true)
+            case .destination:
+                UserSettings.shared.destinationCity = datasOfCityTableView[indexPath.row]
+                dismiss(animated: true)
         }
     }
 }

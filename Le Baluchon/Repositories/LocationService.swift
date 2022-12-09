@@ -12,25 +12,25 @@ class LocationService {
     static var shared = LocationService()
     private init() {}
 
-    private let numberOfLocation = 5
-    var city = ""
-
-    private var locationUrl: URL? {
-        if let cityForUrl = self.city.encodingURL() {
-            // TODO: encodingURL juste sur city... et si APIKey n'est pas conforme au type URL par exemple ca va crasher
-            return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(ApiKey.openWeather)")
-        }
-        return nil
-    }
-
     private var session = URLSession(configuration: .default)
     private var task: URLSessionDataTask?
 
-    func getLocation(callback: @escaping (Bool, [City]?) -> Void) {
+    func getLocation(city: String, callback: @escaping (Bool, [City]?) -> Void) {
         task?.cancel()
-        guard let url = locationUrl else {
-            return callback(false, nil)
+        
+        let numberOfLocation = 5
+//        var city = UserSettings.shared.userLanguage.rawValue
+
+        var locationUrl: URL? {
+            if let cityForUrl = city.encodingURL() {
+                // TODO: encodingURL juste sur city... et si APIKey n'est pas conforme au type URL par exemple ca va crasher
+                return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(ApiKey.openWeather)")
+            }
+            return nil
         }
+
+        guard let url = locationUrl else { return callback(false, nil) }
+        
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
