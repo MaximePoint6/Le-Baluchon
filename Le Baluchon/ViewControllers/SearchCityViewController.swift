@@ -31,13 +31,18 @@ class SearchCityViewController: UIViewController {
     }
     
     private func getCitiesList(city: String) {
-        LocationService.shared.getLocation(city: city) { success, cities in
-            guard let cities = cities, success == true else {
-                let retry = UIAlertAction(title: "Retry", style: .default) { _ in
-                    self.getCitiesList(city: city)
+        LocationService.shared.getLocation(city: city) { error, cities in
+            guard let cities = cities, error == nil else {
+                if error == ServiceError.noData {
+                    return
+                } else {
+                    let retry = UIAlertAction(title: "Retry", style: .default) { _ in
+                        self.getCitiesList(city: city)
+                    }
+                    let ok = UIAlertAction(title: "Ok", style: .cancel) { _ in }
+                    self.alertUser(title: "Error", message: error!.rawValue, actions: [retry, ok])
+                    return
                 }
-                self.alertUser(title: "Error", message: "The Locations download failed", actions: [retry])
-                return
             }
             self.datasOfCityTableView = cities
             self.cityTableView.reloadData()

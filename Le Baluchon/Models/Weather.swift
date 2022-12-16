@@ -101,10 +101,10 @@ struct Weather: Decodable {
     
     var tempLabel: String {
         guard let tempWithPreferredUnit = self.tempWithPreferredUnit else {
-            return "- \(UserSettings.shared.temperatureUnit.unit)"
+            return "-\(UserSettings.shared.temperatureUnit.unit)"
         }
         // Temperature unit in "temp" variable is Kelvin by default
-        return "\(tempWithPreferredUnit) \(UserSettings.shared.temperatureUnit.unit)"
+        return "\(tempWithPreferredUnit)\(UserSettings.shared.temperatureUnit.unit)"
     }
 
     

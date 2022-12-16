@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var settingsTableView: UITableView!
     
     private let settingCellIdentifier = "SettingCell"
+    private let segueToSearchCity = "segueToSearchCity"
     
     private var datasOfCurrentCityTableView = [City]()
     private var datasOfDestinationCityTableView = [City]()
@@ -41,7 +42,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToSearchCity" {
+        if segue.identifier == segueToSearchCity {
             let VC = segue.destination as? SearchCityViewController
             let cityType = sender as? CityType
             VC?.cityType = cityType ?? .current
@@ -138,9 +139,9 @@ extension SettingsViewController: UITableViewDataSource {
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            performSegue(withIdentifier: "segueToSearchCity", sender: CityType.current)
+            performSegue(withIdentifier: segueToSearchCity, sender: CityType.current)
         } else if indexPath.row == 1 {
-            performSegue(withIdentifier: "segueToSearchCity", sender: CityType.destination)
+            performSegue(withIdentifier: segueToSearchCity, sender: CityType.destination)
         }
     }
 }

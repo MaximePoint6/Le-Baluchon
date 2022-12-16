@@ -17,13 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Kqb-Rt-3aa">
-                                <rect key="frame" x="24" y="251" width="342" height="342"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Kqb-Rt-3aa">
+                                <rect key="frame" x="0.0" y="251" width="390" height="342"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="LightGreenColor"/>
+                        <constraints>
+                            <constraint firstItem="Kqb-Rt-3aa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4NF-Fd-lAd"/>
+                            <constraint firstItem="Kqb-Rt-3aa" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jdr-Bv-qap"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kqb-Rt-3aa" secondAttribute="trailing" id="mbi-pN-83K"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -34,7 +38,7 @@
     <resources>
         <image name="Image" width="341.33334350585938" height="341.33334350585938"/>
         <namedColor name="LightGreenColor">
-            <color red="0.81176470588235294" green="0.96078431372549022" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81199997663497925" green="0.96100002527236938" blue="0.90600001811981201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

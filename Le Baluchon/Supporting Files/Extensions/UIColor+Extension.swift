@@ -10,18 +10,18 @@ import UIKit
 
 extension UIColor {
     public class var lightGreen: UIColor {
-        return UIColor(named: "lightGreen")!
+        return UIColor(named: "LightGreenColor")!
     }
 
     public class var mediumGreen: UIColor {
-        return UIColor(red: 160/255, green: 228/255, blue: 203/255, alpha: 1.0)
+        return UIColor(named: "MediumGreenColor")!
     }
 
     public class var darkGreen: UIColor {
-        return UIColor(red: 89/255, green: 193/255, blue: 189/255, alpha: 1.0)
+        return UIColor(named: "DarkGreenColor")!
     }
 
     public class var navyBlue: UIColor {
-        return UIColor(red: 13/255, green: 76/255, blue: 146/255, alpha: 1.0)
+        return UIColor(named: "NavyBlueColor")!
     }
 }

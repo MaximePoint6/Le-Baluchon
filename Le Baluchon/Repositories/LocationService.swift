@@ -19,37 +19,35 @@ class LocationService {
     
     private var task: URLSessionDataTask?
 
-    func getLocation(city: String, callback: @escaping (Bool, [City]?) -> Void) {
+    func getLocation(city: String, callback: @escaping (ServiceError?, [City]?) -> Void) {
         task?.cancel()
         
         let numberOfLocation = 5
 
         var locationUrl: URL? {
             if let cityForUrl = city.encodingURL() {
-                // TODO: encodingURL juste sur city... et si APIKey n'est pas conforme au type URL par exemple ca va crasher
                 return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(ApiKey.openWeather)")
             }
             return nil
         }
 
-        guard let url = locationUrl else { return callback(false, nil) }
+        guard let url = locationUrl else { return callback(ServiceError.urlNotCorrect, nil) }
         
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    // TODO: j'ai remis le callBack pour que les tests fonctionnent, mais mettre une erreur particuliere et la gerer dans le viewController pour régler le bug ?
-                    callback(false, nil)
+                    callback(ServiceError.noData, nil)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    callback(false, nil)
+                    callback(ServiceError.badResponse, nil)
                     return
                 }
                 guard let responseJSON = try? SnakeCaseJSONDecoder().decode([City].self, from: data) else {
-                    callback(false, nil)
+                    callback(ServiceError.undecodableJSON, nil)
                     return
                 }
-                callback(true, responseJSON)
+                callback(nil, responseJSON)
             }
         }
         task?.resume()

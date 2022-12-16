@@ -74,7 +74,7 @@ struct City: Decodable {
     var stateAndCountryDetails: String {
         if let stateOfTheCity = self.state {
             if let countryOfTheCity = self.country {
-                return "\(stateOfTheCity) - \(countryOfTheCity)"
+                return "\(stateOfTheCity), \(countryOfTheCity)"
             } else {
                 return stateOfTheCity
             }
@@ -92,13 +92,13 @@ struct City: Decodable {
         
         if let stateOfTheCity = self.state {
             if let countryOfTheCity = self.country {
-                return "\(localName) - \(stateOfTheCity) - \(countryOfTheCity)"
+                return "\(localName), \(stateOfTheCity), \(countryOfTheCity)"
             } else {
-                return "\(localName) - \(stateOfTheCity)"
+                return "\(localName), \(stateOfTheCity)"
             }
         } else {
             if let countryOfTheCity = self.country {
-                return "\(localName) - \(countryOfTheCity)"
+                return "\(localName), \(countryOfTheCity)"
             } else {
                 return localName
             }
@@ -107,8 +107,8 @@ struct City: Decodable {
     
     // MARK: swiftLint, cyclomatic_complexity rule disable
     // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
 
-    
     /// Function that returns the city name based on the user's language.
     /// - Parameter languageKeys: user's language key
     /// - Returns: city name based on the user's language
@@ -171,4 +171,5 @@ struct City: Decodable {
 
     // MARK: swiftLint, cyclomatic_complexity rule enable
     // swiftlint:enable cyclomatic_complexity
+    // swiftlint:enable function_body_length
 }
