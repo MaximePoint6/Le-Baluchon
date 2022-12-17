@@ -106,6 +106,14 @@ struct Weather: Decodable {
         // Temperature unit in "temp" variable is Kelvin by default
         return "\(tempWithPreferredUnit)\(UserSettings.shared.temperatureUnit.unit)"
     }
+    
+    var localDate: String {
+        if let timeZone = self.timezone {
+            return DateFormater.getDate(timeZone: timeZone)
+        } else {
+            return "-"
+        }
+    }
 
     
 }

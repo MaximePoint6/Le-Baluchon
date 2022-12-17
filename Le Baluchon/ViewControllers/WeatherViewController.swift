@@ -30,6 +30,7 @@ class WeatherViewController: UIViewController {
         //            return
         //        }
         getWeatherCities(cityType: .current)
+        topBar.setupUI()
     }
     
     private func getWeatherCities(cityType: CityType) {
@@ -67,8 +68,9 @@ class WeatherViewController: UIViewController {
                 case .current:
                     self.currentCityWeather.cityNameLabel.text = city.getLocalName(languageKeys:
                                                                         UserSettings.shared.userLanguage)
-                    self.currentCityWeather.skyLabel.text = weather.mainWeatherDescription
+                    self.currentCityWeather.skyLabel.text = weather.mainWeatherDescription.capitalizedSentence
                     self.currentCityWeather.temperatureLabel.text = weather.tempLabel
+                    self.currentCityWeather.localDate.text = weather.localDate
                     
                     if let weatherIcon = weather.mainWeatherIcon {
                         self.currentCityWeather.iconWeather.downloaded(
@@ -83,8 +85,9 @@ class WeatherViewController: UIViewController {
                 case .destination:
                     self.destinationCityWeather.cityNameLabel.text = city.getLocalName(languageKeys:
                                                                             UserSettings.shared.userLanguage)
-                    self.destinationCityWeather.skyLabel.text = weather.mainWeatherDescription
+                    self.destinationCityWeather.skyLabel.text = weather.mainWeatherDescription.capitalizedSentence
                     self.destinationCityWeather.temperatureLabel.text = weather.tempLabel
+                    self.destinationCityWeather.localDate.text = weather.localDate
                     
                     if let weatherIcon = weather.mainWeatherIcon {
                         self.destinationCityWeather.iconWeather.downloaded(
@@ -105,7 +108,7 @@ extension WeatherViewController: ContainsTopBar {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSettingsView" {
-            let VC = segue.destination as? SettingsViewController
+            _ = segue.destination as? SettingsViewController
         }
     }
 }

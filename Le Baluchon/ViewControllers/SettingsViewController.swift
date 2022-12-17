@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
     @IBOutlet weak var languagePickerView: UIPickerView!
     @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userPicture: UIImageView!
     
     private let settingCellIdentifier = "SettingCell"
     private let segueToSearchCity = "segueToSearchCity"
@@ -67,6 +69,11 @@ class SettingsViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @IBAction func userNamehasBeenEdited(_ sender: Any) {
+        if let userName = userName.text {
+            UserSettings.shared.userName = userName
+        }
+    }
     
     // MARK: function
     private func setupUI() {
@@ -80,6 +87,10 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupUserSettings() {
+        // textField
+        userName.text = UserSettings.shared.userName
+        // UIImageView
+        userPicture.image = UserSettings.shared.userPicture
         // Picker
         let indexUserLanguage = languagesList.firstIndex(of: UserSettings.shared.userLanguage)!
         self.languagePickerView.selectRow(indexUserLanguage, inComponent: 0, animated: true)
@@ -167,6 +178,7 @@ extension SettingsViewController: UIPickerViewDelegate {
         // When the user changes the selection
         let index = pickerView.selectedRow(inComponent: component)
         UserSettings.shared.userLanguage = languagesList[index]
-        setupUserSettings()
+        // for get cities local names
+        settingsTableView.reloadData()
     }
 }
