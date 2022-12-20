@@ -27,4 +27,13 @@ extension String {
         let remainingLetters = self.dropFirst().lowercased()
         return firstLetter + remainingLetters
     }
+    
+    func localized() -> String {
+        return NSLocalizedString(
+            self,
+            tableName: "Localizable",
+            bundle: .main,
+            value: self,
+            comment: self)
+    }
 }

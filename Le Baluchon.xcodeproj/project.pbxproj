@@ -18,6 +18,8 @@
 		CA8E64072939338700CF0440 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E64062939338700CF0440 /* UIImageView+Extension.swift */; };
 		CA8E6409293940B000CF0440 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E6408293940B000CF0440 /* String+Extension.swift */; };
 		CAAF441C294E3AB00071BDD8 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */; };
+		CAAF44202950D5DD0071BDD8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAAF44222950D5DD0071BDD8 /* Localizable.strings */; };
+		CAAF44252950E4A40071BDD8 /* SearchLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF44242950E4A40071BDD8 /* SearchLanguageViewController.swift */; };
 		CAB83F852927CEC800BB1D30 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */; };
 		CAB83F89292A686700BB1D30 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F88292A686700BB1D30 /* ApiKey.swift */; };
 		CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F8A292A6EDB00BB1D30 /* WeatherService.swift */; };
@@ -67,6 +69,9 @@
 		CA8E64062939338700CF0440 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		CA8E6408293940B000CF0440 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		CAAF44212950D5DD0071BDD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CAAF44232950D5EB0071BDD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CAAF44242950E4A40071BDD8 /* SearchLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLanguageViewController.swift; sourceTree = "<group>"; };
 		CAB83F7F2927C89000BB1D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Le Baluchon/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CAB83F88292A686700BB1D30 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
@@ -125,6 +130,14 @@
 				CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CAAF441D2950D5B60071BDD8 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				CAAF44222950D5DD0071BDD8 /* Localizable.strings */,
+			);
+			path = Localizable;
 			sourceTree = "<group>";
 		};
 		CACE541D2927C25100A37F5A = {
@@ -191,6 +204,7 @@
 				CAB83F8C292A875200BB1D30 /* WeatherViewController.swift */,
 				CA8E63FE2931062A00CF0440 /* SettingsViewController.swift */,
 				CAF074872940BEF100F0FC74 /* SearchCityViewController.swift */,
+				CAAF44242950E4A40071BDD8 /* SearchLanguageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -219,6 +233,7 @@
 		CACE545D2927C37800A37F5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CAAF441D2950D5B60071BDD8 /* Localizable */,
 				CAFD20D3294CB83D00B96D52 /* Protocol */,
 				CA8E640A29394D1C00CF0440 /* Extensions */,
 				CAB83F7F2927C89000BB1D30 /* Info.plist */,
@@ -313,6 +328,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = CACE541D2927C25100A37F5A;
 			productRefGroup = CACE54272927C25100A37F5A /* Products */;
@@ -331,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAFD20D2294CADA600B96D52 /* TopBarComponentView.xib in Resources */,
+				CAAF44202950D5DD0071BDD8 /* Localizable.strings in Resources */,
 				CACE54362927C25200A37F5A /* LaunchScreen.storyboard in Resources */,
 				CAFD20CD294C764600B96D52 /* WeatherComponentView.xib in Resources */,
 				CACE54332927C25200A37F5A /* Assets.xcassets in Resources */,
@@ -399,6 +416,7 @@
 				CAFD20CC294C764600B96D52 /* WeatherComponentView.swift in Sources */,
 				CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */,
 				CAFD20D5294CB8A600B96D52 /* ContainsTopBar.swift in Sources */,
+				CAAF44252950E4A40071BDD8 /* SearchLanguageViewController.swift in Sources */,
 				CA8E63FF2931062A00CF0440 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,6 +443,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		CAAF44222950D5DD0071BDD8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAAF44212950D5DD0071BDD8 /* en */,
+				CAAF44232950D5EB0071BDD8 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CACE542F2927C25100A37F5A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -448,6 +475,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -508,6 +536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

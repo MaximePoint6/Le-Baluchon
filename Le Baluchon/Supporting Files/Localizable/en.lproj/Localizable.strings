@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  Le Baluchon
+
+  Created by Maxime Point on 19/12/2022.
+  
+*/
+
+// share across multiple screens/views
+"Retry" = "Retry";
+"Error" = "Error";
+"Ok" = "Ok";
+
+// WeatherViewController
+
+// SettingsViewController
+"Current City" = "Current City";
+"City not specified" = "City not specified";
+"Destination City" = "Destination City";
+"Language" = "Language";
+
+// SearchCityViewController
+
+
+// TopBarComponentView
+"Good Morning," = "Good Morning,";
+"Good Afternoon," = "Good Afternoon,";
+"Good Evening," = "Good Evening,";

@@ -100,7 +100,7 @@
             <color red="0.34900000691413879" green="0.75700002908706665" blue="0.74099999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LightGreenColor">
-            <color red="0.81199997663497925" green="0.96100002527236938" blue="0.90600001811981201" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81199997663497925" green="0.96100002527236938" blue="0.90600001811981201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

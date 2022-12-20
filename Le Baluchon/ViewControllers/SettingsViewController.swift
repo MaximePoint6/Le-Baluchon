@@ -18,6 +18,7 @@ class SettingsViewController: UIViewController {
     
     private let settingCellIdentifier = "SettingCell"
     private let segueToSearchCity = "segueToSearchCity"
+    private let segueToSearchLanguage = "segueToSearchLanguage"
     
     private var datasOfCurrentCityTableView = [City]()
     private var datasOfDestinationCityTableView = [City]()
@@ -115,43 +116,45 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == 0 {
-            return datasOfCurrentCityTableView.count // number of cells in each section
-        } else if tableView.tag == 1 {
-            return datasOfDestinationCityTableView.count // number of cells in each section
-        } else {
-            return 2
-        }
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
+        let cityNotSpecified = "City not specified".localized()
+        
         if indexPath.row == 0 {
-            cell.textLabel?.text = "Current City"
+            cell.textLabel?.text = "Language".localized()
+            cell.detailTextLabel?.text = UserSettings.shared.userLanguage.description
+        } else if indexPath.row == 1 {
+            cell.textLabel?.text = "Current City".localized()
             if let city = UserSettings.shared.currentCity {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
                     languageKeys: UserSettings.shared.userLanguage)
             } else {
-                cell.detailTextLabel?.text = "City name not specified"
+                cell.detailTextLabel?.text = cityNotSpecified
             }
-        } else {
-            cell.textLabel?.text = "Destination City"
+        } else if indexPath.row == 2 {
+            cell.textLabel?.text = "Destination City".localized()
             if let city = UserSettings.shared.destinationCity {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
                     languageKeys: UserSettings.shared.userLanguage)
             } else {
-                cell.detailTextLabel?.text = "City name not specified"
+                cell.detailTextLabel?.text = cityNotSpecified
             }
-        }
+        } else { }
         return cell
     }
+    
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            performSegue(withIdentifier: segueToSearchCity, sender: CityType.current)
+            performSegue(withIdentifier: segueToSearchLanguage, sender: nil)
         } else if indexPath.row == 1 {
+            performSegue(withIdentifier: segueToSearchCity, sender: CityType.current)
+        } else if indexPath.row == 2 {
             performSegue(withIdentifier: segueToSearchCity, sender: CityType.destination)
         }
     }
