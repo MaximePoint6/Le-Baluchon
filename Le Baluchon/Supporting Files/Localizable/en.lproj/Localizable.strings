@@ -7,22 +7,22 @@
 */
 
 // share across multiple screens/views
-"Retry" = "Retry";
-"Error" = "Error";
-"Ok" = "Ok";
+"retry" = "Retry";
+"error" = "Error";
+"ok" = "Ok";
 
 // WeatherViewController
 
 // SettingsViewController
-"Current City" = "Current City";
-"City not specified" = "City not specified";
-"Destination City" = "Destination City";
-"Language" = "Language";
+"current.city" = "Current City";
+"city.not.specified" = "City not specified";
+"destination.city" = "Destination City";
+"language" = "Language";
 
 // SearchCityViewController
 
 
 // TopBarComponentView
-"Good Morning," = "Good Morning,";
-"Good Afternoon," = "Good Afternoon,";
-"Good Evening," = "Good Evening,";
+"good.morning," = "Good Morning,";
+"good.afternoon," = "Good Afternoon,";
+"good.evening," = "Good Evening,";

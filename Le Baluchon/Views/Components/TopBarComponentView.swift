@@ -56,11 +56,11 @@ class TopBarComponentView: UIView {
         
         let hour = Calendar.current.component(.hour, from: Date())
         if hour > 5 && hour <= 12 {
-            helloLabel.text = "Good Morning,".localized()
+            helloLabel.text = "good.morning,".localized()
         } else if hour > 12 && hour <= 18 {
-            helloLabel.text = "Good Afternoon,".localized()
+            helloLabel.text = "good.afternoon,".localized()
         } else {
-            helloLabel.text = "Good Evening,".localized()
+            helloLabel.text = "good.evening,".localized()
         }
     }
 }

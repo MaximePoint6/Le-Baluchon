@@ -36,11 +36,11 @@ class SearchCityViewController: UIViewController {
                 if error == ServiceError.noData {
                     return
                 } else {
-                    let retry = UIAlertAction(title: "Retry".localized(), style: .default) { _ in
+                    let retry = UIAlertAction(title: "retry".localized(), style: .default) { _ in
                         self.getCitiesList(city: city)
                     }
-                    let ok = UIAlertAction(title: "Ok".localized(), style: .cancel) { _ in }
-                    self.alertUser(title: "Error".localized(), message: error!.rawValue, actions: [retry, ok])
+                    let ok = UIAlertAction(title: "ok".localized(), style: .cancel) { _ in }
+                    self.alertUser(title: "error".localized(), message: error!.rawValue, actions: [retry, ok])
                     return
                 }
             }

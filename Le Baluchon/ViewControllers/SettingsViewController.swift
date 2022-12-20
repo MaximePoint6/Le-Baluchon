@@ -121,13 +121,13 @@ extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
-        let cityNotSpecified = "City not specified".localized()
+        let cityNotSpecified = "city.not.specified".localized()
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = "Language".localized()
+            cell.textLabel?.text = "language".localized()
             cell.detailTextLabel?.text = UserSettings.shared.userLanguage.description
         } else if indexPath.row == 1 {
-            cell.textLabel?.text = "Current City".localized()
+            cell.textLabel?.text = "current.city".localized()
             if let city = UserSettings.shared.currentCity {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
                     languageKeys: UserSettings.shared.userLanguage)
@@ -135,7 +135,7 @@ extension SettingsViewController: UITableViewDataSource {
                 cell.detailTextLabel?.text = cityNotSpecified
             }
         } else if indexPath.row == 2 {
-            cell.textLabel?.text = "Destination City".localized()
+            cell.textLabel?.text = "destination.city".localized()
             if let city = UserSettings.shared.destinationCity {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
                     languageKeys: UserSettings.shared.userLanguage)
