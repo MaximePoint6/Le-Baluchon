@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct City: Decodable {
+struct City: Codable {
 
     var name: String?
     var localNames: LocalNames?
@@ -16,7 +16,7 @@ struct City: Decodable {
     var country: String?
     var state: String?
 
-    struct LocalNames: Decodable {
+    struct LocalNames: Codable {
         var featureName: String?
         var ascii: String?
         var af: String?

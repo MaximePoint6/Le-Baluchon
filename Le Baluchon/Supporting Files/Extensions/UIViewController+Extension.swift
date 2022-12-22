@@ -1,5 +1,5 @@
 //
-//  UIAlertController.swift
+//  UIViewController+Extension.swift
 //  Le Baluchon
 //
 //  Created by Maxime Point on 02/12/2022.
@@ -18,4 +18,15 @@ extension UIViewController {
         }
         present(alert, animated: true)
     }
+    
+    static var identifier: String {
+        return String(String(describing: self))
+    }
+    
+    // swiftlint:disable force_cast
+    static func instantiate() -> Self {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(identifier: identifier) as! Self
+    }
+    // swiftlint:enable force_cast
 }

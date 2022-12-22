@@ -6,6 +6,9 @@
   
 */
 
+// UserDefaults
+"the.traveler" = "The traveler";
+
 // share across multiple screens/views
 "retry" = "Retry";
 "error" = "Error";

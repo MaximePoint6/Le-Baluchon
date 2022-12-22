@@ -20,15 +20,6 @@ class WeatherViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //        if UserSettings.shared.currentCity == nil && UserSettings.shared.destinationCity == nil {
-        //            let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
-        //                self.present(SettingsViewController(), animated: true)
-        //            }
-        //            self.alertUser(title: "Unknown cities",
-        //                           message: "You must enter your current city and your destination city.",
-        //                           actions: [okButton])
-        //            return
-        //        }
         getWeatherCities(cityType: .current)
         topBar.setupUI()
     }
@@ -38,13 +29,13 @@ class WeatherViewController: UIViewController {
         switch cityType {
             case .current:
                 // Get Current City
-                guard let currentCity = UserSettings.shared.currentCity else {
+                guard let currentCity = UserSettings.currentCity else {
                     return
                 }
                 city = currentCity
             case .destination:
                 // Get Destination City
-                guard let destinationCity = UserSettings.shared.destinationCity else {
+                guard let destinationCity = UserSettings.destinationCity else {
                     return
                 }
                 city = destinationCity
@@ -67,7 +58,7 @@ class WeatherViewController: UIViewController {
             switch cityType {
                 case .current:
                     self.currentCityWeather.cityNameLabel.text = city.getLocalName(languageKeys:
-                                                                        UserSettings.shared.userLanguage)
+                                                                        UserSettings.userLanguage)
                     self.currentCityWeather.skyLabel.text = weather.mainWeatherDescription.capitalizedSentence
                     self.currentCityWeather.temperatureLabel.text = weather.tempLabel
                     self.currentCityWeather.localDate.text = weather.localDate
@@ -84,7 +75,7 @@ class WeatherViewController: UIViewController {
                     
                 case .destination:
                     self.destinationCityWeather.cityNameLabel.text = city.getLocalName(languageKeys:
-                                                                            UserSettings.shared.userLanguage)
+                                                                            UserSettings.userLanguage)
                     self.destinationCityWeather.skyLabel.text = weather.mainWeatherDescription.capitalizedSentence
                     self.destinationCityWeather.temperatureLabel.text = weather.tempLabel
                     self.destinationCityWeather.localDate.text = weather.localDate

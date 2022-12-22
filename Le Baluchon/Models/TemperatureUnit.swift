@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TemperatureUnit: String, CaseIterable {
+enum TemperatureUnit: String, CaseIterable, Codable {
     case Kelvin
     case Celsius
     case Fahrenheit

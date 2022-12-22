@@ -26,23 +26,23 @@ class WeatherService {
         var lon: Double
         switch cityType {
             case .current:
-                guard let currentCityLat = UserSettings.shared.currentCity?.lat,
-                        let currentCityLon = UserSettings.shared.currentCity?.lon else {
+                guard let currentCityLat = UserSettings.currentCity?.lat,
+                        let currentCityLon = UserSettings.currentCity?.lon else {
                     callback(ServiceError.noCurrentCity, nil)
                     return
                 }
                 lat = currentCityLat
                 lon = currentCityLon
             case .destination:
-                guard let destinationCityLat = UserSettings.shared.destinationCity?.lat,
-                        let destinationCityLon = UserSettings.shared.destinationCity?.lon else {
+                guard let destinationCityLat = UserSettings.destinationCity?.lat,
+                        let destinationCityLon = UserSettings.destinationCity?.lon else {
                     callback(ServiceError.noDestinationCity, nil)
                     return
                 }
                 lat = destinationCityLat
                 lon = destinationCityLon
         }
-        let lang = UserSettings.shared.userLanguage.rawValue
+        let lang = UserSettings.userLanguage.rawValue
 
         var weatherUrl: URL? {
             return URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(String(lat))&lon=\(String(lon))&appid=\(ApiKey.openWeather)&lang=\(lang)")

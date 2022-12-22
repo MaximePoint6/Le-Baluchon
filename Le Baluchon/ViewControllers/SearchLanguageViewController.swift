@@ -80,7 +80,7 @@ extension SearchLanguageViewController: UITableViewDataSource {
 
 extension SearchLanguageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UserSettings.shared.userLanguage = datasOfLanguageTableView[indexPath.row]
+        UserSettings.userLanguage = datasOfLanguageTableView[indexPath.row]
         dismiss(animated: true)
     }
 }

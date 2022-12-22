@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    // swiftlint:disable unused_optional_binding
+    // swiftlint:disable force_cast
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,7 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new
         // (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: scene)
+        
+        
+        // Allows you to launch the screen you want at startup (TabBar or OnBoarding)
+        var controller: UIViewController!
+        if UserSettings.onBoardingScreenWasShown {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // homeTB = tabBar
+            controller = storyboard.instantiateViewController(identifier: "homeTB") as! UITabBarController
+        } else {
+            controller = OnBoardingViewController.instantiate()
+        }
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -51,8 +66,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-    // swiftlint:enable unused_optional_binding
+    
+    // swiftlint:enable force_cast
     
 }
 

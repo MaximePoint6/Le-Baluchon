@@ -40,9 +40,9 @@ class TopBarComponentView: UIView {
     // swiftlint:enable force_cast
     
     func setupUI() {
-        userfirstName.text = UserSettings.shared.userName.capitalized
+        userfirstName.text = UserSettings.userName.capitalized
         
-        if let userPicture = UserSettings.shared.userPicture {
+        if let userPicture = UserSettings.userPicture {
             self.userPicture.setBackgroundImage(userPicture, for: UIControl.State.normal)
         } else {
             self.userPicture.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill"),

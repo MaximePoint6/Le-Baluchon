@@ -81,7 +81,7 @@ extension SearchCityViewController: UITableViewDataSource {
         }
         city = datasOfCityTableView[indexPath.row]
         
-        cell.textLabel?.text = city.getLocalName(languageKeys: UserSettings.shared.userLanguage)
+        cell.textLabel?.text = city.getLocalName(languageKeys: UserSettings.userLanguage)
         cell.detailTextLabel?.text = city.stateAndCountryDetails
         
         return cell
@@ -92,10 +92,10 @@ extension SearchCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch cityType {
             case .current:
-                UserSettings.shared.currentCity = datasOfCityTableView[indexPath.row]
+                UserSettings.currentCity = datasOfCityTableView[indexPath.row]
                 dismiss(animated: true)
             case .destination:
-                UserSettings.shared.destinationCity = datasOfCityTableView[indexPath.row]
+                UserSettings.destinationCity = datasOfCityTableView[indexPath.row]
                 dismiss(animated: true)
         }
     }

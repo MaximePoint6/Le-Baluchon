@@ -62,7 +62,7 @@ class SettingsViewController: UIViewController {
         } else {
             temperatureUnit = .Fahrenheit
         }
-        UserSettings.shared.temperatureUnit = temperatureUnit
+        UserSettings.temperatureUnit = temperatureUnit
     }
     
     
@@ -72,7 +72,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func userNamehasBeenEdited(_ sender: Any) {
         if let userName = userName.text {
-            UserSettings.shared.userName = userName
+            UserSettings.userName = userName
         }
     }
     
@@ -89,16 +89,16 @@ class SettingsViewController: UIViewController {
     
     private func setupUserSettings() {
         // textField
-        userName.text = UserSettings.shared.userName
+        userName.text = UserSettings.userName
         // UIImageView
-        userPicture.image = UserSettings.shared.userPicture
+        userPicture.image = UserSettings.userPicture
         // Picker
-        let indexUserLanguage = languagesList.firstIndex(of: UserSettings.shared.userLanguage)!
+        let indexUserLanguage = languagesList.firstIndex(of: UserSettings.userLanguage)!
         self.languagePickerView.selectRow(indexUserLanguage, inComponent: 0, animated: true)
         // TableView
         settingsTableView.reloadData()
         // SelectedSegment
-        switch UserSettings.shared.temperatureUnit {
+        switch UserSettings.temperatureUnit {
             case .Kelvin: self.temperatureUnitSegmentedControl.selectedSegmentIndex = 0
             case .Celsius: self.temperatureUnitSegmentedControl.selectedSegmentIndex = 1
             case .Fahrenheit: self.temperatureUnitSegmentedControl.selectedSegmentIndex = 2
@@ -125,20 +125,20 @@ extension SettingsViewController: UITableViewDataSource {
         
         if indexPath.row == 0 {
             cell.textLabel?.text = "language".localized()
-            cell.detailTextLabel?.text = UserSettings.shared.userLanguage.description
+            cell.detailTextLabel?.text = UserSettings.userLanguage.description
         } else if indexPath.row == 1 {
             cell.textLabel?.text = "current.city".localized()
-            if let city = UserSettings.shared.currentCity {
+            if let city = UserSettings.currentCity {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
-                    languageKeys: UserSettings.shared.userLanguage)
+                    languageKeys: UserSettings.userLanguage)
             } else {
                 cell.detailTextLabel?.text = cityNotSpecified
             }
         } else if indexPath.row == 2 {
             cell.textLabel?.text = "destination.city".localized()
-            if let city = UserSettings.shared.destinationCity {
+            if let city = UserSettings.destinationCity {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
-                    languageKeys: UserSettings.shared.userLanguage)
+                    languageKeys: UserSettings.userLanguage)
             } else {
                 cell.detailTextLabel?.text = cityNotSpecified
             }
@@ -180,7 +180,8 @@ extension SettingsViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // When the user changes the selection
         let index = pickerView.selectedRow(inComponent: component)
-        UserSettings.shared.userLanguage = languagesList[index]
+        UserSettings.userLanguage = languagesList[index]
+//        UserSettings.shared.userLanguage = languagesList[index]
         // for get cities local names
         settingsTableView.reloadData()
     }
