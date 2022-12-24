@@ -9,14 +9,23 @@
 // UserDefaults
 "the.traveler" = "The traveler";
 
-// share across multiple screens/views
+// Share across multiple screens/views
 "retry" = "Retry";
 "error" = "Error";
 "ok" = "Ok";
+"urlNotCorrect" = "URL not correct";
+"noData" = "No data retrieved";
+"badResponse" = "The request returned a bad response";
+"undecodableJSON" = "Unexpected data";
+"noCurrentCity" = "No current city provided";
+"noDestinationCity" = "No destination city provided";
+"next" = "Next";
+"get.started" = "Go !";
 
 // WeatherViewController
 
 // SettingsViewController
+"username" = "Username";
 "current.city" = "Current City";
 "city.not.specified" = "City not specified";
 "destination.city" = "Destination City";
@@ -29,3 +38,14 @@
 "good.morning," = "Good Morning,";
 "good.afternoon," = "Good Afternoon,";
 "good.evening," = "Good Evening,";
+
+// onBoardingViewController
+"onBoardingSlide.title1" = "Welcome dear traveler,";
+"onBoardingSlide.description1" = "ready to embark on a new destination?! LeBaluchon will make your life easier for your next trip.";
+"onBoardingSlide.title2" = "In order to help you,";
+"onBoardingSlide.description2" = "we need to know your nickname.  It's easier to communicate together, no?";
+"onBoardingSlide.title3" = "Enchanted %@";
+"onBoardingSlide.description3" = "can you now tell us your current city.";
+"onBoardingSlide.title4" = "And the most important...";
+"onBoardingSlide.description4" = "to which city do you want to travel?";
+"search.city" = "Search for a city";

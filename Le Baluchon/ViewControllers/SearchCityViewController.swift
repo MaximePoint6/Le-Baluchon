@@ -40,7 +40,7 @@ class SearchCityViewController: UIViewController {
                         self.getCitiesList(city: city)
                     }
                     let ok = UIAlertAction(title: "ok".localized(), style: .cancel) { _ in }
-                    self.alertUser(title: "error".localized(), message: error!.rawValue, actions: [retry, ok])
+                    self.alertUser(title: "error".localized(), message: error!.rawValue.localized(), actions: [retry, ok])
                     return
                 }
             }

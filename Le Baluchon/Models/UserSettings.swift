@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// save UserSettings in UserDefault
 struct UserSettings {
     
     static var userName: String {

@@ -8,10 +8,10 @@
 import Foundation
 
 enum ServiceError: String, Error {
-    case urlNotCorrect = "URL not correct"
-    case noData = "No data retrieved"
-    case badResponse = "The request returned a bad response"
-    case undecodableJSON = "Unexpected data"
-    case noCurrentCity = "No current city provided"
-    case noDestinationCity = "No destination city provided"
+    case urlNotCorrect
+    case noData
+    case badResponse
+    case undecodableJSON
+    case noCurrentCity
+    case noDestinationCity
 }

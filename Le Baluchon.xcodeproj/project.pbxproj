@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA36C24E2954BF3400F2952E /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */; };
+		CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */; };
 		CA8E63E0292AA67E00CF0440 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63DF292AA67E00CF0440 /* Weather.swift */; };
 		CA8E63F72930B23A00CF0440 /* SnakeCaseJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */; };
 		CA8E63F92930B9BC00CF0440 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63F82930B9BC00CF0440 /* City.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainsOnBoardingCollectionView.swift; sourceTree = "<group>"; };
 		CA8E63DF292AA67E00CF0440 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeCaseJSONDecoder.swift; sourceTree = "<group>"; };
 		CA8E63F82930B9BC00CF0440 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				CA8E6408293940B000CF0440 /* String+Extension.swift */,
 				CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */,
 				CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */,
+				CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				CAFD20D4294CB8A600B96D52 /* ContainsTopBar.swift */,
+				CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				CAB83F89292A686700BB1D30 /* ApiKey.swift in Sources */,
 				CAAF44312952F5A60071BDD8 /* OnBoardingCollectionViewCell.swift in Sources */,
 				CA8E63F92930B9BC00CF0440 /* City.swift in Sources */,
+				CA36C24E2954BF3400F2952E /* UITextField+Extension.swift in Sources */,
 				CACE542A2927C25100A37F5A /* AppDelegate.swift in Sources */,
 				CA8E640129310EC400CF0440 /* UserSettings.swift in Sources */,
 				CAAF442E2952F3830071BDD8 /* OnBoardingSlide.swift in Sources */,
@@ -443,6 +450,7 @@
 				CAAF442C2952F0000071BDD8 /* UIView+Extension.swift in Sources */,
 				CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */,
 				CAFD20D5294CB8A600B96D52 /* ContainsTopBar.swift in Sources */,
+				CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */,
 				CAAF442A295220140071BDD8 /* OnBoardingViewController.swift in Sources */,
 				CAAF44252950E4A40071BDD8 /* SearchLanguageViewController.swift in Sources */,
 				CA8E63FF2931062A00CF0440 /* SettingsViewController.swift in Sources */,

@@ -11,7 +11,6 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var languagePickerView: UIPickerView!
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userPicture: UIImageView!
@@ -26,13 +25,8 @@ class SettingsViewController: UIViewController {
     /// List of Language Enum with alphabetical sorting
     private var languagesList: [Languages] = (Languages.allCases.map { $0 }).sorted { $0.description < $1.description }
     
-    
-    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        // language UIPickerView
-        self.languagePickerView.dataSource = self
-        self.languagePickerView.delegate = self
         // settings table view
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
@@ -85,6 +79,8 @@ class SettingsViewController: UIViewController {
                                                           at: temperatureUnitSegmentedControl.numberOfSegments,
                                                           animated: false)
         }
+        // textField
+        userName.uiCustomization()
     }
     
     private func setupUserSettings() {
@@ -92,9 +88,6 @@ class SettingsViewController: UIViewController {
         userName.text = UserSettings.userName
         // UIImageView
         userPicture.image = UserSettings.userPicture
-        // Picker
-        let indexUserLanguage = languagesList.firstIndex(of: UserSettings.userLanguage)!
-        self.languagePickerView.selectRow(indexUserLanguage, inComponent: 0, animated: true)
         // TableView
         settingsTableView.reloadData()
         // SelectedSegment
@@ -157,32 +150,5 @@ extension SettingsViewController: UITableViewDelegate {
         } else if indexPath.row == 2 {
             performSegue(withIdentifier: segueToSearchCity, sender: CityType.destination)
         }
-    }
-}
-
-
-// MARK: UIPickerView
-extension SettingsViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return languagesList.count
-    }
-}
-
-extension SettingsViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        // Add datas
-        return languagesList[row].description
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // When the user changes the selection
-        let index = pickerView.selectedRow(inComponent: component)
-        UserSettings.userLanguage = languagesList[index]
-//        UserSettings.shared.userLanguage = languagesList[index]
-        // for get cities local names
-        settingsTableView.reloadData()
     }
 }

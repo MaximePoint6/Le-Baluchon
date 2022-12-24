@@ -13,10 +13,19 @@
 "retry" = "Recommencer";
 "error" = "Erreur";
 "ok" = "Ok";
+"urlNotCorrect" = "L'URL n'est pas correct";
+"noData" = "Aucune donnée récupérée";
+"badResponse" = "La requête a retourné une mauvaise réponse";
+"undecodableJSON" = "Données inatendues";
+"noCurrentCity" = "Ville actuelle non précisée";
+"noDestinationCity" = "Ville de destination non précisée";
+"next" = "Suivant";
+"get.started" = "C'est parti !";
 
 // WeatherViewController
 
 // SettingsViewController
+"username" = "Pseudo";
 "current.city" = "Ville actuelle";
 "city.not.specified" = "Ville non précisée";
 "destination.city" = "Ville de destination";
@@ -28,4 +37,15 @@
 // TopBarComponentView
 "good.morning," = "Bonne matinée,";
 "good.afternoon," = "Bon après-midi,";
-"good.evening," = "Bonne soirée,";
+"good.evening," = "Bonsoir,";
+
+// onBoardingViewController
+"onBoardingSlide.title1" = "Bienvenue cher(e) voyageur,";
+"onBoardingSlide.description1" = "prêt à embarquer vers une nouvelle destination ?! LeBaluchon te facilitera la vie pour ton prochain voyage.";
+"onBoardingSlide.title2" = "Pour pouvoir t'aider,";
+"onBoardingSlide.description2" = "nous devons connaitre ton pseudo. C'est plus simple pour communiquer ensemble, n'est-ce pas ?";
+"onBoardingSlide.title3" = "Enchanté %@";
+"onBoardingSlide.description3" = "peux-tu, à présent, nous indiquer ta ville actuelle.";
+"onBoardingSlide.title4" = "Et le plus important...";
+"onBoardingSlide.description4" = "vers quelle ville souhaites-tu voyager ?";
+"search.city" = "Rechercher une ville";
