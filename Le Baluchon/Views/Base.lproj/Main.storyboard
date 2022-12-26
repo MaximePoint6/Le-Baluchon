@@ -282,11 +282,11 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="z7f-Fa-wrZ" customClass="SearchCityViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oea-UP-Jf6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sGX-Dr-pEK" userLabel="cityTableView">
-                                <rect key="frame" x="20" y="109" width="374" height="713"/>
+                                <rect key="frame" x="20" y="109" width="374" height="733"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Ville" id="h8f-Bv-61A">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -337,6 +337,7 @@
                         <constraints>
                             <constraint firstItem="OR2-gC-599" firstAttribute="top" secondItem="ZJ0-tY-DhP" secondAttribute="top" constant="10" id="Cud-Ew-J4C"/>
                             <constraint firstItem="sGX-Dr-pEK" firstAttribute="leading" secondItem="ZJ0-tY-DhP" secondAttribute="leading" constant="20" id="DfF-Yv-ne6"/>
+                            <constraint firstItem="OR2-gC-599" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZJ0-tY-DhP" secondAttribute="leading" constant="20" id="MJc-81-HqA"/>
                             <constraint firstItem="ZJ0-tY-DhP" firstAttribute="trailing" secondItem="OR2-gC-599" secondAttribute="trailing" constant="10" id="N1M-30-Gnd"/>
                             <constraint firstItem="sGX-Dr-pEK" firstAttribute="top" secondItem="OR2-gC-599" secondAttribute="bottom" constant="20" id="TtY-vL-W4y"/>
                             <constraint firstItem="ZJ0-tY-DhP" firstAttribute="bottom" secondItem="sGX-Dr-pEK" secondAttribute="bottom" constant="20" id="VQ6-u9-qWN"/>
@@ -420,19 +421,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oPv-Hs-kmV">
-                                                    <rect key="frame" x="20" y="206.66666666666663" width="372" height="300"/>
+                                                    <rect key="frame" x="20" y="187.33333333333337" width="372" height="300"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="300" id="Brb-oP-LCB"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsK-ma-PgG">
-                                                    <rect key="frame" x="20" y="568.66666666666663" width="372" height="20.333333333333371"/>
+                                                    <rect key="frame" x="20" y="549.33333333333337" width="372" height="20.333333333333371"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnU-ZE-YBz">
-                                                    <rect key="frame" x="20" y="526.66666666666663" width="372" height="37"/>
+                                                    <rect key="frame" x="20" y="507.33333333333326" width="372" height="37"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -444,9 +445,6 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" returnKeyType="continue" textContentType="nickname"/>
-                                                    <connections>
-                                                        <action selector="textFieldEdited:" destination="x1r-Cy-VqM" eventType="editingDidEnd" id="HkV-tl-SVT"/>
-                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TU5-dX-9lz">
                                                     <rect key="frame" x="20" y="609" width="372" height="35"/>
@@ -464,22 +462,31 @@
                                                         <action selector="searchCityButtonClicked:" destination="x1r-Cy-VqM" eventType="touchUpInside" id="o1D-UA-Z64"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHZ-dp-vsY" userLabel="city validated">
+                                                    <rect key="frame" x="20" y="589.66666666666663" width="372" height="14.333333333333371"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" name="MediumGreenColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="RsK-ma-PgG" firstAttribute="leading" secondItem="SXg-8b-g5G" secondAttribute="leading" constant="20" id="0HC-rk-wuW"/>
                                                 <constraint firstItem="NnU-ZE-YBz" firstAttribute="top" secondItem="oPv-Hs-kmV" secondAttribute="bottom" constant="20" id="44U-sL-UsW"/>
                                                 <constraint firstItem="ztk-5v-DGd" firstAttribute="leading" secondItem="SXg-8b-g5G" secondAttribute="leading" constant="20" id="4IZ-c1-6ye"/>
+                                                <constraint firstItem="ztk-5v-DGd" firstAttribute="top" secondItem="NHZ-dp-vsY" secondAttribute="bottom" constant="5" id="5Vx-dK-bTb"/>
+                                                <constraint firstAttribute="bottom" secondItem="TU5-dX-9lz" secondAttribute="bottom" constant="20" id="6JU-t1-Oq4"/>
                                                 <constraint firstAttribute="trailing" secondItem="oPv-Hs-kmV" secondAttribute="trailing" constant="20" id="9w5-US-d2m"/>
                                                 <constraint firstAttribute="trailing" secondItem="TU5-dX-9lz" secondAttribute="trailing" constant="20" id="CYb-HC-aTn"/>
-                                                <constraint firstItem="ztk-5v-DGd" firstAttribute="top" secondItem="RsK-ma-PgG" secondAttribute="bottom" constant="20" id="DcC-WE-l38"/>
+                                                <constraint firstAttribute="trailing" secondItem="NHZ-dp-vsY" secondAttribute="trailing" constant="20" id="JEf-GR-9mf"/>
+                                                <constraint firstItem="NHZ-dp-vsY" firstAttribute="leading" secondItem="SXg-8b-g5G" secondAttribute="leading" constant="20" id="NKZ-q6-5Mj"/>
                                                 <constraint firstItem="NnU-ZE-YBz" firstAttribute="leading" secondItem="SXg-8b-g5G" secondAttribute="leading" constant="20" id="OYO-8l-mOm"/>
-                                                <constraint firstItem="TU5-dX-9lz" firstAttribute="top" secondItem="RsK-ma-PgG" secondAttribute="bottom" constant="20" id="S0o-bz-NG4"/>
-                                                <constraint firstAttribute="bottom" secondItem="TU5-dX-9lz" secondAttribute="bottom" constant="20" symbolic="YES" id="TH6-o6-KXa"/>
                                                 <constraint firstItem="RsK-ma-PgG" firstAttribute="top" secondItem="NnU-ZE-YBz" secondAttribute="bottom" constant="5" id="V5w-hA-7NB"/>
                                                 <constraint firstAttribute="trailing" secondItem="NnU-ZE-YBz" secondAttribute="trailing" constant="20" id="aXy-a6-HLw"/>
+                                                <constraint firstItem="TU5-dX-9lz" firstAttribute="top" secondItem="NHZ-dp-vsY" secondAttribute="bottom" constant="5" id="kqZ-QW-Ui5"/>
                                                 <constraint firstAttribute="trailing" secondItem="ztk-5v-DGd" secondAttribute="trailing" constant="20" id="rQd-PS-jVE"/>
                                                 <constraint firstItem="oPv-Hs-kmV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SXg-8b-g5G" secondAttribute="top" id="rgS-QL-ZQS"/>
                                                 <constraint firstItem="oPv-Hs-kmV" firstAttribute="leading" secondItem="SXg-8b-g5G" secondAttribute="leading" constant="20" id="tBi-Im-WBl"/>
+                                                <constraint firstItem="NHZ-dp-vsY" firstAttribute="top" secondItem="RsK-ma-PgG" secondAttribute="bottom" constant="20" id="ufs-k9-zsP"/>
                                                 <constraint firstItem="TU5-dX-9lz" firstAttribute="leading" secondItem="SXg-8b-g5G" secondAttribute="leading" constant="20" id="uwr-Od-AFH"/>
                                                 <constraint firstAttribute="bottom" secondItem="ztk-5v-DGd" secondAttribute="bottom" constant="20" id="wp9-Zq-C5j"/>
                                                 <constraint firstAttribute="trailing" secondItem="RsK-ma-PgG" secondAttribute="trailing" constant="20" id="xVy-MG-QMw"/>
@@ -488,6 +495,7 @@
                                         <gestureRecognizers/>
                                         <size key="customSize" width="412" height="664"/>
                                         <connections>
+                                            <outlet property="slideCityValidatedLabel" destination="NHZ-dp-vsY" id="Vpd-V8-21N"/>
                                             <outlet property="slideDescriptionLabel" destination="RsK-ma-PgG" id="Phu-Fz-Xk8"/>
                                             <outlet property="slideImageView" destination="oPv-Hs-kmV" id="GhX-of-vm7"/>
                                             <outlet property="slideSearchCityButton" destination="TU5-dX-9lz" id="Pga-3r-U0Q"/>
@@ -544,15 +552,15 @@
                         <outlet property="button" destination="0wW-ts-ur4" id="uyc-f2-AoJ"/>
                         <outlet property="collectionView" destination="MJa-mv-PIH" id="LpK-5P-0mE"/>
                         <outlet property="pageControl" destination="udJ-Fv-zJ8" id="ng9-lP-u2y"/>
+                        <outlet property="tapGestureRecognizer" destination="QmA-aU-GxP" id="p54-CS-Lbo"/>
                         <segue destination="Hlt-94-6EE" kind="presentation" identifier="segueToWeatherView" modalTransitionStyle="crossDissolve" id="p9Y-CG-bpn"/>
-                        <segue destination="z7f-Fa-wrZ" kind="presentation" identifier="segueFromOnBoardingToSearchCity" modalPresentationStyle="pageSheet" id="yIe-SN-OLV"/>
+                        <segue destination="z7f-Fa-wrZ" kind="presentation" identifier="segueFromOnBoardingToSearchCity" modalPresentationStyle="fullScreen" id="yIe-SN-OLV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jv3-Ea-yrA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="QmA-aU-GxP">
                     <connections>
-                        <action selector="dismissKeyboard:" destination="Il6-wW-2p5" id="eQN-5u-UMy"/>
-                        <outlet property="delegate" destination="3xW-PP-Psl" id="Dos-36-5EH"/>
+                        <action selector="dismissKeyBoard:" destination="Il6-wW-2p5" id="39u-8W-afJ"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

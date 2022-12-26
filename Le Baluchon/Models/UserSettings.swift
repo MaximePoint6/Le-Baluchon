@@ -12,7 +12,12 @@ import UIKit
 struct UserSettings {
     
     static var userName: String {
-        get { return UserDefaults.standard.object(forKey: UserDefaultsKeys.userName.rawValue) as? String ?? "the.traveler".localized() }
+        get {
+            guard let temporaryUserName = UserDefaults.standard.object(forKey: UserDefaultsKeys.userName.rawValue) as? String, temporaryUserName != "" else {
+                return "the.traveler".localized()
+            }
+            return temporaryUserName
+        }
         set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userName.rawValue) }
     }
     

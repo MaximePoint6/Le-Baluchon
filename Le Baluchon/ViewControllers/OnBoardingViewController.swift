@@ -7,11 +7,12 @@
 
 import UIKit
 
-class OnBoardingViewController: UIViewController {
+class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
     private let segueFromOnBoardingToSearchCity = "segueFromOnBoardingToSearchCity"
     private let segueToWeatherView = "segueToWeatherView"
@@ -20,7 +21,6 @@ class OnBoardingViewController: UIViewController {
         didSet {
             // The current page of the pageControl is equal to currentpage
             pageControl.currentPage = currentPage
-            refresh()
             if currentPage == OnBoardingSlide.slides.count - 1 {
                 button.setTitle("get.started".localized(), for: .normal)
             } else {
@@ -33,8 +33,17 @@ class OnBoardingViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        // tapGestureRecognizer
+        tapGestureRecognizer.delegate = self
+        self.collectionView?.addGestureRecognizer(tapGestureRecognizer)
+        
         // button
         button.setTitle("next".localized(), for: .normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        refresh()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -59,9 +68,11 @@ class OnBoardingViewController: UIViewController {
         }
     }
     
-    @IBAction func dismissKeyboard(_ sender: Any) {
+    // TODO: Ne fonctionn pas, si je supprime, enlever aussi le protocole : UIGestureRecognizerDelegate et le delegate dans le viewDidLoad
+    @IBAction func dismissKeyBoard(_ sender: Any) {
+        let indexPath = IndexPath(item: currentPage, section: 0)
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnBoardingCollectionViewCell.identifier,
-                                                         for: IndexPath(item: 1, section: 1)) as? OnBoardingCollectionViewCell {
+                                                         for: indexPath) as? OnBoardingCollectionViewCell {
             cell.slideTextField.resignFirstResponder()
         }
     }
@@ -85,6 +96,29 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
             cell.setup(OnBoardingSlide.slides[indexPath.row])
             cell.delegate = self
             cell.slideTextField.delegate = self
+            
+            // refresh city Validated label
+            let checkmarkImage = NSTextAttachment()
+            // If you want to enable Color in the SF Symbols.
+            checkmarkImage.image = UIImage(systemName: "checkmark.circle")?.withTintColor(UIColor.mediumGreen)
+            var myLabel = ""
+            let fullString = NSMutableAttributedString(string: "")
+            
+            if indexPath.row == 2, UserSettings.currentCity != nil {
+                myLabel = String(format: "city.validated.label".localized(), UserSettings.currentCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
+                cell.slideCityValidatedLabel.isHidden = false
+                // button
+                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal)
+            } else if indexPath.row == 3, UserSettings.destinationCity != nil {
+                myLabel = String(format: "city.validated.label".localized(), UserSettings.destinationCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
+                cell.slideCityValidatedLabel.isHidden = false
+                // button
+                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal)
+            }
+            fullString.append(NSAttributedString(attachment: checkmarkImage))
+            fullString.append(NSAttributedString(string: myLabel))
+            cell.slideCityValidatedLabel.attributedText = fullString
+            
             return cell
         }
         return UICollectionViewCell()
@@ -106,7 +140,6 @@ extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-
 extension OnBoardingViewController: ContainsOnBoardingCollectionView {
     // Segue
     func didClickSearchCityButton() {
@@ -116,24 +149,19 @@ extension OnBoardingViewController: ContainsOnBoardingCollectionView {
             performSegue(withIdentifier: segueFromOnBoardingToSearchCity, sender: CityType.destination)
         } else { }
     }
-    
-    func editedTextField() {
-        // Save username in UserSettings
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: OnBoardingCollectionViewCell.identifier,
-            for: IndexPath(item: 1, section: 0)) as? OnBoardingCollectionViewCell else {
-            return
-        }
-        if let username = cell.slideTextField.text {
-            UserSettings.userName = username
-        }
-    }
 }
 
 extension OnBoardingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // Save username in UserSettings
+        if let username = textField.text {
+            UserSettings.userName = username
+        }
     }
 }
 

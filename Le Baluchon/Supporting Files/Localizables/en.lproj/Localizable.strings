@@ -49,3 +49,5 @@
 "onBoardingSlide.title4" = "And the most important...";
 "onBoardingSlide.description4" = "to which city do you want to travel?";
 "search.city" = "Search for a city";
+"search.other.city" = "Search for a other city";
+"city.validated.label" = "The city of %@ has been registered";

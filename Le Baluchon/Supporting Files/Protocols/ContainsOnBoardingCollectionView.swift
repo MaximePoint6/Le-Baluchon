@@ -9,5 +9,4 @@ import Foundation
 
 protocol ContainsOnBoardingCollectionView {
     func didClickSearchCityButton()
-    func editedTextField()
 }
