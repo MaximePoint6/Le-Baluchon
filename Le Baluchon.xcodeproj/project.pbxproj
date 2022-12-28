@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */; };
 		CA36C24E2954BF3400F2952E /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */; };
 		CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */; };
 		CA8E63E0292AA67E00CF0440 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63DF292AA67E00CF0440 /* Weather.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 		CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainsOnBoardingCollectionView.swift; sourceTree = "<group>"; };
 		CA8E63DF292AA67E00CF0440 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				CAFD20C8294C55B600B96D52 /* Errors.swift */,
 				CAAF442D2952F3830071BDD8 /* OnBoardingSlide.swift */,
 				CAAF44342954A7E60071BDD8 /* UserDefaultsKeys.swift */,
+				CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				CAFD20CC294C764600B96D52 /* WeatherComponentView.swift in Sources */,
 				CAAF442C2952F0000071BDD8 /* UIView+Extension.swift in Sources */,
 				CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */,
+				CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */,
 				CAFD20D5294CB8A600B96D52 /* ContainsTopBar.swift in Sources */,
 				CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */,
 				CAAF442A295220140071BDD8 /* OnBoardingViewController.swift in Sources */,

@@ -44,8 +44,8 @@
 "onBoardingSlide.description1" = "prêt à embarquer vers une nouvelle destination ?! LeBaluchon te facilitera la vie pour ton prochain voyage.";
 "onBoardingSlide.title2" = "Pour pouvoir t'aider,";
 "onBoardingSlide.description2" = "nous devons connaitre ton pseudo. C'est plus simple pour communiquer ensemble, n'est-ce pas ?";
-"onBoardingSlide.title3" = "Enchanté %@";
-"onBoardingSlide.description3" = "peux-tu, à présent, nous indiquer ta ville actuelle.";
+"onBoardingSlide.title3" = "Enchanté %@,";
+"onBoardingSlide.description3" = "peux-tu à présent, nous indiquer ta ville actuelle.";
 "onBoardingSlide.title4" = "Et le plus important...";
 "onBoardingSlide.description4" = "vers quelle ville souhaites-tu voyager ?";
 "search.city" = "Rechercher une ville";

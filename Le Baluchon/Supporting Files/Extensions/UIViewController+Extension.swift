@@ -29,4 +29,8 @@ extension UIViewController {
         return storyboard.instantiateViewController(identifier: identifier) as! Self
     }
     // swiftlint:enable force_cast
+    
+    func performSegue(withIdentifier identifier: SegueIdentifiers, sender: Any?) {
+        performSegue(withIdentifier: identifier.rawValue, sender: sender)
+    }
 }

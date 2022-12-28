@@ -94,11 +94,11 @@ class WeatherViewController: UIViewController {
 extension WeatherViewController: ContainsTopBar {
     // Segue
     func didClickSettings() {
-        performSegue(withIdentifier: "segueToSettingsView", sender: nil)
+        performSegue(withIdentifier: .segueToSettingsView, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToSettingsView" {
+        if segue.identifier == .segueToSettingsView {
             _ = segue.destination as? SettingsViewController
         }
     }

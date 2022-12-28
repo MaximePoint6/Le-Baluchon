@@ -14,9 +14,6 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
-    private let segueFromOnBoardingToSearchCity = "segueFromOnBoardingToSearchCity"
-    private let segueToWeatherView = "segueToWeatherView"
-    
     private var currentPage = 0 {
         didSet {
             // The current page of the pageControl is equal to currentpage
@@ -47,9 +44,9 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueToWeatherView {
+        if segue.identifier == .segueToWeatherView {
             _ = segue.destination as? SettingsViewController
-        } else if segue.identifier == segueFromOnBoardingToSearchCity {
+        } else if segue.identifier == .segueFromOnBoardingToSearchCity {
             let VC = segue.destination as? SearchCityViewController
             let cityType = sender as? CityType
             VC?.cityType = cityType ?? .current
@@ -64,7 +61,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             // go to next page
             UserSettings.onBoardingScreenWasShown = true
-            performSegue(withIdentifier: segueToWeatherView, sender: nil)
+            performSegue(withIdentifier: .segueToWeatherView, sender: nil)
         }
     }
     
@@ -144,9 +141,9 @@ extension OnBoardingViewController: ContainsOnBoardingCollectionView {
     // Segue
     func didClickSearchCityButton() {
         if currentPage == 2 {
-            performSegue(withIdentifier: segueFromOnBoardingToSearchCity, sender: CityType.current)
+            performSegue(withIdentifier: .segueFromOnBoardingToSearchCity, sender: CityType.current)
         } else if currentPage == 3 {
-            performSegue(withIdentifier: segueFromOnBoardingToSearchCity, sender: CityType.destination)
+            performSegue(withIdentifier: .segueFromOnBoardingToSearchCity, sender: CityType.destination)
         } else { }
     }
 }
