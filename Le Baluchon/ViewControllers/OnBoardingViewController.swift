@@ -26,6 +26,8 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
@@ -53,6 +55,8 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    // MARK: IBAction
     @IBAction func nextButtonClicked(_ sender: Any) {
         if currentPage < OnBoardingSlide.slides.count - 1 {
             currentPage += 1
@@ -74,6 +78,8 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    // MARK: private function
     private func refresh() {
         collectionView.reloadData()
     }
@@ -81,6 +87,8 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
 }
 
 
+
+// MARK: UICollectionView
 extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return OnBoardingSlide.slides.count
@@ -94,9 +102,8 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
             cell.delegate = self
             cell.slideTextField.delegate = self
             
-            // refresh city Validated label
+            // CityValidatedLabel and button
             let checkmarkImage = NSTextAttachment()
-            // If you want to enable Color in the SF Symbols.
             checkmarkImage.image = UIImage(systemName: "checkmark.circle")?.withTintColor(UIColor.mediumGreen)
             var myLabel = ""
             let fullString = NSMutableAttributedString(string: "")
@@ -104,14 +111,13 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
             if indexPath.row == 2, UserSettings.currentCity != nil {
                 myLabel = String(format: "city.validated.label".localized(), UserSettings.currentCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
                 cell.slideCityValidatedLabel.isHidden = false
-                // button
-                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal)
+                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal) // Button
             } else if indexPath.row == 3, UserSettings.destinationCity != nil {
                 myLabel = String(format: "city.validated.label".localized(), UserSettings.destinationCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
                 cell.slideCityValidatedLabel.isHidden = false
-                // button
-                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal)
+                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal) // Button
             }
+            
             fullString.append(NSAttributedString(attachment: checkmarkImage))
             fullString.append(NSAttributedString(string: myLabel))
             cell.slideCityValidatedLabel.attributedText = fullString
@@ -128,6 +134,7 @@ extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Width of scrollview on screen
         let width = scrollView.frame.width
@@ -137,8 +144,10 @@ extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
+
+// MARK: ContainsOnBoardingCollectionView
 extension OnBoardingViewController: ContainsOnBoardingCollectionView {
-    // Segue
+    // PerformSegue
     func didClickSearchCityButton() {
         if currentPage == 2 {
             performSegue(withIdentifier: .segueFromOnBoardingToSearchCity, sender: CityType.current)
@@ -148,9 +157,11 @@ extension OnBoardingViewController: ContainsOnBoardingCollectionView {
     }
 }
 
+
+// MARK: UITextField
 extension OnBoardingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        textField.resignFirstResponder() // Dismiss KeyBoard
         return true
     }
     

@@ -15,7 +15,7 @@ class OnBoardingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var slideImageView: UIImageView!
     @IBOutlet weak var slideTitleLabel: UILabel!
     @IBOutlet weak var slideDescriptionLabel: UILabel!
-    @IBOutlet weak var slideTextField: UITextField!
+    @IBOutlet weak var slideTextField: TitledTextField!
     @IBOutlet weak var slideSearchCityButton: UIButton!
     @IBOutlet weak var slideCityValidatedLabel: UILabel!
     
@@ -26,24 +26,26 @@ class OnBoardingCollectionViewCell: UICollectionViewCell {
     }
     
     func setup(_ slide: OnBoardingSlide) {
+        // Image, Title and Description
         slideImageView.image = slide.image
         slideTitleLabel.text = slide.title
         slideDescriptionLabel.text = slide.description
         
         // textField
-        slideTextField.uiCustomization()
         slideTextField.isHidden = slide.textFieldIsHidden
         slideTextField.placeholder = slide.placeholderTextField
+        slideTextField.title = slide.placeholderTextField ?? ""
+        
         if UserSettings.userName != "the.traveler".localized() {
             slideTextField.text = UserSettings.userName
         }
         
+        // CityValidatedLabel
+        slideCityValidatedLabel.isHidden = true
+        
         // Button
         slideSearchCityButton.isHidden = slide.searchCityButtonIsHidden
         slideSearchCityButton.setTitle(slide.textSearchCityButton, for: .normal)
-        
-        // city Validated Label
-        slideCityValidatedLabel.isHidden = true
     }
     
 }

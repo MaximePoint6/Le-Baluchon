@@ -48,7 +48,6 @@ class TopBarComponentView: UIView {
             self.userPicture.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill"),
                                                 for: UIControl.State.normal)
         }
-        // cornerRadius & border
         userPicture.layer.masksToBounds = true
         userPicture.layer.cornerRadius = 10
 //        userPicture.layer.borderColor = UIColor.navyBlue.cgColor

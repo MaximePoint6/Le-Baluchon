@@ -37,7 +37,7 @@
                         <constraint firstAttribute="height" constant="25" id="zBY-0x-QOH"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gl-qu-5Cv" userLabel="temp">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gl-qu-5Cv" userLabel="temp">
                     <rect key="frame" x="20" y="76.333333333333314" width="29" height="77.666666666666686"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="65"/>
                     <color key="textColor" name="DarkGreenColor"/>

@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
     @IBOutlet weak var settingsTableView: UITableView!
-    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userName: TitledTextField!
     @IBOutlet weak var userPicture: UIImageView!
     
     private let settingCellIdentifier = "SettingCell"
@@ -23,6 +23,8 @@ class SettingsViewController: UIViewController {
     /// List of Language Enum with alphabetical sorting
     private var languagesList: [Languages] = (Languages.allCases.map { $0 }).sorted { $0.description < $1.description }
     
+    
+    // MARK: override funcction
     override func viewDidLoad() {
         super.viewDidLoad()
         // settings table view
@@ -44,6 +46,8 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    
+    // MARK: IBAction
     @IBAction func temperatureUnitChange(_ sender: Any) {
         let temperatureUnitIndex = temperatureUnitSegmentedControl.selectedSegmentIndex
         let temperatureUnit: TemperatureUnit
@@ -57,7 +61,6 @@ class SettingsViewController: UIViewController {
         UserSettings.temperatureUnit = temperatureUnit
     }
     
-    
     @IBAction func validateButton(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -68,8 +71,12 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    // MARK: function
+    
+    // MARK: private function
     private func setupUI() {
+        // textField
+        userName.placeholder = "username".localized()
+        userName.title = "username".localized()
         // SegmentControl
         temperatureUnitSegmentedControl.removeAllSegments()
         TemperatureUnit.allCases.forEach {
@@ -77,15 +84,13 @@ class SettingsViewController: UIViewController {
                                                           at: temperatureUnitSegmentedControl.numberOfSegments,
                                                           animated: false)
         }
-        // textField
-        userName.uiCustomization()
     }
     
     private func setupUserSettings() {
-        // textField
-        userName.text = UserSettings.userName
         // UIImageView
         userPicture.image = UserSettings.userPicture
+        // textField
+        userName.text = UserSettings.userName
         // TableView
         settingsTableView.reloadData()
         // SelectedSegment

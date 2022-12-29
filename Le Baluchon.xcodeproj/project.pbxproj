@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */; };
-		CA36C24E2954BF3400F2952E /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */; };
+		CA36C24E2954BF3400F2952E /* TitledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24D2954BF3400F2952E /* TitledTextField.swift */; };
 		CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */; };
 		CA8E63E0292AA67E00CF0440 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63DF292AA67E00CF0440 /* Weather.swift */; };
 		CA8E63F72930B23A00CF0440 /* SnakeCaseJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */; };
@@ -67,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
-		CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		CA36C24D2954BF3400F2952E /* TitledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledTextField.swift; sourceTree = "<group>"; };
 		CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainsOnBoardingCollectionView.swift; sourceTree = "<group>"; };
 		CA8E63DF292AA67E00CF0440 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeCaseJSONDecoder.swift; sourceTree = "<group>"; };
@@ -136,6 +136,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA101B74295D763A00D938FA /* UIClass */ = {
+			isa = PBXGroup;
+			children = (
+				CA36C24D2954BF3400F2952E /* TitledTextField.swift */,
+			);
+			path = UIClass;
+			sourceTree = "<group>";
+		};
 		CA8E640A29394D1C00CF0440 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +153,6 @@
 				CA8E6408293940B000CF0440 /* String+Extension.swift */,
 				CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */,
 				CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */,
-				CA36C24D2954BF3400F2952E /* UITextField+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +274,7 @@
 				CAAF441D2950D5B60071BDD8 /* Localizables */,
 				CAFD20D3294CB83D00B96D52 /* Protocols */,
 				CA8E640A29394D1C00CF0440 /* Extensions */,
+				CA101B74295D763A00D938FA /* UIClass */,
 				CAB83F7F2927C89000BB1D30 /* Info.plist */,
 				CACE54292927C25100A37F5A /* AppDelegate.swift */,
 				CACE542B2927C25100A37F5A /* SceneDelegate.swift */,
@@ -429,7 +437,7 @@
 				CAB83F89292A686700BB1D30 /* ApiKey.swift in Sources */,
 				CAAF44312952F5A60071BDD8 /* OnBoardingCollectionViewCell.swift in Sources */,
 				CA8E63F92930B9BC00CF0440 /* City.swift in Sources */,
-				CA36C24E2954BF3400F2952E /* UITextField+Extension.swift in Sources */,
+				CA36C24E2954BF3400F2952E /* TitledTextField.swift in Sources */,
 				CACE542A2927C25100A37F5A /* AppDelegate.swift in Sources */,
 				CA8E640129310EC400CF0440 /* UserSettings.swift in Sources */,
 				CAAF442E2952F3830071BDD8 /* OnBoardingSlide.swift in Sources */,
