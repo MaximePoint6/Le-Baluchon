@@ -34,8 +34,6 @@ class SettingsViewController: UIViewController {
         // settings table view
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
-        // sliding the view depending on the keyboard
-        self.view.bindToKeyboard()
         // UI setup
         setupUI()
     }
