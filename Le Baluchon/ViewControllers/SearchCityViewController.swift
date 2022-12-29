@@ -13,6 +13,7 @@ class SearchCityViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var cityTableView: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     private let cityCellIdentifier = "CityCell"
     private var datasOfCityTableView = [City]()
@@ -24,10 +25,19 @@ class SearchCityViewController: UIViewController {
         // city table view
         self.cityTableView.dataSource = self
         self.cityTableView.delegate = self
+        // UI
+        setupUI()
     }
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    private func setupUI() {
+        // cancelButton
+        cancelButton.setTitle("cancel".localized(), for: .normal)
+        // Searchbar
+        searchBar.placeholder = "city".localized()
     }
     
     private func getCitiesList(city: String) {

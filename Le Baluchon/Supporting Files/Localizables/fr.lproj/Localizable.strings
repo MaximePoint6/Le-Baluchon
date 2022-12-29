@@ -21,6 +21,7 @@
 "noDestinationCity" = "Ville de destination non précisée";
 "next" = "Suivant";
 "get.started" = "C'est parti !";
+"cancel" = "Annuler";
 
 // WeatherViewController
 
@@ -30,9 +31,14 @@
 "city.not.specified" = "Ville non précisée";
 "destination.city" = "Ville de destination";
 "language" = "Langue";
+"temp.unit.label" = "Température";
+"validate" = "Valider";
 
 // SearchCityViewController
+"city" = "Ville";
 
+// SearchLanguageViewController
+"language" = "Langue";
 
 // TopBarComponentView
 "good.morning," = "Bonne matinée,";
@@ -40,14 +46,24 @@
 "good.evening," = "Bonsoir,";
 
 // onBoardingViewController
-"onBoardingSlide.title1" = "Bienvenue cher(e) voyageur,";
-"onBoardingSlide.description1" = "prêt à embarquer vers une nouvelle destination ?! LeBaluchon te facilitera la vie pour ton prochain voyage.";
+"onBoardingSlide.title1" = "Bienvenue cher(e) voyageur";
+"onBoardingSlide.description1" = "Prêt à embarquer vers une nouvelle destination ?! LeBaluchon te facilitera la vie pour ton prochain voyage.";
 "onBoardingSlide.title2" = "Pour pouvoir t'aider,";
-"onBoardingSlide.description2" = "nous devons connaitre ton pseudo. C'est plus simple pour communiquer ensemble, n'est-ce pas ?";
-"onBoardingSlide.title3" = "Enchanté %@,";
-"onBoardingSlide.description3" = "peux-tu à présent, nous indiquer ta ville actuelle.";
+"onBoardingSlide.description2" = "Nous devons connaitre ton pseudo. C'est plus simple pour communiquer ensemble, n'est-ce pas ?";
+"onBoardingSlide.title3" = "Enchanté %@ !";
+"onBoardingSlide.description3" = "Peux-tu à présent, nous indiquer ta ville actuelle.";
 "onBoardingSlide.title4" = "Et le plus important...";
-"onBoardingSlide.description4" = "vers quelle ville souhaites-tu voyager ?";
+"onBoardingSlide.description4" = "Vers quelle ville souhaites-tu voyager ?";
 "search.city" = "Rechercher une ville";
 "search.other.city" = "Rechercher une autre ville";
 "city.validated.label" = " La ville de %@ a bien été enregistrée";
+
+// ImagePicker
+"camera" = "Camera";
+"library" = "Bibliothèque";
+"pick.photo" = "Choisissez une photo";
+"image.picker.alert.user.message" = "Choisissez une image de la bibliothèque ou de l'appareil photo";
+"settings" = "Paramètres";
+ "no.permission.access.camera.message" = "Cette application n'est pas autorisée à utiliser l'appareil photo. Veuillez autoriser l'application à utiliser l'appareil photo dans les paramètres.";
+"no.permission.access.library.message" = "Cette application n'est pas autorisée à utiliser Photos. Veuillez autoriser l'application à utiliser des photos dans les paramètres.";
+

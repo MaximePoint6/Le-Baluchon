@@ -13,6 +13,7 @@ class SearchLanguageViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var languageTableView: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     private let languageCellIdentifier = "LanguageCell"
     private var datasOfLanguageTableView = [Languages]()
@@ -27,10 +28,19 @@ class SearchLanguageViewController: UIViewController {
         self.languageTableView.dataSource = self
         self.languageTableView.delegate = self
         self.datasOfLanguageTableView = languagesList
+        // UI
+        setupUI()
     }
     
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    private func setupUI() {
+        // cancelButton
+        cancelButton.setTitle("cancel".localized(), for: .normal)
+        // Searchbar
+        searchBar.placeholder = "language".localized()
     }
     
 }

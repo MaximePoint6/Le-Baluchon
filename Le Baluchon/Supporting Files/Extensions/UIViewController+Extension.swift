@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    func alertUser(title: String, message: String, actions: [UIAlertAction]? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    func alertUser(title: String, message: String, actions: [UIAlertAction]? = nil, preferredStyle: UIAlertController.Style = .alert) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         if let actions = actions {
             actions.forEach { alert.addAction($0) }
         } else {

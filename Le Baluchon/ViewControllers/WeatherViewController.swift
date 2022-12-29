@@ -52,6 +52,7 @@ class WeatherViewController: UIViewController {
                 self.alertUser(title: "error".localized(), message: error!.rawValue.localized(), actions: [retry, ok])
                 return
             }
+            
             self.updateUI(cityType: cityType, city: city, weather: weather)
         }
     }

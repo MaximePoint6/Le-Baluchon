@@ -7,13 +7,17 @@
 
 import Foundation
 import UIKit
+import Photos
+import PhotosUI
 
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var userName: TitledTextField!
-    @IBOutlet weak var userPicture: UIImageView!
+    @IBOutlet weak var userPictureButton: UIButton!
+    @IBOutlet weak var tempUnitLabel: UILabel!
+    @IBOutlet weak var validateButton: UIButton!
     
     private let settingCellIdentifier = "SettingCell"
     
@@ -30,6 +34,8 @@ class SettingsViewController: UIViewController {
         // settings table view
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
+        // sliding the view depending on the keyboard
+        self.view.bindToKeyboard()
         // UI setup
         setupUI()
     }
@@ -60,6 +66,9 @@ class SettingsViewController: UIViewController {
         }
         UserSettings.temperatureUnit = temperatureUnit
     }
+    @IBAction func didClickUserPictureButton(_ sender: Any) {
+        showImagePickerOption()
+    }
     
     @IBAction func validateButton(_ sender: Any) {
         dismiss(animated: true)
@@ -74,10 +83,16 @@ class SettingsViewController: UIViewController {
     
     // MARK: private function
     private func setupUI() {
+        // ValidateButton
+        validateButton.setTitle("validate".localized(), for: .normal)
+        // UserPicture
+        userPictureButton.layer.masksToBounds = true
+        userPictureButton.layer.cornerRadius = 50
         // textField
         userName.placeholder = "username".localized()
         userName.title = "username".localized()
         // SegmentControl
+        tempUnitLabel.text = "temp.unit.label".localized()
         temperatureUnitSegmentedControl.removeAllSegments()
         TemperatureUnit.allCases.forEach {
             temperatureUnitSegmentedControl.insertSegment(withTitle: $0.rawValue,
@@ -87,8 +102,13 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupUserSettings() {
-        // UIImageView
-        userPicture.image = UserSettings.userPicture
+        // userPictureButton
+        if let userPicture = UserSettings.userPicture {
+            addImageInUserPicture(image: userPicture)
+        } else {
+            userPictureButton.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill"),
+                                                for: UIControl.State.normal)
+        }
         // textField
         userName.text = UserSettings.userName
         // TableView
@@ -154,4 +174,130 @@ extension SettingsViewController: UITableViewDelegate {
             performSegue(withIdentifier: .segueToSearchCity, sender: CityType.destination)
         }
     }
+}
+
+
+// MARK: ImagePicker
+extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    /// Function displaying a popup to choose the source (library or camera) in order to add an image.
+    private func showImagePickerOption() {
+        let cameraAction = UIAlertAction(title: "camera".localized(), style: .default) { _ in
+            self.cameraAuthorization()
+        }
+        let libraryAction = UIAlertAction(title: "library".localized(), style: .default) { _ in
+            self.photosAutorization()
+        }
+        let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel, handler: nil)
+        self.alertUser(title: "pick.photo".localized(),
+                       message: "image.picker.alert.user.message".localized(),
+                       actions: [cameraAction, libraryAction, cancelAction], preferredStyle: .actionSheet)
+    }
+
+    /// Function verifying and/or requesting authorizations for the use of the camera
+    private func cameraAuthorization() {
+        // Authorization for Camera
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized: // The user has previously granted access to the camera.
+            self.imagePicker(sourceType: .camera)
+        case .notDetermined: // The user has not yet been asked for camera access.
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    DispatchQueue.main.async {
+                        self.imagePicker(sourceType: .camera)
+                    }
+                }
+            }
+        case .denied: // The user has previously denied access.
+                let settingsAction = UIAlertAction(title: "settings".localized(), style: .default) { _ in
+                    DispatchQueue.main.async {
+                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(settingsURL)
+                        }
+                    }
+                }
+                let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel, handler: nil)
+                self.alertUser(title: "settings".localized(),
+                               message: "no.permission.access.camera.message".localized(),
+                               actions: [settingsAction, cancelAction])
+        case .restricted: // The user can't grant access due to restrictions.
+            return
+        @unknown default:
+            return
+        }
+    }
+
+    /// Function verifying and/or requesting authorizations for the use of the library
+    private func photosAutorization() {
+        // Authorization for Photos
+        var authorizationStatus: PHAuthorizationStatus
+        if #available(iOS 14, *) {
+            authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        }
+        switch authorizationStatus {
+        case .authorized: // The user has previously granted access to the photo.
+            self.imagePicker(sourceType: .photoLibrary)
+        case .limited:
+            self.imagePicker(sourceType: .photoLibrary)
+        case .notDetermined: // The user has not yet been asked for photos access.
+            if #available(iOS 14, *) {
+                PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                    DispatchQueue.main.async {
+                        if status == .authorized {
+                            self.imagePicker(sourceType: .photoLibrary)
+                        } else if status == .limited {
+                            self.imagePicker(sourceType: .photoLibrary)
+                        }
+                    }
+                }
+            } else {
+                PHPhotoLibrary.requestAuthorization { status in
+                    if status == .authorized {
+                        self.imagePicker(sourceType: .photoLibrary)
+                    }
+                }
+            }
+        case .denied: // The user has previously denied access.
+                let settingsAction = UIAlertAction(title: "settings".localized(), style: .default) { _ in
+                    DispatchQueue.main.async {
+                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(settingsURL)
+                        }
+                    }
+                }
+                let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel, handler: nil)
+                self.alertUser(title: "settings".localized(),
+                               message: "no.permission.access.library.message".localized(),
+                               actions: [settingsAction, cancelAction])
+        case .restricted: // The user can't grant access due to restrictions.
+            return
+        @unknown default:
+            fatalError()
+        }
+    }
+
+    private func imagePicker(sourceType: UIImagePickerController.SourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true) {}
+    }
+    
+    // When the user selects an image or takes a photo
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            UserSettings.userPicture = image
+            addImageInUserPicture(image: image)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // To add the photo to the button
+    func addImageInUserPicture(image: UIImage) {
+        userPictureButton.setImage(image, for: .normal)
+        userPictureButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
+    }
+
 }

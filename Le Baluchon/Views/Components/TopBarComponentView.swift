@@ -8,7 +8,7 @@
 import UIKit
 
 class TopBarComponentView: UIView {
-
+    
     @IBOutlet weak var userPicture: UIButton!
     @IBOutlet weak var helloLabel: UILabel!
     @IBOutlet weak var userfirstName: UILabel!
@@ -43,15 +43,16 @@ class TopBarComponentView: UIView {
         userfirstName.text = UserSettings.userName.capitalized
         
         if let userPicture = UserSettings.userPicture {
-            self.userPicture.setBackgroundImage(userPicture, for: UIControl.State.normal)
+            self.userPicture.setImage(userPicture, for: .normal)
+            self.userPicture.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
         } else {
             self.userPicture.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill"),
                                                 for: UIControl.State.normal)
         }
         userPicture.layer.masksToBounds = true
-        userPicture.layer.cornerRadius = 10
-//        userPicture.layer.borderColor = UIColor.navyBlue.cgColor
-//        userPicture.layer.borderWidth = 1.0
+        userPicture.layer.cornerRadius = 25
+        //        userPicture.layer.borderColor = UIColor.navyBlue.cgColor
+        //        userPicture.layer.borderWidth = 1.0
         
         let hour = Calendar.current.component(.hour, from: Date())
         if hour > 5 && hour <= 12 {

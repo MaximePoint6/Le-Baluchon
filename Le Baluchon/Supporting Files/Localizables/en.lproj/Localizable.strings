@@ -21,6 +21,7 @@
 "noDestinationCity" = "No destination city provided";
 "next" = "Next";
 "get.started" = "Go !";
+"cancel" = "Cancel";
 
 // WeatherViewController
 
@@ -30,9 +31,14 @@
 "city.not.specified" = "City not specified";
 "destination.city" = "Destination City";
 "language" = "Language";
+"temp.unit.label" = "Temperature";
+"validate" = "Validate";
 
 // SearchCityViewController
+"city" = "City";
 
+// SearchLanguageViewController
+"language" = "Language";
 
 // TopBarComponentView
 "good.morning," = "Good Morning,";
@@ -40,14 +46,24 @@
 "good.evening," = "Good Evening,";
 
 // onBoardingViewController
-"onBoardingSlide.title1" = "Welcome dear traveler,";
-"onBoardingSlide.description1" = "ready to embark on a new destination?! LeBaluchon will make your life easier for your next trip.";
+"onBoardingSlide.title1" = "Welcome dear traveler";
+"onBoardingSlide.description1" = "Ready to embark on a new destination?! LeBaluchon will make your life easier for your next trip.";
 "onBoardingSlide.title2" = "In order to help you,";
-"onBoardingSlide.description2" = "we need to know your nickname.  It's easier to communicate together, no?";
-"onBoardingSlide.title3" = "Enchanted %@,";
-"onBoardingSlide.description3" = "can you now tell us your current city.";
+"onBoardingSlide.description2" = "We need to know your nickname. It's easier to communicate together, no?";
+"onBoardingSlide.title3" = "Enchanted %@!";
+"onBoardingSlide.description3" = "Can you now tell us your current city.";
 "onBoardingSlide.title4" = "And the most important...";
-"onBoardingSlide.description4" = "to which city do you want to travel?";
+"onBoardingSlide.description4" = "To which city do you want to travel?";
 "search.city" = "Search for a city";
 "search.other.city" = "Search for a other city";
 "city.validated.label" = "The city of %@ has been registered";
+
+// ImagePicker
+"camera" = "Camera";
+"library" = "Library";
+"pick.photo" = "Pick a Photo";
+"image.picker.alert.user.message" = "Choose a picture from Library or camera";
+"settings" = "Settings";
+ "no.permission.access.camera.message" = "This app is not authorized to use Camera. Please allow the app to use the camera in settings.";
+"no.permission.access.library.message" = "This app is not authorized to use Photos. Please allow the app to use photos in settings.";
+

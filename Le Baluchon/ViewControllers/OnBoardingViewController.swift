@@ -14,6 +14,8 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
+    var activeField: UITextField?
+    
     private var currentPage = 0 {
         didSet {
             // The current page of the pageControl is equal to currentpage
@@ -39,6 +41,9 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // button
         button.setTitle("next".localized(), for: .normal)
+        
+        // sliding the view depending on the keyboard
+        self.view.bindToKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +63,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: IBAction
     @IBAction func nextButtonClicked(_ sender: Any) {
+        dismissKeyBoard()
         if currentPage < OnBoardingSlide.slides.count - 1 {
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
@@ -69,13 +75,8 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    // TODO: Ne fonctionn pas, si je supprime, enlever aussi le protocole : UIGestureRecognizerDelegate et le delegate dans le viewDidLoad
-    @IBAction func dismissKeyBoard(_ sender: Any) {
-        let indexPath = IndexPath(item: currentPage, section: 0)
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnBoardingCollectionViewCell.identifier,
-                                                         for: indexPath) as? OnBoardingCollectionViewCell {
-            cell.slideTextField.resignFirstResponder()
-        }
+    @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
+        dismissKeyBoard()
     }
     
     
@@ -84,7 +85,12 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.reloadData()
     }
     
+    private func dismissKeyBoard() {
+        collectionView.endEditing(true)
+    }
+    
 }
+
 
 
 
@@ -136,6 +142,7 @@ extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        dismissKeyBoard()
         // Width of scrollview on screen
         let width = scrollView.frame.width
         // Current position divided by width of the scrollView, we get the page number
