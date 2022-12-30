@@ -13,9 +13,8 @@ struct UserSettings {
     
     static var userName: String {
         get {
-            guard let temporaryUserName = UserDefaults.standard.object(forKey: UserDefaultsKeys.userName.rawValue) as? String, temporaryUserName != "" else {
-                return "the.traveler".localized()
-            }
+            guard let temporaryUserName = UserDefaults.standard.object(forKey: UserDefaultsKeys.userName.rawValue) as? String,
+                    temporaryUserName != "" else { return "the.traveler".localized() }
             return temporaryUserName
         }
         set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userName.rawValue) }
@@ -23,22 +22,14 @@ struct UserSettings {
     
     static var userPicture: UIImage? {
         get {
-            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.userPicture.rawValue) else {
-                return nil
-            }
-            guard let responseJSON = try? PropertyListDecoder().decode(Data.self, from: data) else {
-                print("Unable to Decode Note")
-                return nil
-            }
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.userPicture.rawValue),
+                    let responseJSON = try? PropertyListDecoder().decode(Data.self, from: data) else { return nil }
             return UIImage(data: responseJSON)
         }
         set {
-            guard let newImage = newValue else { return }
-            guard let compressedImage = newImage.jpegData(compressionQuality: 0.5) else { return }
-            guard let dataJSON = try? PropertyListEncoder().encode(compressedImage) else {
-                print("Unable to Encode Note")
-                return
-            }
+            guard let newImage = newValue,
+                    let compressedImage = newImage.jpegData(compressionQuality: 0.5),
+                    let dataJSON = try? PropertyListEncoder().encode(compressedImage) else { return }
             UserDefaults.standard.set(dataJSON, forKey: UserDefaultsKeys.userPicture.rawValue)
         }
     }
@@ -46,20 +37,12 @@ struct UserSettings {
     
     static var userLanguage: Languages {
         get {
-            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.userLanguage.rawValue) else {
-                return .en
-            }
-            guard let responseJSON = try? JSONDecoder().decode(Languages.self, from: data) else {
-                print("Unable to Decode Note")
-                return .en
-            }
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.userLanguage.rawValue),
+                    let responseJSON = try? JSONDecoder().decode(Languages.self, from: data) else { return .en }
             return responseJSON
         }
         set {
-            guard let dataJSON = try? JSONEncoder().encode(newValue) else {
-                print("Unable to Encode Note")
-                return
-            }
+            guard let dataJSON = try? JSONEncoder().encode(newValue) else { return }
             UserDefaults.standard.set(dataJSON, forKey: UserDefaultsKeys.userLanguage.rawValue)
         }
     }
@@ -67,20 +50,12 @@ struct UserSettings {
     
     static var currentCity: City? {
         get {
-            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.currentCity.rawValue) else {
-                return nil
-            }
-            guard let responseJSON = try? JSONDecoder().decode(City.self, from: data) else {
-                print("Unable to Decode Note")
-                return nil
-            }
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.currentCity.rawValue),
+                    let responseJSON = try? JSONDecoder().decode(City.self, from: data) else { return nil }
             return responseJSON
         }
         set {
-            guard let dataJSON = try? JSONEncoder().encode(newValue) else {
-                print("Unable to Encode Note")
-                return
-            }
+            guard let dataJSON = try? JSONEncoder().encode(newValue) else { return }
             UserDefaults.standard.set(dataJSON, forKey: UserDefaultsKeys.currentCity.rawValue)
         }
     }
@@ -88,20 +63,12 @@ struct UserSettings {
     
     static var destinationCity: City? {
         get {
-            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.destinationCity.rawValue) else {
-                return nil
-            }
-            guard let responseJSON = try? JSONDecoder().decode(City.self, from: data) else {
-                print("Unable to Decode Note")
-                return nil
-            }
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.destinationCity.rawValue),
+                  let responseJSON = try? JSONDecoder().decode(City.self, from: data) else { return nil }
             return responseJSON
         }
         set {
-            guard let dataJSON = try? JSONEncoder().encode(newValue) else {
-                print("Unable to Encode Note")
-                return
-            }
+            guard let dataJSON = try? JSONEncoder().encode(newValue) else { return }
             UserDefaults.standard.set(dataJSON, forKey: UserDefaultsKeys.destinationCity.rawValue)
         }
     }
@@ -109,20 +76,12 @@ struct UserSettings {
     
     static var temperatureUnit: TemperatureUnit {
         get {
-            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.temperatureUnit.rawValue) else {
-                return .Celsius
-            }
-            guard let responseJSON = try? JSONDecoder().decode(TemperatureUnit.self, from: data) else {
-                print("Unable to Decode Note")
-                return .Celsius
-            }
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.temperatureUnit.rawValue),
+                  let responseJSON = try? JSONDecoder().decode(TemperatureUnit.self, from: data) else { return .Celsius }
             return responseJSON
         }
         set {
-            guard let dataJSON = try? JSONEncoder().encode(newValue) else {
-                print("Unable to Encode Note")
-                return
-            }
+            guard let dataJSON = try? JSONEncoder().encode(newValue) else { return }
             UserDefaults.standard.set(dataJSON, forKey: UserDefaultsKeys.temperatureUnit.rawValue)
         }
     }

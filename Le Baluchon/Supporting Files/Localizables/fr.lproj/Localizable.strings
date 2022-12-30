@@ -66,4 +66,3 @@
 "settings" = "Paramètres";
  "no.permission.access.camera.message" = "Cette application n'est pas autorisée à utiliser l'appareil photo. Veuillez autoriser l'application à utiliser l'appareil photo dans les paramètres.";
 "no.permission.access.library.message" = "Cette application n'est pas autorisée à utiliser Photos. Veuillez autoriser l'application à utiliser des photos dans les paramètres.";
-

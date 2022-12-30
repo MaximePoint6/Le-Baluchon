@@ -66,4 +66,3 @@
 "settings" = "Settings";
  "no.permission.access.camera.message" = "This app is not authorized to use Camera. Please allow the app to use the camera in settings.";
 "no.permission.access.library.message" = "This app is not authorized to use Photos. Please allow the app to use photos in settings.";
-
