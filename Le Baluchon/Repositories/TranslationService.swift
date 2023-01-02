@@ -29,12 +29,15 @@ class TranslationService {
         }
         
         var exchangeRateUrl: URL? {
-            switch translationFrom {
-                case .current:
-                    return URL(string: "https://api-free.deepl.com/v2/translate?text=\(text)&target_lang=\(languageDestinationCity)&source_lang=\(languageCurrentCity)")
-                case .destination:
-                    return URL(string: "https://api-free.deepl.com/v2/translate?text=\(text)&target_lang=\(languageCurrentCity)&source_lang=\(languageDestinationCity)")
+            if let textForUrl = text.encodingURL() {
+                switch translationFrom {
+                    case .current:
+                        return URL(string: "https://api-free.deepl.com/v2/translate?text=\(textForUrl)&target_lang=\(languageDestinationCity)&source_lang=\(languageCurrentCity)")
+                    case .destination:
+                        return URL(string: "https://api-free.deepl.com/v2/translate?text=\(textForUrl)&target_lang=\(languageCurrentCity)&source_lang=\(languageDestinationCity)")
+                }
             }
+            return nil
         }
         
         guard let url = exchangeRateUrl else { return callback(ServiceError.urlNotCorrect, nil) }
