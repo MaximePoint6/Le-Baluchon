@@ -14,8 +14,6 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
-    var activeField: UITextField?
-    
     private var currentPage = 0 {
         didSet {
             // The current page of the pageControl is equal to currentpage

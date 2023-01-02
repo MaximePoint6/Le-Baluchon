@@ -14,4 +14,7 @@ enum ServiceError: String, Error {
     case undecodableJSON
     case noCurrentCity
     case noDestinationCity
+    case noCurrentCityCountry
+    case noDestinationCityCountry
+    case currencyNotFound
 }

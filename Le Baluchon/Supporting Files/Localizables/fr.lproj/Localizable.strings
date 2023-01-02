@@ -9,6 +9,11 @@
 // UserDefaults
 "the.traveler" = "Le voyageur";
 
+// TabBArController
+"weather" = "Météo";
+"exchange.rate" = "Taux de change";
+"translation" = "Traduction";
+
 // share across multiple screens/views
 "retry" = "Recommencer";
 "error" = "Erreur";
@@ -17,8 +22,12 @@
 "noData" = "Aucune donnée récupérée";
 "badResponse" = "La requête a retourné une mauvaise réponse";
 "undecodableJSON" = "Données inatendues";
+"no.city.name" = "Nom de ville non précisée";
 "noCurrentCity" = "Ville actuelle non précisée";
 "noDestinationCity" = "Ville de destination non précisée";
+"noCurrentCityCountry" = "Pays de la ville actuelle introuvable";
+"noDestinationCityCountry" = "Pays de la ville de destination introuvable";
+"currencyNotFound" = "Une des devises des deux villes selectionnées est introuvable";
 "next" = "Suivant";
 "get.started" = "C'est parti !";
 "cancel" = "Annuler";
@@ -66,3 +75,12 @@
 "settings" = "Paramètres";
  "no.permission.access.camera.message" = "Cette application n'est pas autorisée à utiliser l'appareil photo. Veuillez autoriser l'application à utiliser l'appareil photo dans les paramètres.";
 "no.permission.access.library.message" = "Cette application n'est pas autorisée à utiliser Photos. Veuillez autoriser l'application à utiliser des photos dans les paramètres.";
+
+// ExchangeRateViewController
+"exchange.rate.description" = "Ajoute un montant dans la devise que tu souhaites.";
+"amount" = "Montant";
+"unknown.currency" = "Monnaie inconnue";
+
+// TranslationViewController
+"text.to.translate" = "Texte à traduire";
+"translation.description" = "Ajoute un texte dans la langue de ton choix.";

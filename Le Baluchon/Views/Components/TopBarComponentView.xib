@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7V-hr-22Y">
-                    <rect key="frame" x="340" y="33.666666666666664" width="50" height="49.999999999999993"/>
+                    <rect key="frame" x="340" y="34.666666666666664" width="50" height="48.666666666666664"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="L7V-hr-22Y" secondAttribute="height" multiplier="1:1" id="Fma-jr-eIn"/>
                         <constraint firstAttribute="width" constant="50" id="VsH-mD-Bwn"/>

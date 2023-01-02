@@ -10,8 +10,9 @@ import UIKit
 import Photos
 import PhotosUI
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var userName: TitledTextField!
@@ -31,14 +32,18 @@ class SettingsViewController: UIViewController {
     // MARK: override funcction
     override func viewDidLoad() {
         super.viewDidLoad()
+        // tapGestureRecognizer
+        tapGestureRecognizer.delegate = self
+        tapGestureRecognizer.cancelsTouchesInView = false
         // settings table view
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
-        // UI setup
-        setupUI()
+        // userName
+        userName.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupUI()
         setupUserSettings()
     }
     
@@ -76,6 +81,10 @@ class SettingsViewController: UIViewController {
         if let userName = userName.text {
             UserSettings.userName = userName
         }
+    }
+    
+    @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
+        dismissKeyBoard()
     }
     
     
@@ -117,6 +126,10 @@ class SettingsViewController: UIViewController {
             case .Celsius: self.temperatureUnitSegmentedControl.selectedSegmentIndex = 1
             case .Fahrenheit: self.temperatureUnitSegmentedControl.selectedSegmentIndex = 2
         }
+    }
+    
+    private func dismissKeyBoard() {
+        self.view.endEditing(true)
     }
     
 }
@@ -171,6 +184,15 @@ extension SettingsViewController: UITableViewDelegate {
         } else if indexPath.row == 2 {
             performSegue(withIdentifier: .segueToSearchCity, sender: CityType.destination)
         }
+    }
+}
+
+
+// MARK: UITextField
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss KeyBoard
+        return true
     }
 }
 

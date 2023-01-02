@@ -28,11 +28,15 @@ extension String {
     }
     
     func localized() -> String {
+        let lang = UserSettings.userLanguage
+        let path = Bundle.main.path(forResource: lang.rawValue, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        
         return NSLocalizedString(
             self,
             tableName: "Localizable",
-            bundle: .main,
+            bundle: bundle!,
             value: self,
-            comment: self)
+            comment: "")
     }
 }

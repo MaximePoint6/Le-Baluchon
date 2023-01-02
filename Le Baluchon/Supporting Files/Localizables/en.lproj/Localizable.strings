@@ -9,6 +9,11 @@
 // UserDefaults
 "the.traveler" = "The traveler";
 
+// TabBArController
+"weather" = "Weather";
+"exchange.rate" = "Exchange rate";
+"translation" = "Translation";
+
 // Share across multiple screens/views
 "retry" = "Retry";
 "error" = "Error";
@@ -17,8 +22,12 @@
 "noData" = "No data retrieved";
 "badResponse" = "The request returned a bad response";
 "undecodableJSON" = "Unexpected data";
+"no.city.name" = "No city name provided";
 "noCurrentCity" = "No current city provided";
 "noDestinationCity" = "No destination city provided";
+"noCurrentCityCountry" = "Current city country not found";
+"noDestinationCityCountry" = "Destination city country not found";
+"currencyNotFound" = "One of the currencies of the two selected cities cannot be found";
 "next" = "Next";
 "get.started" = "Go !";
 "cancel" = "Cancel";
@@ -66,3 +75,12 @@
 "settings" = "Settings";
  "no.permission.access.camera.message" = "This app is not authorized to use Camera. Please allow the app to use the camera in settings.";
 "no.permission.access.library.message" = "This app is not authorized to use Photos. Please allow the app to use photos in settings.";
+
+// ExchangeRateViewController
+"exchange.rate.description" = "Add an amount in the currency you want.";
+"amount" = "Amount";
+"unknown.currency" = "Unknown Currency";
+
+// TranslationViewController
+"text.to.translate" = "Text to be translated";
+"translation.description" = "Add a text in the language of your choice.";

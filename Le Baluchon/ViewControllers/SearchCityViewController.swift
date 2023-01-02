@@ -59,6 +59,33 @@ class SearchCityViewController: UIViewController {
         }
     }
     
+    private func getCountryDetails(cityType: CityType) {
+        CountryService.shared.getCountryDetails(cityType: cityType) { error, countryDetails in
+            guard let countryDetails = countryDetails, error == nil else {
+                if error == ServiceError.noData {
+                    return
+                } else {
+                    let retry = UIAlertAction(title: "retry".localized(), style: .default) { _ in
+                        self.getCountryDetails(cityType: cityType)
+                    }
+                    let ok = UIAlertAction(title: "ok".localized(), style: .cancel) { _ in }
+                    self.alertUser(title: "error".localized(), message: error!.rawValue.localized(), actions: [retry, ok])
+                    return
+                }
+            }
+            self.saveCountryDetail(cityType: cityType, countryDetails: countryDetails)
+        }
+    }
+    
+    private func saveCountryDetail(cityType: CityType, countryDetails: City.CountryDetails) {
+        switch cityType {
+            case .current:
+                UserSettings.currentCity?.countryDetails = countryDetails
+            case .destination:
+                UserSettings.destinationCity?.countryDetails = countryDetails
+        }
+    }
+    
 }
 
 // MARK: UISearchBar
@@ -103,9 +130,11 @@ extension SearchCityViewController: UITableViewDelegate {
         switch cityType {
             case .current:
                 UserSettings.currentCity = datasOfCityTableView[indexPath.row]
+                getCountryDetails(cityType: cityType)
                 dismiss(animated: true)
             case .destination:
                 UserSettings.destinationCity = datasOfCityTableView[indexPath.row]
+                getCountryDetails(cityType: cityType)
                 dismiss(animated: true)
         }
     }

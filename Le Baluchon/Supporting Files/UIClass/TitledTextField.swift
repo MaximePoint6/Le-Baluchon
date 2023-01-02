@@ -113,10 +113,14 @@ private extension TitledTextField {
     }
 
     func createTitle() {
+        if let viewWithTag = self.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+        }
         lblTitle = nil
         lblTitle = UILabel(frame: CGRect(x: originNew.x, y: originNew.y, width: 25, height: 25))
         guard let lblTitle = lblTitle else { return }
 
+        lblTitle.tag = 100
         lblTitle.textAlignment = .center
         lblTitle.text = title
         lblTitle.textColor = titleColor
