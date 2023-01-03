@@ -33,6 +33,7 @@
 "cancel" = "Annuler";
 
 // WeatherViewController
+"weather.description" = "Comparez la météo entre ta ville actuelle et celle de ta destination.";
 
 // SettingsViewController
 "username" = "Pseudo";
@@ -56,7 +57,7 @@
 
 // onBoardingViewController
 "onBoardingSlide.title1" = "Bienvenue cher(e) voyageur";
-"onBoardingSlide.description1" = "Prêt à embarquer vers une nouvelle destination ?! LeBaluchon te facilitera la vie pour ton prochain voyage.";
+"onBoardingSlide.description1" = "Prêt à embarquer vers une nouvelle destination ?! Travel Buddy te facilitera la vie pour ton prochain voyage.";
 "onBoardingSlide.title2" = "Pour pouvoir t'aider,";
 "onBoardingSlide.description2" = "Nous devons connaitre ton pseudo. C'est plus simple pour communiquer ensemble, n'est-ce pas ?";
 "onBoardingSlide.title3" = "Enchanté %@ !";
@@ -77,10 +78,10 @@
 "no.permission.access.library.message" = "Cette application n'est pas autorisée à utiliser Photos. Veuillez autoriser l'application à utiliser des photos dans les paramètres.";
 
 // ExchangeRateViewController
-"exchange.rate.description" = "Ajoute un montant dans la devise que tu souhaites.";
+"exchange.rate.description" = "Ajoute un montant dans la devise que tu souhaites pour la convertir.";
 "amount" = "Montant";
 "unknown.currency" = "Monnaie inconnue";
 
 // TranslationViewController
 "text.to.translate" = "Texte à traduire";
-"translation.description" = "Ajoute un texte dans la langue de ton choix.";
+"translation.description" = "Ajoute un texte dans la langue de ton choix pour la traduire.";

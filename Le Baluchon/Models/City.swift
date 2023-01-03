@@ -82,7 +82,10 @@ struct City: Codable {
         guard let currency = self.countryDetails?.currencies?[0].name else {
             return "unknown.currency".localized()
         }
-        return currency
+        guard let currencySymbol = self.countryDetails?.currencies?[0].symbol else {
+            return currency
+        }
+        return "\(currency) - \(currencySymbol)"
     }
     
     var getLanguage: String {

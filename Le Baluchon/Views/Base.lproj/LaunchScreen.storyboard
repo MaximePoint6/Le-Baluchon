@@ -17,28 +17,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Kqb-Rt-3aa">
-                                <rect key="frame" x="0.0" y="251" width="390" height="342"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Travel Buddy" translatesAutoresizingMaskIntoConstraints="NO" id="Kqb-Rt-3aa">
+                                <rect key="frame" x="15.333333333333343" y="272" width="359.33333333333326" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Kqb-Rt-3aa" secondAttribute="height" multiplier="115:96" id="35b-Py-VGI"/>
+                                    <constraint firstAttribute="height" constant="300" id="wma-EF-Gc2"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="LightGreenColor"/>
                         <constraints>
-                            <constraint firstItem="Kqb-Rt-3aa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4NF-Fd-lAd"/>
+                            <constraint firstItem="Kqb-Rt-3aa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="11n-qg-6QQ"/>
                             <constraint firstItem="Kqb-Rt-3aa" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jdr-Bv-qap"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kqb-Rt-3aa" secondAttribute="trailing" id="mbi-pN-83K"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.307692307692307" y="374.64454976303318"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="341.33334350585938" height="341.33334350585938"/>
+        <image name="Travel Buddy" width="166.66667175292969" height="166.66667175292969"/>
         <namedColor name="LightGreenColor">
-            <color red="0.81199997663497925" green="0.96100002527236938" blue="0.90600001811981201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.88200002908706665" green="0.9649999737739563" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

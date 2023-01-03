@@ -13,6 +13,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var topBar: TopBarComponentView!
     @IBOutlet weak var currentCityWeather: WeatherComponentView!
     @IBOutlet weak var destinationCityWeather: WeatherComponentView!
+    @IBOutlet weak var screenDescription: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,13 @@ class WeatherViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         getWeatherCities(cityType: .current)
+        setupUI()
         topBar.setupUI()
+    }
+    
+    private func setupUI() {
+        // label
+        screenDescription.text = "weather.description".localized()
     }
     
     private func getWeatherCities(cityType: CityType) {

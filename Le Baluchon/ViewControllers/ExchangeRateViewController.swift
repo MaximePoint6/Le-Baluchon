@@ -26,8 +26,6 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         // textfield
         currentAmount.delegate = self
         destinationAmount.delegate = self
-        // sliding the view depending on the keyboard
-        self.view.bindToKeyboard()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,10 +61,8 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     private func setupUserSettings() {
         // currentCurrency
         currentAmount.title = UserSettings.currentCity?.getCurrency ?? "unknown.currency".localized()
-        currentAmount.text = ""
         // destinationCurrency
         destinationAmount.title = UserSettings.destinationCity?.getCurrency ?? "unknown.currency".localized()
-        destinationAmount.text = ""
     }
     
     private func dismissKeyBoard() {
