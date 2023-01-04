@@ -26,6 +26,17 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    private var slideInformationIsOk: Bool {
+        if UserSettings.currentCity != nil &&
+            UserSettings.destinationCity != nil &&
+            UserSettings.userName != "" &&
+            UserSettings.userName != "the.traveler".localized() {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     // MARK: override function
     override func viewDidLoad() {
@@ -67,9 +78,13 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
             let indexPath = IndexPath(item: currentPage, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         } else {
-            // go to next page
-            UserSettings.onBoardingScreenWasShown = true
-            performSegue(withIdentifier: .segueToWeatherView, sender: nil)
+            if slideInformationIsOk {
+                // go to next page
+                UserSettings.onBoardingScreenWasShown = true
+                performSegue(withIdentifier: .segueToWeatherView, sender: nil)
+            } else {
+                alertUser(title: "alert.onBoarding.title".localized(), message: "alert.onBoarding.message".localized())
+            }
         }
     }
     
@@ -108,7 +123,7 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
             
             // CityValidatedLabel and button
             let checkmarkImage = NSTextAttachment()
-            checkmarkImage.image = UIImage(systemName: "checkmark.circle")?.withTintColor(UIColor.mediumGreen)
+            checkmarkImage.image = UIImage(systemName: "checkmark.circle")?.withTintColor(UIColor.darkGreen)
             var myLabel = ""
             let fullString = NSMutableAttributedString(string: "")
             
@@ -174,6 +189,7 @@ extension OnBoardingViewController: UITextFieldDelegate {
         // Save username in UserSettings
         if let username = textField.text {
             UserSettings.userName = username
+            refresh()
         }
     }
 }
