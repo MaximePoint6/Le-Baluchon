@@ -58,15 +58,17 @@
 // onBoardingViewController
 "onBoardingSlide.title1" = "Welcome dear traveler";
 "onBoardingSlide.description1" = "Ready to embark on a new destination?! Travel Buddy will make your life easier for your next trip.";
-"onBoardingSlide.title2" = "In order to help you,";
+"onBoardingSlide.title2" = "In order to help you during your stay,";
 "onBoardingSlide.description2" = "We need to know your nickname. It's easier to communicate together, no?";
 "onBoardingSlide.title3" = "Enchanted %@!";
-"onBoardingSlide.description3" = "Can you now tell us your current city.";
+"onBoardingSlide.description3" = "Now tell us your current city.";
 "onBoardingSlide.title4" = "And the most important...";
 "onBoardingSlide.description4" = "To which city do you want to travel?";
 "search.city" = "Search for a city";
 "search.other.city" = "Search for a other city";
 "city.validated.label" = "The city of %@ has been registered";
+"alert.onBoarding.title" = "Wow, you are in a hurry to travel! :)";
+"alert.onBoarding.message" = "We are missing information to be able to accompany you in your travel. Remember to tell us your nickname, your current city and your destination city.";
 
 // ImagePicker
 "camera" = "Camera";
@@ -85,3 +87,5 @@
 // TranslationViewController
 "text.to.translate" = "Text to be translated";
 "translation.description" = "Add a text in the language of your choice to translate it.";
+"unavailable.language" = "/!\\ Sorry, this language is unavailable";
+"unavailable.translation" = "/!\\ Unavailable translation";

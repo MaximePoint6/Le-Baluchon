@@ -15,6 +15,7 @@ struct Translation: Codable {
         var text: String?
     }
     
+    
     // MARK: Tools for ViewControllers
     var resultText: String {
         guard let result = self.translations[0].text else {
@@ -22,4 +23,34 @@ struct Translation: Codable {
         }
         return result
     }
+    
+    static var availableLanguages = [
+        "BG",
+        "CS",
+        "DA",
+        "DE",
+        "EL",
+        "EN",
+        "ES",
+        "ET",
+        "FI",
+        "FR",
+        "HU",
+        "ID",
+        "IT",
+        "JA",
+        "LT",
+        "LV",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "RU",
+        "SK",
+        "SL",
+        "SV",
+        "TR",
+        "UK",
+        "ZH",
+    ]
 }

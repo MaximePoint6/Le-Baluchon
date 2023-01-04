@@ -30,9 +30,10 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         // UI
         setupUI()
         addPlaceHolder()
+        languageCheck()
         // User Settings
         setupUserSettings()
-        // Notifications when the user has changed a city or language in his settings
+        // Notification when the user has changed a city or language or temperature unit in his settings
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterCityNotification(notification:)), name: .newCity, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterLanguageNotification(notification:)), name: .newLanguage, object: nil)
     }
@@ -50,10 +51,9 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc private func refreshAfterCityNotification(notification: Notification) {
-        currentTranslationTextView.text = nil
-        destinationTranslationTextView.text = nil
         setupUI()
         addPlaceHolder()
+        languageCheck()
         setupUserSettings()
     }
     
@@ -62,7 +62,29 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         screenDescription.text = "translation.description".localized()
     }
     
+    private func languageCheck() {
+        currentTranslationTextView.isEditable = true
+        destinationTranslationTextView.isEditable = true
+        if let currentCityLanguageCode = UserSettings.currentCity?.countryDetails?.languages?[0].iso6391,
+           !Translation.availableLanguages.contains(currentCityLanguageCode.uppercased()) {
+            currentTranslationTextView.text = "unavailable.language".localized()
+            currentTranslationTextView.isEditable = false
+            destinationTranslationTextView.text = "unavailable.translation".localized()
+            destinationTranslationTextView.isEditable = false
+        }
+        if  let destinationCityLanguageCode = UserSettings.destinationCity?.countryDetails?.languages?[0].iso6391,
+            !Translation.availableLanguages.contains(destinationCityLanguageCode.uppercased()) {
+            destinationTranslationTextView.text = "unavailable.language".localized()
+            destinationTranslationTextView.isEditable = false
+            currentTranslationTextView.text = "unavailable.translation".localized()
+            currentTranslationTextView.isEditable = false
+        }
+    }
+    
     private func addPlaceHolder() {
+        // TextView
+        destinationTranslationTextView.text = nil
+        currentTranslationTextView.text = nil
         // current translation
         currentTranslationTextView.text = "text.to.translate".localized()
         currentTranslationTextView.textColor = UIColor.placeholderText

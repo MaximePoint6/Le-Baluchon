@@ -56,17 +56,19 @@
 "good.evening," = "Bonsoir,";
 
 // onBoardingViewController
-"onBoardingSlide.title1" = "Bienvenue cher(e) voyageur";
-"onBoardingSlide.description1" = "Prêt à embarquer vers une nouvelle destination ?! Travel Buddy te facilitera la vie pour ton prochain voyage.";
-"onBoardingSlide.title2" = "Pour pouvoir t'aider,";
+"onBoardingSlide.title1" = "Bienvenue cher(e) voyageur(euse)";
+"onBoardingSlide.description1" = "Prêt(e) à embarquer vers une nouvelle destination ?! Travel Buddy te facilitera la vie pour ton prochain voyage.";
+"onBoardingSlide.title2" = "Pour pouvoir t'aider durant ton séjour,";
 "onBoardingSlide.description2" = "Nous devons connaitre ton pseudo. C'est plus simple pour communiquer ensemble, n'est-ce pas ?";
 "onBoardingSlide.title3" = "Enchanté %@ !";
-"onBoardingSlide.description3" = "Peux-tu à présent, nous indiquer ta ville actuelle.";
+"onBoardingSlide.description3" = "Indique-nous à présent ta ville actuelle.";
 "onBoardingSlide.title4" = "Et le plus important...";
 "onBoardingSlide.description4" = "Vers quelle ville souhaites-tu voyager ?";
 "search.city" = "Rechercher une ville";
 "search.other.city" = "Rechercher une autre ville";
 "city.validated.label" = " La ville de %@ a bien été enregistrée";
+"alert.onBoarding.title" = "Oula, tu es pressé(e) de voyager ! :)";
+"alert.onBoarding.message" = "Il nous manque des informations pour pouvoir t'accompagner dans ton voyage. Pense à nous indiquer ton pseudo, ta ville actuelle et ta ville de destination.";
 
 // ImagePicker
 "camera" = "Camera";
@@ -85,3 +87,5 @@
 // TranslationViewController
 "text.to.translate" = "Texte à traduire";
 "translation.description" = "Ajoute un texte dans la langue de ton choix pour la traduire.";
+"unavailable.language" = "/!\\ Désolé, cette langue n'est pas disponible";
+"unavailable.translation" = "/!\\ Traduction indisponible";
