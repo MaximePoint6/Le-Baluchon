@@ -17,7 +17,8 @@ struct ExchangeRate: Codable {
         guard let result = self.result else {
             return "-"
         }
-        let resultString = String(result)
+        let resultWithCorrectDecimals = floor(result * 100) / 100
+        let resultString = String(resultWithCorrectDecimals)
         return resultString
     }
 }

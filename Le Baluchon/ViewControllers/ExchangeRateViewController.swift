@@ -30,7 +30,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         setupUI()
         // User Settings
         setupUserSettings()
-        // Notifications when the user has changed a city or language in his settings
+        // Notification when the user has changed a city or language in his settings
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterCityNotification(notification:)), name: .newCity, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterLanguageNotification(notification:)), name: .newLanguage, object: nil)
     }
@@ -44,14 +44,28 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     }
     
     @IBAction func currentAmountAdded(_ sender: Any) {
-        if let amount = currentAmount.text, let amountDouble = Double(amount) {
+        guard let amount = currentAmount.text else {
+            return
+        }
+        let correctAmount = amount.replacingOccurrences(of: ",", with: ".", options: .regularExpression)
+        if let amountDouble = Double(correctAmount) {
             getExchangeRateService(conversionFrom: .current, amount: amountDouble)
+        } else {
+            destinationAmount.text = nil
+            destinationAmount.placeholder = "amount".localized()
         }
     }
     
     @IBAction func destinationAmountAdded(_ sender: Any) {
-        if let amount = destinationAmount.text, let amountDouble = Double(amount) {
+        guard let amount = destinationAmount.text else {
+            return
+        }
+        let correctAmount = amount.replacingOccurrences(of: ",", with: ".", options: .regularExpression)
+        if let amountDouble = Double(correctAmount) {
             getExchangeRateService(conversionFrom: .destination, amount: amountDouble)
+        } else {
+            currentAmount.text = nil
+            currentAmount.placeholder = "amount".localized()
         }
     }
     
@@ -133,4 +147,3 @@ extension ExchangeRateViewController: ContainsTopBar {
         }
     }
 }
-

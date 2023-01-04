@@ -27,20 +27,20 @@
                                     <constraint firstAttribute="height" constant="70" id="ili-0C-2Ec"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1SA-0d-qxb" userLabel="screen description">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1SA-0d-qxb" userLabel="screen description">
                                 <rect key="frame" x="20" y="158" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1yu-IB-F6s" userLabel="Current Amount" customClass="TitledTextField" customModule="Le_Baluchon" customModuleProvider="target">
-                                <rect key="frame" x="20" y="198.5" width="374" height="200"/>
+                                <rect key="frame" x="20" y="198.5" width="374" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="icD-wZ-rsy"/>
+                                    <constraint firstAttribute="height" constant="100" id="icD-wZ-rsy"/>
                                 </constraints>
                                 <color key="textColor" name="DarkGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="search"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="textFieldcornerRadius">
                                         <real key="value" value="10"/>
@@ -60,13 +60,13 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g9g-G2-hps" userLabel="Destination amount" customClass="TitledTextField" customModule="Le_Baluchon" customModuleProvider="target">
-                                <rect key="frame" x="20" y="418.5" width="374" height="200"/>
+                                <rect key="frame" x="20" y="318.5" width="374" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="6VJ-gL-8Jc"/>
+                                    <constraint firstAttribute="height" constant="100" id="6VJ-gL-8Jc"/>
                                 </constraints>
                                 <color key="textColor" name="DarkGreenColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="search"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="textFieldcornerRadius">
                                         <real key="value" value="10"/>
@@ -88,6 +88,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jyx-8p-s4L"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="yNK-rR-Uay" firstAttribute="leading" secondItem="Jyx-8p-s4L" secondAttribute="leading" constant="20" id="59N-rd-UfH"/>
                             <constraint firstItem="g9g-G2-hps" firstAttribute="height" secondItem="1yu-IB-F6s" secondAttribute="height" id="LgA-8n-STm"/>
@@ -104,6 +105,9 @@
                             <constraint firstItem="Jyx-8p-s4L" firstAttribute="trailing" secondItem="yNK-rR-Uay" secondAttribute="trailing" constant="20" id="wL9-c9-U2w"/>
                             <constraint firstItem="1SA-0d-qxb" firstAttribute="top" secondItem="yNK-rR-Uay" secondAttribute="bottom" constant="20" id="zYc-Pl-Chj"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="D6S-5O-2Iw" appends="YES" id="UsQ-dF-Yey"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Taux de change" id="7a0-xC-h8l">
                         <imageReference key="image" image="dollarsign.circle.fill" catalog="system" symbolScale="default"/>
@@ -112,15 +116,15 @@
                         <outlet property="currentAmount" destination="1yu-IB-F6s" id="l5o-66-evW"/>
                         <outlet property="destinationAmount" destination="g9g-G2-hps" id="umw-B3-cPh"/>
                         <outlet property="screenDescription" destination="1SA-0d-qxb" id="paF-1G-2o6"/>
-                        <outlet property="tapGestureRecognizer" destination="DMu-wC-Scj" id="eUe-Ia-zlL"/>
+                        <outlet property="tapGestureRecognizer" destination="D6S-5O-2Iw" id="73Z-Aq-Q3z"/>
                         <outlet property="topBar" destination="yNK-rR-Uay" id="VKL-7U-Z2g"/>
                         <segue destination="sfr-GV-x8i" kind="presentation" identifier="segueToSettingsView" id="0eH-bN-C7c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAK-lw-zgz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="DMu-wC-Scj">
+                <tapGestureRecognizer id="D6S-5O-2Iw">
                     <connections>
-                        <action selector="dismissKeyBoardAfterGestureRecognizer:" destination="WXb-tx-tM3" id="Ijp-E8-aZ8"/>
+                        <action selector="dismissKeyBoardAfterGestureRecognizer:" destination="WXb-tx-tM3" id="xG8-48-DU2"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -141,7 +145,7 @@
                                     <constraint firstAttribute="height" constant="70" id="zSe-uw-OJs"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G70-yL-ZCL" userLabel="screen description">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G70-yL-ZCL" userLabel="screen description">
                                 <rect key="frame" x="20" y="158" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -469,7 +473,7 @@
                                     <constraint firstAttribute="height" constant="70" id="ENg-S9-vTs"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UvV-rs-nMG" userLabel="screen description">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UvV-rs-nMG" userLabel="screen description">
                                 <rect key="frame" x="20" y="158" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -895,7 +899,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="fiY-f8-iZ4"/>
+        <segue reference="yIe-SN-OLV"/>
         <segue reference="0eH-bN-C7c"/>
     </inferredMetricsTieBreakers>
     <resources>
