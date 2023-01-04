@@ -91,6 +91,8 @@ extension SearchLanguageViewController: UITableViewDataSource {
 extension SearchLanguageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UserSettings.userLanguage = datasOfLanguageTableView[indexPath.row]
+        // Notification when the user has changed a language in his settings
+        NotificationCenter.default.post(name: .newLanguage, object: nil)
         dismiss(animated: true)
     }
 }

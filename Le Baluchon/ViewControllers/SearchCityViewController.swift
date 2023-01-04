@@ -74,6 +74,8 @@ class SearchCityViewController: UIViewController {
                 }
             }
             self.saveCountryDetail(cityType: cityType, countryDetails: countryDetails)
+            // Notification when the user has changed a city in his settings
+            NotificationCenter.default.post(name: .newCity, object: nil)
         }
     }
     

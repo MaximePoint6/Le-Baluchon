@@ -58,7 +58,7 @@
 		CAE624CD29648AA800E2FCDA /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAE624BB29648AA800E2FCDA /* Montserrat-Thin.ttf */; };
 		CAE624CE29648AA800E2FCDA /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CAE624BC29648AA800E2FCDA /* Montserrat-Bold.ttf */; };
 		CAE624D029648D3400E2FCDA /* DefaultCustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE624CF29648D3400E2FCDA /* DefaultCustomFont.swift */; };
-		CAE624D229649A6200E2FCDA /* UpdatedScreenBasedOnCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE624D129649A6200E2FCDA /* UpdatedScreenBasedOnCities.swift */; };
+		CAE624D4296580C800E2FCDA /* NotificationName+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE624D3296580C800E2FCDA /* NotificationName+extension.swift */; };
 		CAF07482293A1D4A00F0FC74 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07481293A1D4A00F0FC74 /* UIViewController+Extension.swift */; };
 		CAF07484293A3DA800F0FC74 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07483293A3DA800F0FC74 /* UIImage+Extension.swift */; };
 		CAF07486293A9C6400F0FC74 /* CityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF07485293A9C6400F0FC74 /* CityType.swift */; };
@@ -150,7 +150,7 @@
 		CAE624BB29648AA800E2FCDA /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
 		CAE624BC29648AA800E2FCDA /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		CAE624CF29648D3400E2FCDA /* DefaultCustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCustomFont.swift; sourceTree = "<group>"; };
-		CAE624D129649A6200E2FCDA /* UpdatedScreenBasedOnCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedScreenBasedOnCities.swift; sourceTree = "<group>"; };
+		CAE624D3296580C800E2FCDA /* NotificationName+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+extension.swift"; sourceTree = "<group>"; };
 		CAF07481293A1D4A00F0FC74 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CAF07483293A3DA800F0FC74 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		CAF07485293A9C6400F0FC74 /* CityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityType.swift; sourceTree = "<group>"; };
@@ -212,6 +212,7 @@
 				CA8E6408293940B000CF0440 /* String+Extension.swift */,
 				CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */,
 				CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */,
+				CAE624D3296580C800E2FCDA /* NotificationName+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -393,7 +394,6 @@
 			children = (
 				CAFD20D4294CB8A600B96D52 /* ContainsTopBar.swift */,
 				CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */,
-				CAE624D129649A6200E2FCDA /* UpdatedScreenBasedOnCities.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -549,7 +549,6 @@
 				CA8E63E0292AA67E00CF0440 /* Weather.swift in Sources */,
 				CAB83F89292A686700BB1D30 /* ApiKey.swift in Sources */,
 				CAAF44312952F5A60071BDD8 /* OnBoardingCollectionViewCell.swift in Sources */,
-				CAE624D229649A6200E2FCDA /* UpdatedScreenBasedOnCities.swift in Sources */,
 				CA8E63F92930B9BC00CF0440 /* City.swift in Sources */,
 				CAF696242962DD340059779A /* TranslationViewController.swift in Sources */,
 				CAF696282962E2480059779A /* Translation.swift in Sources */,
@@ -580,6 +579,7 @@
 				CA8E6409293940B000CF0440 /* String+Extension.swift in Sources */,
 				CAFD20CC294C764600B96D52 /* WeatherComponentView.swift in Sources */,
 				CAAF442C2952F0000071BDD8 /* UIView+Extension.swift in Sources */,
+				CAE624D4296580C800E2FCDA /* NotificationName+extension.swift in Sources */,
 				CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */,
 				CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */,
 				CAFD20D5294CB8A600B96D52 /* ContainsTopBar.swift in Sources */,

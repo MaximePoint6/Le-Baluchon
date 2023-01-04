@@ -21,16 +21,22 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         super.viewDidLoad()
         // topBar
         topBar.delegate = self
-        // tapGestureRecognizer
+        // tapGestureRecognizer for dismiss KeyBoard
         tapGestureRecognizer.delegate = self
         // textfield
         currentAmount.delegate = self
         destinationAmount.delegate = self
+        // UI
+        setupUI()
+        // User Settings
+        setupUserSettings()
+        // Notifications when the user has changed a city or language in his settings
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterCityNotification(notification:)), name: .newCity, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterLanguageNotification(notification:)), name: .newLanguage, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupUI()
-        setupUserSettings()
+        topBar.setupUI()
     }
     
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
@@ -47,6 +53,16 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         if let amount = destinationAmount.text, let amountDouble = Double(amount) {
             getExchangeRateService(conversionFrom: .destination, amount: amountDouble)
         }
+    }
+    
+    @objc private func refreshAfterLanguageNotification(notification: Notification) {
+        setupUI()
+    }
+    
+    @objc private func refreshAfterCityNotification(notification: Notification) {
+        setupUserSettings()
+        currentAmount.text = nil
+        destinationAmount.text = nil
     }
     
     private func setupUI() {
@@ -97,6 +113,10 @@ extension ExchangeRateViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // Dismiss KeyBoard
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
     }
 }
 

@@ -22,35 +22,53 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         // topBar
         topBar.delegate = self
-        // tapGestureRecognizer
+        // tapGestureRecognizer  for dismiss KeyBoard
         tapGestureRecognizer.delegate = self
         // textView
         currentTranslationTextView.delegate = self
         destinationTranslationTextView.delegate = self
+        // UI
+        setupUI()
+        addPlaceHolder()
+        // User Settings
+        setupUserSettings()
+        // Notifications when the user has changed a city or language in his settings
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterCityNotification(notification:)), name: .newCity, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterLanguageNotification(notification:)), name: .newLanguage, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupUI()
-        setupUserSettings()
+        topBar.setupUI()
     }
     
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
         dismissKeyBoard()
     }
     
+    @objc private func refreshAfterLanguageNotification(notification: Notification) {
+        setupUI()
+    }
+    
+    @objc private func refreshAfterCityNotification(notification: Notification) {
+        currentTranslationTextView.text = nil
+        destinationTranslationTextView.text = nil
+        setupUI()
+        addPlaceHolder()
+        setupUserSettings()
+    }
+    
     private func setupUI() {
         // label
         screenDescription.text = "translation.description".localized()
-        // currentCurrency
-        if currentTranslationTextView.text.isEmpty {
-            currentTranslationTextView.text = "text.to.translate".localized()
-            currentTranslationTextView.textColor = UIColor.placeholderText
-        }
-        // destinationCurrency
-        if destinationTranslationTextView.text.isEmpty {
-            destinationTranslationTextView.text = "text.to.translate".localized()
-            destinationTranslationTextView.textColor = UIColor.placeholderText
-        }
+    }
+    
+    private func addPlaceHolder() {
+        // current translation
+        currentTranslationTextView.text = "text.to.translate".localized()
+        currentTranslationTextView.textColor = UIColor.placeholderText
+        // destination translation
+        destinationTranslationTextView.text = "text.to.translate".localized()
+        destinationTranslationTextView.textColor = UIColor.placeholderText
     }
     
     private func setupUserSettings() {
@@ -79,10 +97,10 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
             switch cityType {
                 case .current:
                     self.destinationTranslationTextView.text = translation.resultText
-                    self.destinationTranslationTextView.textColor = UIColor.lightGray
+                    self.destinationTranslationTextView.textColor = UIColor.darkGreen
                 case .destination:
                     self.currentTranslationTextView.text = translation.resultText
-                    self.currentTranslationTextView.textColor = UIColor.lightGray
+                    self.currentTranslationTextView.textColor = UIColor.darkGreen
             }
         }
     }
@@ -108,18 +126,15 @@ extension TranslationViewController: ContainsTopBar {
 // MARK: TextView
 extension TranslationViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = nil
-        if textView.textColor == UIColor.lightGray {
+        textView.text = ""
+        if textView.textColor == UIColor.placeholderText {
             textView.textColor = UIColor.darkGreen
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            currentTranslationTextView.text = "text.to.translate".localized()
-            destinationTranslationTextView.text = "text.to.translate".localized()
-            currentTranslationTextView.textColor = UIColor.lightGray
-            destinationTranslationTextView.textColor = UIColor.lightGray
+            addPlaceHolder()
         } else if textView.tag == 0, let text = textView.text {
             getTranslationService(translationFrom: .current, text: text)
         } else if textView.tag == 1, let text = textView.text {

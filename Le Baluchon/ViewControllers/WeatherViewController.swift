@@ -15,15 +15,39 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var destinationCityWeather: WeatherComponentView!
     @IBOutlet weak var screenDescription: UILabel!
     
+    var currentCityWeatherDateRefresh: Date?
+    var destinationCityWeatherDateRefresh: Date?
+    let timeForRefreshInSeconds: Double = 15 * 60
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // topBar
         topBar.delegate = self
+        // UI
+        setupUI()
+        refreshScreen()
+        // Notification when the user has changed a city or language in his settings
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newCity, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newLanguage, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getWeatherCities(cityType: .current)
-        setupUI()
         topBar.setupUI()
+        // Screen refresh every 15min or if a city changes (see notification)
+        if let currentCityWeatherDateRefresh = currentCityWeatherDateRefresh,
+           let destinationCityWeatherDateRefresh = destinationCityWeatherDateRefresh,
+           currentCityWeatherDateRefresh + timeForRefreshInSeconds < Date() || destinationCityWeatherDateRefresh + timeForRefreshInSeconds < Date() {
+            refreshScreen()
+        }
+    }
+    
+    @objc private func refreshAfterNotification(notification: Notification) {
+        setupUI()
+        refreshScreen()
+    }
+    
+    private func refreshScreen() {
+        getWeatherCities(cityType: .current)
     }
     
     private func setupUI() {
@@ -59,7 +83,10 @@ class WeatherViewController: UIViewController {
                 self.alertUser(title: "error".localized(), message: error!.rawValue.localized(), actions: [retry, ok])
                 return
             }
-            
+            switch cityType {
+                case .current: self.currentCityWeatherDateRefresh = Date()
+                case .destination: self.destinationCityWeatherDateRefresh = Date()
+            }
             self.updateUI(cityType: cityType, city: city, weather: weather)
         }
     }
@@ -102,7 +129,6 @@ class WeatherViewController: UIViewController {
     
     
 }
-
 
 // MARK: TOPBAR
 extension WeatherViewController: ContainsTopBar {
