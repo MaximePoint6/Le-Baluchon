@@ -10,4 +10,5 @@ import Foundation
 extension Notification.Name {
     static let newLanguage = Notification.Name("newLanguage")
     static let newCity = Notification.Name("newCity")
+    static let newTemperatureUnit = Notification.Name("newTemperatureUnit")
 }

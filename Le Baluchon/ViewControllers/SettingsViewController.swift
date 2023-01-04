@@ -68,6 +68,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
             temperatureUnit = .Fahrenheit
         }
         UserSettings.temperatureUnit = temperatureUnit
+        NotificationCenter.default.post(name: .newTemperatureUnit, object: nil)
     }
     @IBAction func didClickUserPictureButton(_ sender: Any) {
         showImagePickerOption()

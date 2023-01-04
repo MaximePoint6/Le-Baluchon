@@ -26,9 +26,10 @@ class WeatherViewController: UIViewController {
         // UI
         setupUI()
         refreshScreen()
-        // Notification when the user has changed a city or language in his settings
+        // Notification when the user has changed a city or language or temperature unit in his settings
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newCity, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newLanguage, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newTemperatureUnit, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,6 +57,11 @@ class WeatherViewController: UIViewController {
     }
     
     private func getWeatherCities(cityType: CityType) {
+        
+        // Add Spinner during loading
+        let spinner = SpinnerViewController()
+        addSpinnerView(spinner: spinner)
+        
         var city: City
         switch cityType {
             case .current:
@@ -74,6 +80,9 @@ class WeatherViewController: UIViewController {
         
         // Function making network call
         WeatherService.shared.getWeather(cityType: cityType) { error, weather in
+            // remove Spinner
+            self.removeSpinnerView(spinner: spinner)
+            
             // Get Weather or Alert
             guard let weather = weather, error == nil else {
                 let retry = UIAlertAction(title: "retry".localized(), style: .default) { _ in
@@ -141,5 +150,22 @@ extension WeatherViewController: ContainsTopBar {
         if segue.identifier == .segueToSettingsView {
             _ = segue.destination as? SettingsViewController
         }
+    }
+}
+
+// MARK: SpinnerView
+extension WeatherViewController {
+    private func addSpinnerView(spinner: SpinnerViewController) {
+        // add the spinner view controller
+        addChild(spinner)
+        spinner.view.frame = view.frame
+        view.addSubview(spinner.view)
+        spinner.didMove(toParent: self)
+    }
+    
+    private func removeSpinnerView(spinner: SpinnerViewController) {
+        spinner.willMove(toParent: nil)
+        spinner.view.removeFromSuperview()
+        spinner.removeFromParent()
     }
 }
