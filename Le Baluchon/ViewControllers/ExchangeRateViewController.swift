@@ -15,6 +15,9 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     @IBOutlet weak var screenDescription: UILabel!
     @IBOutlet weak var currentAmount: TitledTextField!
     @IBOutlet weak var destinationAmount: TitledTextField!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    var activeField: UITextField?
     
     
     override func viewDidLoad() {
@@ -37,6 +40,14 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     
     override func viewDidAppear(_ animated: Bool) {
         topBar.setupUI()
+        // Notification for keyboard
+        registerForKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Notification for remove keyboard
+        deregisterFromKeyboardNotifications()
     }
     
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
@@ -130,7 +141,12 @@ extension ExchangeRateViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeField = textField
         textField.text = ""
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeField = nil
     }
 }
 
@@ -145,5 +161,63 @@ extension ExchangeRateViewController: ContainsTopBar {
         if segue.identifier == .segueToSettingsView {
             _ = segue.destination as? SettingsViewController
         }
+    }
+}
+
+
+// MARK: KeyBoard
+extension ExchangeRateViewController {
+    
+    func registerForKeyboardNotifications() {
+        // Adding notifies on keyboard appearing
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications() {
+        // Removing notifies on keyboard appearing
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWasShown(notification: NSNotification) {
+        self.scrollView.isScrollEnabled = true
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        var shouldMoveViewUp = false
+        // if active text field is not nil
+        guard let activeField = activeField else {
+            return
+        }
+        let bottomOfTextField = activeField.convert(activeField.bounds, to: self.view).maxY
+        let topOfKeyboard = self.view.frame.height - keyboardSize.height
+        // if the bottom of Textfield is below the top of keyboard, move up
+        if bottomOfTextField > topOfKeyboard {
+            shouldMoveViewUp = true
+        }
+        if shouldMoveViewUp {
+            let heightTabBar = self.tabBarController?.tabBar.frame.height ?? 49.0
+            self.view.frame.origin.y = 0 - keyboardSize.height + heightTabBar
+            self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize.height, right: 0.0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        self.view.endEditing(true)
+        self.scrollView.isScrollEnabled = false
+
+        self.view.frame.origin.y = 0
     }
 }
