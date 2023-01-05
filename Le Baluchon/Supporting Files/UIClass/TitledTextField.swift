@@ -109,7 +109,8 @@ private extension TitledTextField {
             placeholderText = placeholder
         }
 
-        self.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: color])
+        self.attributedPlaceholder = NSAttributedString(string: placeholderText,
+                                                        attributes: [NSAttributedString.Key.foregroundColor: color])
     }
 
     func createTitle() {
@@ -130,7 +131,9 @@ private extension TitledTextField {
         }
 
         lblTitle.sizeToFit()
-        lblTitle.frame = CGRect(x: lblTitle.frame.origin.x + sidePadding, y: lblTitle.frame.origin.y, width: lblTitle.frame.width + sidePadding, height: lblTitle.frame.height)
+        lblTitle.frame = CGRect(x: lblTitle.frame.origin.x + sidePadding,
+                                y: lblTitle.frame.origin.y,
+                                width: lblTitle.frame.width + sidePadding, height: lblTitle.frame.height)
         addSubview(lblTitle)
     }
 
@@ -151,13 +154,25 @@ private extension TitledTextField {
 
         path.move(to: pointA)
         path.addLine(to: pointB)
-        path.addArc(withCenter: centerUR, radius: textFieldcornerRadius, startAngle: CGFloat(3 * Double.pi/2), endAngle: 0, clockwise: true)
+        path.addArc(withCenter: centerUR,
+                    radius: textFieldcornerRadius,
+                    startAngle: CGFloat(3 * Double.pi/2),
+                    endAngle: 0, clockwise: true)
         path.addLine(to: pointC)
-        path.addArc(withCenter: centerBR, radius: textFieldcornerRadius, startAngle: 0, endAngle: CGFloat(Double.pi/2), clockwise: true)
+        path.addArc(withCenter: centerBR,
+                    radius: textFieldcornerRadius,
+                    startAngle: 0, endAngle: CGFloat(Double.pi/2),
+                    clockwise: true)
         path.addLine(to: pointD)
-        path.addArc(withCenter: centerBL, radius: textFieldcornerRadius, startAngle: CGFloat(Double.pi/2), endAngle: CGFloat(2 * Double.pi/2), clockwise: true)
+        path.addArc(withCenter: centerBL,
+                    radius: textFieldcornerRadius,
+                    startAngle: CGFloat(Double.pi/2), endAngle: CGFloat(2 * Double.pi/2),
+                    clockwise: true)
         path.addLine(to: pointE)
-        path.addArc(withCenter: centerUL, radius: textFieldcornerRadius, startAngle: CGFloat(2 * Double.pi/2), endAngle: CGFloat(3 * Double.pi/2), clockwise: true)
+        path.addArc(withCenter: centerUL,
+                    radius: textFieldcornerRadius,
+                    startAngle: CGFloat(2 * Double.pi/2), endAngle: CGFloat(3 * Double.pi/2),
+                    clockwise: true)
         path.addLine(to: pointF)
 
         return path

@@ -1,0 +1,16 @@
+{
+  "date": "2005-01-01",
+  "historical": true,
+  "info": {
+    "quote": 0.51961,
+    "timestamp": 1104623999
+  },
+  "query": {
+    "amount": 10,
+    "from": "USD",
+    "to": "GBP"
+  },
+  "result": 5.1961,
+  "success": true
+}
+

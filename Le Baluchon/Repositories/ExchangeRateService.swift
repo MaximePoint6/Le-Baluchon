@@ -19,7 +19,8 @@ class ExchangeRateService {
     
     private var task: URLSessionDataTask?
     
-    func getExchangeRateService(conversionFrom: CityType, amount: Double, callback: @escaping (ServiceError?, ExchangeRate?) -> Void) {
+    func getExchangeRateService(conversionFrom: CityType, amount: Double,
+                                callback: @escaping (ServiceError?, ExchangeRate?) -> Void) {
         task?.cancel()
         
         guard let currencyCurrentCity = UserSettings.currentCity?.countryDetails?.currencies?[0].code,

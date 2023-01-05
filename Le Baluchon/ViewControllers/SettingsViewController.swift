@@ -307,7 +307,8 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
     }
     
     // When the user selects an image or takes a photo
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage {
             UserSettings.userPicture = image
             addImageInUserPicture(image: image)

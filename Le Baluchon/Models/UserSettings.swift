@@ -13,7 +13,8 @@ struct UserSettings {
     
     static var userName: String {
         get {
-            guard let temporaryUserName = UserDefaults.standard.object(forKey: UserDefaultsKeys.userName.rawValue) as? String,
+            guard let temporaryUserName = UserDefaults.standard.object(forKey:
+                                                                        UserDefaultsKeys.userName.rawValue) as? String,
                   temporaryUserName != "" else { return "the.traveler".localized() }
             return temporaryUserName
         }
@@ -84,7 +85,9 @@ struct UserSettings {
     static var temperatureUnit: TemperatureUnit {
         get {
             guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.temperatureUnit.rawValue),
-                  let responseJSON = try? JSONDecoder().decode(TemperatureUnit.self, from: data) else { return .Celsius }
+                  let responseJSON = try? JSONDecoder().decode(TemperatureUnit.self, from: data) else {
+                return .Celsius
+            }
             return responseJSON
         }
         set {

@@ -15,21 +15,30 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var destinationCityWeather: WeatherComponentView!
     @IBOutlet weak var screenDescription: UILabel!
     
-    var currentCityWeatherDateRefresh: Date?
-    var destinationCityWeatherDateRefresh: Date?
-    let timeForRefreshInSeconds: Double = 15 * 60
+    private var currentCityWeatherDateRefresh: Date?
+    private var destinationCityWeatherDateRefresh: Date?
+    private let timeForRefreshInSeconds: Double = 15 * 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // topBar
+        // Delegate
         topBar.delegate = self
         // UI
         setupUI()
         refreshScreen()
         // Notification when the user has changed a city or language or temperature unit in his settings
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newCity, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newLanguage, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterNotification(notification:)), name: .newTemperatureUnit, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterNotification(notification:)),
+                                               name: .newCity,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterNotification(notification:)),
+                                               name: .newLanguage,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterNotification(notification:)),
+                                               name: .newTemperatureUnit,
+                                               object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,7 +46,8 @@ class WeatherViewController: UIViewController {
         // Screen refresh every 15min or if a city changes (see notification)
         if let currentCityWeatherDateRefresh = currentCityWeatherDateRefresh,
            let destinationCityWeatherDateRefresh = destinationCityWeatherDateRefresh,
-           currentCityWeatherDateRefresh + timeForRefreshInSeconds < Date() || destinationCityWeatherDateRefresh + timeForRefreshInSeconds < Date() {
+           currentCityWeatherDateRefresh + timeForRefreshInSeconds < Date() ||
+            destinationCityWeatherDateRefresh + timeForRefreshInSeconds < Date() {
             refreshScreen()
         }
     }
@@ -52,12 +62,10 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupUI() {
-        // label
         screenDescription.text = "weather.description".localized()
     }
     
     private func getWeatherCities(cityType: CityType) {
-        
         // Add Spinner during loading
         let spinner = SpinnerViewController()
         addSpinnerView(spinner: spinner)
@@ -80,7 +88,7 @@ class WeatherViewController: UIViewController {
         
         // Function making network call
         WeatherService.shared.getWeather(cityType: cityType) { error, weather in
-            // remove Spinner
+            // Remove Spinner
             self.removeSpinnerView(spinner: spinner)
             
             // Get Weather or Alert
@@ -139,6 +147,7 @@ class WeatherViewController: UIViewController {
     
 }
 
+
 // MARK: TOPBAR
 extension WeatherViewController: ContainsTopBar {
     // Segue
@@ -153,10 +162,11 @@ extension WeatherViewController: ContainsTopBar {
     }
 }
 
+
 // MARK: SpinnerView
 extension WeatherViewController {
     private func addSpinnerView(spinner: SpinnerViewController) {
-        // add the spinner view controller
+        // Add the spinner view controller
         addChild(spinner)
         spinner.view.frame = view.frame
         view.addSubview(spinner.view)

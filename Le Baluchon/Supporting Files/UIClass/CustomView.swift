@@ -91,7 +91,9 @@ private extension CustomView {
         lblTitle.font = UIFont(name: AppFontName.medium, size: 20 * 0.85)
 
         lblTitle.sizeToFit()
-        lblTitle.frame = CGRect(x: lblTitle.frame.origin.x + sidePadding, y: lblTitle.frame.origin.y, width: lblTitle.frame.width + sidePadding, height: lblTitle.frame.height)
+        lblTitle.frame = CGRect(x: lblTitle.frame.origin.x + sidePadding,
+                                y: lblTitle.frame.origin.y, width: lblTitle.frame.width + sidePadding,
+                                height: lblTitle.frame.height)
         addSubview(lblTitle)
     }
 
@@ -112,13 +114,26 @@ private extension CustomView {
 
         path.move(to: pointA)
         path.addLine(to: pointB)
-        path.addArc(withCenter: centerUR, radius: viewCornerRadius, startAngle: CGFloat(3 * Double.pi/2), endAngle: 0, clockwise: true)
+        path.addArc(withCenter: centerUR,
+                    radius: viewCornerRadius,
+                    startAngle: CGFloat(3 * Double.pi/2),
+                    endAngle: 0, clockwise: true)
         path.addLine(to: pointC)
-        path.addArc(withCenter: centerBR, radius: viewCornerRadius, startAngle: 0, endAngle: CGFloat(Double.pi/2), clockwise: true)
+        path.addArc(withCenter: centerBR,
+                    radius: viewCornerRadius,
+                    startAngle: 0, endAngle: CGFloat(Double.pi/2),
+                    clockwise: true)
         path.addLine(to: pointD)
-        path.addArc(withCenter: centerBL, radius: viewCornerRadius, startAngle: CGFloat(Double.pi/2), endAngle: CGFloat(2 * Double.pi/2), clockwise: true)
+        path.addArc(withCenter: centerBL,
+                    radius: viewCornerRadius,
+                    startAngle: CGFloat(Double.pi/2),
+                    endAngle: CGFloat(2 * Double.pi/2), clockwise: true)
         path.addLine(to: pointE)
-        path.addArc(withCenter: centerUL, radius: viewCornerRadius, startAngle: CGFloat(2 * Double.pi/2), endAngle: CGFloat(3 * Double.pi/2), clockwise: true)
+        path.addArc(withCenter: centerUL,
+                    radius: viewCornerRadius,
+                    startAngle: CGFloat(2 * Double.pi/2),
+                    endAngle: CGFloat(3 * Double.pi/2),
+                    clockwise: true)
         path.addLine(to: pointF)
 
         return path

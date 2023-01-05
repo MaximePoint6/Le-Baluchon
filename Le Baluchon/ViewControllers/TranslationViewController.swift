@@ -23,22 +23,25 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // topBar
+        // Delegate
         topBar.delegate = self
-        // tapGestureRecognizer  for dismiss KeyBoard
         tapGestureRecognizer.delegate = self
-        // textView
         currentTranslationTextView.delegate = self
         destinationTranslationTextView.delegate = self
-        // UI
+        // UI & User Settings
         setupUI()
         addPlaceHolder()
         languageCheck()
-        // User Settings
         setupUserSettings()
         // Notification when the user has changed a city or language or temperature unit in his settings
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterCityNotification(notification:)), name: .newCity, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterLanguageNotification(notification:)), name: .newLanguage, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterCityNotification(notification:)),
+                                               name: .newCity,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterLanguageNotification(notification:)),
+                                               name: .newLanguage,
+                                               object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,7 +72,6 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func setupUI() {
-        // label
         screenDescription.text = "translation.description".localized()
     }
     
@@ -186,13 +188,20 @@ extension TranslationViewController: UITextViewDelegate {
     }
 }
 
+
 // MARK: KeyBoard
 extension TranslationViewController {
     
     func registerForKeyboardNotifications() {
         // Adding notifies on keyboard appearing
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWasShown(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     func deregisterFromKeyboardNotifications() {

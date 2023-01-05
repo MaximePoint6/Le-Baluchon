@@ -13,9 +13,9 @@ final class WeatherServiceTests: XCTestCase {
     override func setUpWithError() throws {
         // Ici mettre des données brutes
         let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
-        UserSettings.shared.currentCity = city[0]
-        UserSettings.shared.destinationCity = city[0]
-        UserSettings.shared.userLanguage = .fr
+        UserSettings.currentCity = city[0]
+        UserSettings.destinationCity = city[0]
+        UserSettings.userLanguage = .fr
     }
     
     
@@ -27,9 +27,9 @@ final class WeatherServiceTests: XCTestCase {
                                                                     error: FakeResponseData.error))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherService.getWeather(cityType: .current) { success, weather in
+        weatherService.getWeather(cityType: .current) { error, weather in
             // Then
-            XCTAssertFalse(success)
+            XCTAssertEqual(ServiceError.noData, error)
             XCTAssertNil(weather)
             expectation.fulfill()
         }
@@ -44,9 +44,9 @@ final class WeatherServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherService.getWeather(cityType: .current) { success, weather in
+        weatherService.getWeather(cityType: .current) { error, weather in
             // Then
-            XCTAssertFalse(success)
+            XCTAssertEqual(ServiceError.badResponse, error)
             XCTAssertNil(weather)
             expectation.fulfill()
         }
@@ -57,13 +57,13 @@ final class WeatherServiceTests: XCTestCase {
     func testgetWeatherShouldPostFailedCallbackIfIncorrectData() throws {
         // Given
         let weatherService = WeatherService(session: URLSessionFake(data: FakeResponseData.weatherIncorrectData,
-                                                                    response: FakeResponseData.responseKO,
+                                                                    response: FakeResponseData.responseOK,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherService.getWeather(cityType: .current) { success, weather in
+        weatherService.getWeather(cityType: .current) { error, weather in
             // Then
-            XCTAssertFalse(success)
+            XCTAssertEqual(ServiceError.undecodableJSON, error)
             XCTAssertNil(weather)
             expectation.fulfill()
         }
@@ -78,9 +78,9 @@ final class WeatherServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherService.getWeather(cityType: .current) { success, weather in
+        weatherService.getWeather(cityType: .current) { error, weather in
             // Then
-            XCTAssertFalse(success)
+            XCTAssertEqual(ServiceError.noData, error)
             XCTAssertNil(weather)
             expectation.fulfill()
         }
@@ -95,9 +95,9 @@ final class WeatherServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherService.getWeather(cityType: .current) { success, weather in
+        weatherService.getWeather(cityType: .current) { error, weather in
             // Then
-            XCTAssertTrue(success)
+            XCTAssertNil(error)
             XCTAssertNotNil(weather)
             
             let weatherDescription = "couvert"
@@ -107,7 +107,6 @@ final class WeatherServiceTests: XCTestCase {
             XCTAssertEqual(weatherDescription, weather!.weather[0].description)
             XCTAssertEqual(weatherIcon, weather!.weather[0].icon)
             XCTAssertEqual(mainTemp, weather!.main!.temp)
-            
             
             expectation.fulfill()
         }

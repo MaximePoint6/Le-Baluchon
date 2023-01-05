@@ -46,4 +46,34 @@ class FakeResponseData {
     
     static let weatherIncorrectData = "erreur".data(using: .utf8)!
     
+    // MARK: Country datas simulation
+    static var countryCorrectData: Data? {
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "Country", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        return data
+    }
+    
+    static let countryIncorrectData = "erreur".data(using: .utf8)!
+    
+    // MARK: ExchangeRate datas simulation
+    static var exchangeRateCorrectData: Data? {
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "ExchangeRate", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        return data
+    }
+    
+    static let exchangeRateIncorrectData = "erreur".data(using: .utf8)!
+    
+    // MARK: Translation datas simulation
+    static var translationCorrectData: Data? {
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "Translation", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        return data
+    }
+    
+    static let translationIncorrectData = "erreur".data(using: .utf8)!
+    
 }

@@ -485,48 +485,6 @@
             </objects>
             <point key="canvasLocation" x="1032" y="1559"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="xhU-bQ-3ZA">
-            <objects>
-                <viewController id="9kW-Ud-hyH" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="h9X-rP-w7o">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xj7-ef-L45">
-                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MMd-Ao-fAx">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1000" id="UNX-dL-3lA"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="MMd-Ao-fAx" secondAttribute="bottom" id="FuJ-T2-kdX"/>
-                                    <constraint firstAttribute="trailing" secondItem="MMd-Ao-fAx" secondAttribute="trailing" id="LaY-Ua-8tI"/>
-                                    <constraint firstItem="MMd-Ao-fAx" firstAttribute="top" secondItem="Xj7-ef-L45" secondAttribute="top" id="k0K-6m-vZq"/>
-                                    <constraint firstItem="MMd-Ao-fAx" firstAttribute="leading" secondItem="Xj7-ef-L45" secondAttribute="leading" id="zbV-HL-7PP"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="lfB-Re-SO2"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="MMd-Ao-fAx" firstAttribute="width" secondItem="h9X-rP-w7o" secondAttribute="width" id="V2y-o7-rnM"/>
-                            <constraint firstItem="lfB-Re-SO2" firstAttribute="bottom" secondItem="Xj7-ef-L45" secondAttribute="bottom" id="hEu-Nk-CnC"/>
-                            <constraint firstItem="lfB-Re-SO2" firstAttribute="trailing" secondItem="Xj7-ef-L45" secondAttribute="trailing" id="kke-Ta-hi5"/>
-                            <constraint firstItem="Xj7-ef-L45" firstAttribute="top" secondItem="lfB-Re-SO2" secondAttribute="top" id="v80-g5-zx7"/>
-                            <constraint firstItem="Xj7-ef-L45" firstAttribute="leading" secondItem="lfB-Re-SO2" secondAttribute="leading" id="yMI-cf-ePY"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Isl-bq-PwT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-813.04347826086962" y="782.8125"/>
-        </scene>
         <!--Traduction-->
         <scene sceneID="LRL-br-UBG">
             <objects>
@@ -995,7 +953,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="yIe-SN-OLV"/>
-        <segue reference="0eH-bN-C7c"/>
+        <segue reference="jLg-2C-Ghz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>

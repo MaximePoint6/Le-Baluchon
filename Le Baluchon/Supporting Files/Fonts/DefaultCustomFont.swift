@@ -77,7 +77,8 @@ extension UIFont {
             method_exchangeImplementations(italicSystemFontMethod, myItalicSystemFontMethod)
         }
         
-        if let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:))), // Trick to get over the lack of UIFont.init(coder:))
+        if let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:))),
+            // Trick to get over the lack of UIFont.init(coder:))
            let myInitCoderMethod = class_getInstanceMethod(self, #selector(UIFont.init(myCoder:))) {
             method_exchangeImplementations(initCoderMethod, myInitCoderMethod)
         }

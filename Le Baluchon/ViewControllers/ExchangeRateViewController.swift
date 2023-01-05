@@ -19,23 +19,24 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     
     var activeField: UITextField?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // topBar
+        // Delegate
         topBar.delegate = self
-        // tapGestureRecognizer for dismiss KeyBoard
         tapGestureRecognizer.delegate = self
-        // textfield
         currentAmount.delegate = self
         destinationAmount.delegate = self
-        // UI
+        // UI & User Settings
         setupUI()
-        // User Settings
         setupUserSettings()
         // Notification when the user has changed a city or language in his settings
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterCityNotification(notification:)), name: .newCity, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterLanguageNotification(notification:)), name: .newLanguage, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterCityNotification(notification:)),
+                                               name: .newCity, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshAfterLanguageNotification(notification:)),
+                                               name: .newLanguage,
+                                               object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,18 +92,13 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     }
     
     private func setupUI() {
-        // label
         screenDescription.text = "exchange.rate.description".localized()
-        // currentCurrency
         currentAmount.placeholder = "amount".localized()
-        // destinationCurrency
         destinationAmount.placeholder = "amount".localized()
     }
     
     private func setupUserSettings() {
-        // currentCurrency
         currentAmount.title = UserSettings.currentCity?.getCurrency ?? "unknown.currency".localized()
-        // destinationCurrency
         destinationAmount.title = UserSettings.destinationCity?.getCurrency ?? "unknown.currency".localized()
     }
     
@@ -113,7 +109,8 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     
     private func getExchangeRateService(conversionFrom cityType: CityType, amount: Double) {
         // Function making network call
-        ExchangeRateService.shared.getExchangeRateService(conversionFrom: cityType, amount: amount) { error, exchangeRate in
+        ExchangeRateService.shared.getExchangeRateService(conversionFrom: cityType,
+                                                          amount: amount) { error, exchangeRate in
             guard let exchangeRate = exchangeRate, error == nil else {
                 let retry = UIAlertAction(title: "retry".localized(), style: .default) { _ in
                     self.getExchangeRateService(conversionFrom: cityType, amount: amount)
@@ -133,6 +130,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     
 }
 
+
 // MARK: UITextField
 extension ExchangeRateViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -149,6 +147,7 @@ extension ExchangeRateViewController: UITextFieldDelegate {
         activeField = nil
     }
 }
+
 
 // MARK: TOPBAR
 extension ExchangeRateViewController: ContainsTopBar {
@@ -170,8 +169,14 @@ extension ExchangeRateViewController {
     
     func registerForKeyboardNotifications() {
         // Adding notifies on keyboard appearing
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWasShown(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     func deregisterFromKeyboardNotifications() {

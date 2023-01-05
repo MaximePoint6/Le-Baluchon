@@ -1,18 +1,26 @@
 //
-//  LocationServiceTests.swift
-//  LocationServiceTests
+//  ExchangeRateServiceTests.swift
+//  Le BaluchonTests
 //
-//  Created by Maxime Point on 18/11/2022.
+//  Created by Maxime Point on 05/01/2023.
 //
 
 import XCTest
 @testable import Le_Baluchon
 
-final class LocationServiceTests: XCTestCase {
+final class ExchangeRateServiceTests: XCTestCase {
     
-    let city = "Paris"
+    let amount: Double = 10
     
     override func setUpWithError() throws {
+        // Ici mettre des données brutes
+        let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
+        UserSettings.currentCity = city[0]
+        UserSettings.destinationCity = city[0]
+        let countryDetails = try! SnakeCaseJSONDecoder().decode(City.CountryDetails.self,
+                                                                from: FakeResponseData.countryCorrectData!)
+        UserSettings.currentCity?.countryDetails = countryDetails
+        UserSettings.destinationCity?.countryDetails = countryDetails
         UserSettings.userLanguage = .fr
     }
     
@@ -20,15 +28,15 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns an error
     func testgetLocationShouldPostFailedCallbackIfError() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationCorrectData,
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: FakeResponseData.exchangeRateCorrectData,
                                                                     response: FakeResponseData.responseKO,
                                                                     error: FakeResponseData.error))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: self.city) { error, location in
+        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
-            XCTAssertNil(location)
+            XCTAssertNil(exchangeRate)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -37,15 +45,15 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns an incorrect response
     func testgetLocationShouldPostFailedCallbackIfIncorrectResponse() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationCorrectData,
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: FakeResponseData.exchangeRateCorrectData,
                                                                     response: FakeResponseData.responseKO,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
             // Then
             XCTAssertEqual(ServiceError.badResponse, error)
-            XCTAssertNil(location)
+            XCTAssertNil(exchangeRate)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -54,15 +62,15 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns incorrect data
     func testgetLocationShouldPostFailedCallbackIfIncorrectData() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationIncorrectData,
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: FakeResponseData.exchangeRateIncorrectData,
                                                                     response: FakeResponseData.responseOK,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
             // Then
             XCTAssertEqual(ServiceError.undecodableJSON, error)
-            XCTAssertNil(location)
+            XCTAssertNil(exchangeRate)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -71,15 +79,15 @@ final class LocationServiceTests: XCTestCase {
     // test when call returns no data
     func testgetLocationShouldPostFailedCallbackIfNoData() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: nil,
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: nil,
                                                                     response: nil,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
-            XCTAssertNil(location)
+            XCTAssertNil(exchangeRate)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -88,28 +96,23 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns good data and a correct answer, without error
     func testgetLocationShouldPostFailedCallbackIfNoErrorAndCorrectData() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationCorrectData,
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: FakeResponseData.exchangeRateCorrectData,
                                                                     response: FakeResponseData.responseOK,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
             // Then
             XCTAssertNil(error)
-            XCTAssertNotNil(location)
+            XCTAssertNotNil(exchangeRate)
             
-            let locationName = "Paris"
-            let locationLocalName = "Paris"
-            let locationCountry = "FR"
-            let locationState = "Ile-de-France"
+            let result: Double = 5.1961
             
-            XCTAssertEqual(locationName, location![0].name)
-            XCTAssertEqual(locationLocalName, location![0].getLocalName(languageKeys: UserSettings.userLanguage))
-            XCTAssertEqual(locationCountry, location![0].country)
-            XCTAssertEqual(locationState, location![0].state)
+            XCTAssertEqual(result, exchangeRate!.result!)
             
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
     }
 }
+

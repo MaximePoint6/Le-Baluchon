@@ -1,18 +1,20 @@
 //
-//  LocationServiceTests.swift
-//  LocationServiceTests
+//  CountryServiceTests.swift
+//  Le BaluchonTests
 //
-//  Created by Maxime Point on 18/11/2022.
+//  Created by Maxime Point on 05/01/2023.
 //
 
 import XCTest
 @testable import Le_Baluchon
 
-final class LocationServiceTests: XCTestCase {
-    
-    let city = "Paris"
+final class CountryServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
+        // Ici mettre des données brutes
+        let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
+        UserSettings.currentCity = city[0]
+        UserSettings.destinationCity = city[0]
         UserSettings.userLanguage = .fr
     }
     
@@ -20,15 +22,15 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns an error
     func testgetLocationShouldPostFailedCallbackIfError() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationCorrectData,
+        let countryService = CountryService(session: URLSessionFake(data: FakeResponseData.countryCorrectData,
                                                                     response: FakeResponseData.responseKO,
                                                                     error: FakeResponseData.error))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: self.city) { error, location in
+        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
-            XCTAssertNil(location)
+            XCTAssertNil(countryDetails)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -37,15 +39,15 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns an incorrect response
     func testgetLocationShouldPostFailedCallbackIfIncorrectResponse() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationCorrectData,
+        let countryService = CountryService(session: URLSessionFake(data: FakeResponseData.countryCorrectData,
                                                                     response: FakeResponseData.responseKO,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
             // Then
             XCTAssertEqual(ServiceError.badResponse, error)
-            XCTAssertNil(location)
+            XCTAssertNil(countryDetails)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -54,15 +56,15 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns incorrect data
     func testgetLocationShouldPostFailedCallbackIfIncorrectData() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationIncorrectData,
+        let countryService = CountryService(session: URLSessionFake(data: FakeResponseData.countryIncorrectData,
                                                                     response: FakeResponseData.responseOK,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
             // Then
             XCTAssertEqual(ServiceError.undecodableJSON, error)
-            XCTAssertNil(location)
+            XCTAssertNil(countryDetails)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -71,15 +73,15 @@ final class LocationServiceTests: XCTestCase {
     // test when call returns no data
     func testgetLocationShouldPostFailedCallbackIfNoData() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: nil,
+        let countryService = CountryService(session: URLSessionFake(data: nil,
                                                                     response: nil,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
-            XCTAssertNil(location)
+            XCTAssertNil(countryDetails)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
@@ -88,28 +90,27 @@ final class LocationServiceTests: XCTestCase {
     // test when the call returns good data and a correct answer, without error
     func testgetLocationShouldPostFailedCallbackIfNoErrorAndCorrectData() throws {
         // Given
-        let locationService = LocationService(session: URLSessionFake(data: FakeResponseData.locationCorrectData,
+        let countryService = CountryService(session: URLSessionFake(data: FakeResponseData.countryCorrectData,
                                                                     response: FakeResponseData.responseOK,
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        locationService.getLocation(city: city) { error, location in
+        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
             // Then
             XCTAssertNil(error)
-            XCTAssertNotNil(location)
+            XCTAssertNotNil(countryDetails)
             
-            let locationName = "Paris"
-            let locationLocalName = "Paris"
-            let locationCountry = "FR"
-            let locationState = "Ile-de-France"
+            let countryName = "France"
+            let currencyName = "Euro"
+            let languagesCode = "fr"
             
-            XCTAssertEqual(locationName, location![0].name)
-            XCTAssertEqual(locationLocalName, location![0].getLocalName(languageKeys: UserSettings.userLanguage))
-            XCTAssertEqual(locationCountry, location![0].country)
-            XCTAssertEqual(locationState, location![0].state)
+            XCTAssertEqual(countryName, countryDetails!.name)
+            XCTAssertEqual(currencyName, countryDetails!.currencies![0].name)
+            XCTAssertEqual(languagesCode, countryDetails!.languages![0].iso6391)
             
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.01)
     }
 }
+

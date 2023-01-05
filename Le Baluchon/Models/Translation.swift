@@ -51,6 +51,6 @@ struct Translation: Codable {
         "SV",
         "TR",
         "UK",
-        "ZH",
+        "ZH"
     ]
 }

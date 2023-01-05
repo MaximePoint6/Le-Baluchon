@@ -128,11 +128,13 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
             let fullString = NSMutableAttributedString(string: "")
             
             if indexPath.row == 2, UserSettings.currentCity != nil {
-                myLabel = String(format: "city.validated.label".localized(), UserSettings.currentCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
+                myLabel = String(format: "city.validated.label".localized(),
+                                 UserSettings.currentCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
                 cell.slideCityValidatedLabel.isHidden = false
                 cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal) // Button
             } else if indexPath.row == 3, UserSettings.destinationCity != nil {
-                myLabel = String(format: "city.validated.label".localized(), UserSettings.destinationCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
+                myLabel = String(format: "city.validated.label".localized(),
+                                 UserSettings.destinationCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
                 cell.slideCityValidatedLabel.isHidden = false
                 cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal) // Button
             }

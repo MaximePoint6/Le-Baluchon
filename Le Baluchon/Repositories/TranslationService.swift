@@ -19,7 +19,9 @@ class TranslationService {
     
     private var task: URLSessionDataTask?
     
-    func getTranslationService(translationFrom: CityType, text: String, callback: @escaping (ServiceError?, Translation?) -> Void) {
+    func getTranslationService(translationFrom: CityType,
+                               text: String,
+                               callback: @escaping (ServiceError?, Translation?) -> Void) {
         task?.cancel()
         
         guard let languageCurrentCity = UserSettings.currentCity?.countryDetails?.languages?[0].iso6391,
