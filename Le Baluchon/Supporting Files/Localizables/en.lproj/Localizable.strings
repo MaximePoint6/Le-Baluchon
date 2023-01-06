@@ -28,6 +28,7 @@
 "noCurrentCityCountry" = "Current city country not found";
 "noDestinationCityCountry" = "Destination city country not found";
 "currencyNotFound" = "One of the currencies of the two selected cities cannot be found";
+"languageNotfound" = "One of the languages of the two selected cities cannot be found";
 "next" = "Next";
 "get.started" = "Go !";
 "cancel" = "Cancel";

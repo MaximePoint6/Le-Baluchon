@@ -11,11 +11,46 @@ import XCTest
 final class CountryServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
-        // Ici mettre des données brutes
         let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
         UserSettings.currentCity = city[0]
         UserSettings.destinationCity = city[0]
         UserSettings.userLanguage = .fr
+    }
+    
+    // test when the call returns no currentCity
+    func testgetWeatherShouldPostFailedCallbackIfNoCurrentCity() throws {
+        UserSettings.currentCity = nil
+        // Given
+        let countryService = CountryService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
+            // Then
+            XCTAssertEqual(ServiceError.noCurrentCityCountry, error)
+            XCTAssertNil(countryDetails)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    // test when the call returns no destinationCity
+    func testgetWeatherShouldPostFailedCallbackIfNoDestinationCity() throws {
+        UserSettings.destinationCity = nil
+        // Given
+        let countryService = CountryService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        countryService.getCountryDetails(cityType: .destination) { error, countryDetails in
+            // Then
+            XCTAssertEqual(ServiceError.noDestinationCityCountry, error)
+            XCTAssertNil(countryDetails)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
@@ -78,7 +113,7 @@ final class CountryServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        countryService.getCountryDetails(cityType: .current) { error, countryDetails in
+        countryService.getCountryDetails(cityType: .destination) { error, countryDetails in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
             XCTAssertNil(countryDetails)
@@ -102,11 +137,20 @@ final class CountryServiceTests: XCTestCase {
             
             let countryName = "France"
             let currencyName = "Euro"
+            let currencySymbol = "€"
             let languagesCode = "fr"
+            
+            let currencyWithSymbol = "\(currencyName) - \(currencySymbol)"
+            let languageNativeName = "français".capitalized
             
             XCTAssertEqual(countryName, countryDetails!.name)
             XCTAssertEqual(currencyName, countryDetails!.currencies![0].name)
             XCTAssertEqual(languagesCode, countryDetails!.languages![0].iso6391)
+            
+            UserSettings.currentCity!.countryDetails = countryDetails
+            
+            XCTAssertEqual(currencyWithSymbol, UserSettings.currentCity!.getCurrency)
+            XCTAssertEqual(languageNativeName, UserSettings.currentCity!.getLanguage)
             
             expectation.fulfill()
         }

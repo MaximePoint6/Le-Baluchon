@@ -13,7 +13,6 @@ final class TranslationServiceTests: XCTestCase {
     let text: String = "Hello"
      
     override func setUpWithError() throws {
-        // Ici mettre des données brutes
         let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
         UserSettings.currentCity = city[0]
         UserSettings.destinationCity = city[0]
@@ -22,6 +21,42 @@ final class TranslationServiceTests: XCTestCase {
         UserSettings.currentCity?.countryDetails = countryDetails
         UserSettings.destinationCity?.countryDetails = countryDetails
         UserSettings.userLanguage = .fr
+    }
+    
+    // test when the call returns no currentCity
+    func testgetWeatherShouldPostFailedCallbackIfNoCurrentCity() throws {
+        UserSettings.currentCity = nil
+        // Given
+        let translationService = TranslationService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translationService.getTranslationService(translationFrom: .current, text: text) { error, translation in
+            // Then
+            XCTAssertEqual(ServiceError.languageNotfound, error)
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    // test when the call returns no destinationCity
+    func testgetWeatherShouldPostFailedCallbackIfNoDestinationCity() throws {
+        UserSettings.destinationCity = nil
+        // Given
+        let translationService = TranslationService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translationService.getTranslationService(translationFrom: .current, text: text) { error, translation in
+            // Then
+            XCTAssertEqual(ServiceError.languageNotfound, error)
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
@@ -84,7 +119,7 @@ final class TranslationServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        translationService.getTranslationService(translationFrom: .current, text: text) { error, translation in
+        translationService.getTranslationService(translationFrom: .destination, text: text) { error, translation in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
             XCTAssertNil(translation)
@@ -108,7 +143,7 @@ final class TranslationServiceTests: XCTestCase {
             
             let result: String = "Bonjour"
             
-            XCTAssertEqual(result, translation!.translations[0].text)
+            XCTAssertEqual(result, translation!.resultText)
             
             expectation.fulfill()
         }

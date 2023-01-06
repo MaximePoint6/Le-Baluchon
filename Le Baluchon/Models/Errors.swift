@@ -17,4 +17,5 @@ enum ServiceError: String, Error {
     case noCurrentCityCountry
     case noDestinationCityCountry
     case currencyNotFound
+    case languageNotfound
 }

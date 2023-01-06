@@ -11,11 +11,47 @@ import XCTest
 final class WeatherServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
-        // Ici mettre des données brutes
         let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
         UserSettings.currentCity = city[0]
         UserSettings.destinationCity = city[0]
         UserSettings.userLanguage = .fr
+        UserSettings.temperatureUnit = .Celsius
+    }
+    
+    // test when the call returns no currentCity
+    func testgetWeatherShouldPostFailedCallbackIfNoCurrentCity() throws {
+        UserSettings.currentCity = nil
+        // Given
+        let weatherService = WeatherService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        weatherService.getWeather(cityType: .current) { error, weather in
+            // Then
+            XCTAssertEqual(ServiceError.noCurrentCity, error)
+            XCTAssertNil(weather)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    // test when the call returns no destinationCity
+    func testgetWeatherShouldPostFailedCallbackIfNoDestinationCity() throws {
+        UserSettings.destinationCity = nil
+        // Given
+        let weatherService = WeatherService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        weatherService.getWeather(cityType: .destination) { error, weather in
+            // Then
+            XCTAssertEqual(ServiceError.noDestinationCity, error)
+            XCTAssertNil(weather)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
@@ -78,7 +114,7 @@ final class WeatherServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherService.getWeather(cityType: .current) { error, weather in
+        weatherService.getWeather(cityType: .destination) { error, weather in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
             XCTAssertNil(weather)
@@ -102,11 +138,15 @@ final class WeatherServiceTests: XCTestCase {
             
             let weatherDescription = "couvert"
             let weatherIcon = "04d"
-            let mainTemp = 273.85
+            let mainTemp = String(format: "%.1f", Float((273.85) - 273.15))
+            let tempLabel = "\(mainTemp)\(UserSettings.temperatureUnit.unit)"
+            let localDate = DateFormater.getDate(timeZone: 3600)
             
-            XCTAssertEqual(weatherDescription, weather!.weather[0].description)
-            XCTAssertEqual(weatherIcon, weather!.weather[0].icon)
-            XCTAssertEqual(mainTemp, weather!.main!.temp)
+            XCTAssertEqual(weatherDescription, weather!.mainWeatherDescription)
+            XCTAssertEqual(weatherIcon, weather!.mainWeatherIcon)
+            XCTAssertEqual(mainTemp, weather!.tempWithPreferredUnit)
+            XCTAssertEqual(tempLabel, weather!.tempLabel)
+            XCTAssertEqual(localDate, weather!.localDate)
             
             expectation.fulfill()
         }

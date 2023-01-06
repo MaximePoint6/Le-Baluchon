@@ -28,12 +28,13 @@
 "noCurrentCityCountry" = "Pays de la ville actuelle introuvable";
 "noDestinationCityCountry" = "Pays de la ville de destination introuvable";
 "currencyNotFound" = "Une des devises des deux villes selectionnées est introuvable";
+"languageNotfound" = "Une des langues des deux villes selectionnées est introuvable";
 "next" = "Suivant";
 "get.started" = "C'est parti !";
 "cancel" = "Annuler";
 
 // WeatherViewController
-"weather.description" = "Comparez la météo entre ta ville actuelle et celle de ta destination.";
+"weather.description" = "Compare la météo entre ta ville actuelle et celle de ta destination.";
 
 // SettingsViewController
 "username" = "Pseudo";

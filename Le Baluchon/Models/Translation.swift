@@ -18,7 +18,7 @@ struct Translation: Codable {
     
     // MARK: Tools for ViewControllers
     var resultText: String {
-        guard let result = self.translations[0].text else {
+        guard self.translations.count > 0, let result = self.translations[0].text else {
             return "-"
         }
         return result

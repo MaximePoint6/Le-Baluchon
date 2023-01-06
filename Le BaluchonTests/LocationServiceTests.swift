@@ -16,7 +16,6 @@ final class LocationServiceTests: XCTestCase {
         UserSettings.userLanguage = .fr
     }
     
-    
     // test when the call returns an error
     func testgetLocationShouldPostFailedCallbackIfError() throws {
         // Given
@@ -103,10 +102,19 @@ final class LocationServiceTests: XCTestCase {
             let locationCountry = "FR"
             let locationState = "Ile-de-France"
             
+            let stateAndCountryDetails = "\(locationState), \(locationCountry)"
+            let nameWithStateAndCountry = "\(locationLocalName), \(stateAndCountryDetails)"
+            let localName = "Paris"
+            
             XCTAssertEqual(locationName, location![0].name)
             XCTAssertEqual(locationLocalName, location![0].getLocalName(languageKeys: UserSettings.userLanguage))
             XCTAssertEqual(locationCountry, location![0].country)
             XCTAssertEqual(locationState, location![0].state)
+            
+            XCTAssertEqual(stateAndCountryDetails, location![0].stateAndCountryDetails)
+            XCTAssertEqual(nameWithStateAndCountry,
+                           location![0].getNameWithStateAndCountry(languageKeys: UserSettings.userLanguage))
+            XCTAssertEqual(localName, location![0].getLocalName(languageKeys: UserSettings.userLanguage))
             
             expectation.fulfill()
         }

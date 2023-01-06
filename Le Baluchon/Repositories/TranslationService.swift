@@ -26,7 +26,7 @@ class TranslationService {
         
         guard let languageCurrentCity = UserSettings.currentCity?.countryDetails?.languages?[0].iso6391,
               let languageDestinationCity = UserSettings.destinationCity?.countryDetails?.languages?[0].iso6391 else {
-            callback(ServiceError.currencyNotFound, nil)
+            callback(ServiceError.languageNotfound, nil)
             return
         }
         

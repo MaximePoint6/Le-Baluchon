@@ -13,7 +13,6 @@ final class ExchangeRateServiceTests: XCTestCase {
     let amount: Double = 10
     
     override func setUpWithError() throws {
-        // Ici mettre des données brutes
         let city = try! SnakeCaseJSONDecoder().decode([City].self, from: FakeResponseData.locationCorrectData!)
         UserSettings.currentCity = city[0]
         UserSettings.destinationCity = city[0]
@@ -22,6 +21,42 @@ final class ExchangeRateServiceTests: XCTestCase {
         UserSettings.currentCity?.countryDetails = countryDetails
         UserSettings.destinationCity?.countryDetails = countryDetails
         UserSettings.userLanguage = .fr
+    }
+    
+    // test when the call returns no currentCity
+    func testgetWeatherShouldPostFailedCallbackIfNoCurrentCity() throws {
+        UserSettings.currentCity = nil
+        // Given
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        exchangeRateService.getExchangeRateService(conversionFrom: .destination, amount: amount) { error, exchangeRate in
+            // Then
+            XCTAssertEqual(ServiceError.currencyNotFound, error)
+            XCTAssertNil(exchangeRate)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    // test when the call returns no destinationCity
+    func testgetWeatherShouldPostFailedCallbackIfNoDestinationCity() throws {
+        UserSettings.destinationCity = nil
+        // Given
+        let exchangeRateService = ExchangeRateService(session: URLSessionFake(data: FakeResponseData.weatherCorrectData,
+                                                                    response: FakeResponseData.responseKO,
+                                                                    error: FakeResponseData.error))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
+            // Then
+            XCTAssertEqual(ServiceError.currencyNotFound, error)
+            XCTAssertNil(exchangeRate)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
     }
     
     
@@ -84,7 +119,7 @@ final class ExchangeRateServiceTests: XCTestCase {
                                                                     error: nil))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        exchangeRateService.getExchangeRateService(conversionFrom: .current, amount: amount) { error, exchangeRate in
+        exchangeRateService.getExchangeRateService(conversionFrom: .destination, amount: amount) { error, exchangeRate in
             // Then
             XCTAssertEqual(ServiceError.noData, error)
             XCTAssertNil(exchangeRate)
@@ -107,8 +142,10 @@ final class ExchangeRateServiceTests: XCTestCase {
             XCTAssertNotNil(exchangeRate)
             
             let result: Double = 5.1961
+            let resultText = String(floor(result * 100) / 100)
             
             XCTAssertEqual(result, exchangeRate!.result!)
+            XCTAssertEqual(resultText, exchangeRate!.resultText)
             
             expectation.fulfill()
         }
