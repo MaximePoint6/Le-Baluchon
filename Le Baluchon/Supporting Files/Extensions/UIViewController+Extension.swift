@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
+    
     func alertUser(title: String,
                    message: String,
                    actions: [UIAlertAction]? = nil,
@@ -36,4 +37,5 @@ extension UIViewController {
     func performSegue(withIdentifier identifier: SegueIdentifiers, sender: Any?) {
         performSegue(withIdentifier: identifier.rawValue, sender: sender)
     }
+    
 }

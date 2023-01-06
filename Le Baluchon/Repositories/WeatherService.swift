@@ -19,7 +19,12 @@ class WeatherService {
     
     private var task: URLSessionDataTask?
     
+    /// Function performing a network call in order to get the city weather forecast.
+    /// - Parameters:
+    ///   - cityType: Desired city to retrieve his weather (type: current or destination).
+    ///   - callback: Callback returning ServiceError? and a Weather?.
     func getWeather(cityType: CityType, callback: @escaping (ServiceError?, Weather?) -> Void) {
+        
         task?.cancel()
         
         var lat: Double
@@ -42,13 +47,16 @@ class WeatherService {
                 lat = destinationCityLat
                 lon = destinationCityLon
         }
+        
         let lang = UserSettings.userLanguage.rawValue
 
-        var weatherUrl: URL? {
-            return URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(String(lat))&lon=\(String(lon))&appid=\(ApiKey.openWeather)&lang=\(lang)")
+        /// Construction of the url for the network call.
+        var urlBuilder: URL? {
+            let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
+            return URL(string: "\(baseURL)lat=\(String(lat))&lon=\(String(lon))&appid=\(ApiKey.oWeather)&lang=\(lang)")
         }
 
-        guard let url = weatherUrl else { return callback(ServiceError.urlNotCorrect, nil) }
+        guard let url = urlBuilder else { return callback(ServiceError.urlNotCorrect, nil) }
 
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {

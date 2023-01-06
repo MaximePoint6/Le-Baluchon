@@ -19,27 +19,37 @@ class ExchangeRateService {
     
     private var task: URLSessionDataTask?
     
-    func getExchangeRateService(conversionFrom: CityType, amount: Double,
+    
+    /// Function performing a network call in order to obtain the conversion of an amount.
+    /// - Parameters:
+    ///   - conversionFrom: Indicate the city / country from which the conversion must be done (type: current or destination).
+    ///   - amount: Amount to be converted.
+    ///   - callback: Callback returning ServiceError? and a Weather?.
+    func getExchangeRateService(conversionFrom: CityType,
+                                amount: Double,
                                 callback: @escaping (ServiceError?, ExchangeRate?) -> Void) {
+
         task?.cancel()
         
-        guard let currencyCurrentCity = UserSettings.currentCity?.countryDetails?.currencies?[0].code,
-              let currencyDestinationCity = UserSettings.destinationCity?.countryDetails?.currencies?[0].code else {
+        guard let currentCurrency = UserSettings.currentCity?.countryDetails?.currencies?[0].code,
+              let destinationCurrency = UserSettings.destinationCity?.countryDetails?.currencies?[0].code else {
             callback(ServiceError.currencyNotFound, nil)
             return
         }
         
-        
-        var exchangeRateUrl: URL? {
+        /// Construction of the url for the network call.
+        var urlBuilder: URL? {
+            let amount = String(amount)
+            let baseURL = "https://api.apilayer.com/fixer/convert?"
             switch conversionFrom {
                 case .current:
-                    return URL(string: "https://api.apilayer.com/fixer/convert?to=\(currencyDestinationCity)&from=\(currencyCurrentCity)&amount=\(String(amount))&apikey=\(ApiKey.apiLayer)")
+                    return URL(string: "\(baseURL)to=\(destinationCurrency)&from=\(currentCurrency)&amount=\(amount)&apikey=\(ApiKey.apiLayer)")
                 case .destination:
-                    return URL(string: "https://api.apilayer.com/fixer/convert?to=\(currencyCurrentCity)&from=\(currencyDestinationCity)&amount=\(String(amount))&apikey=\(ApiKey.apiLayer)")
+                    return URL(string: "\(baseURL)to=\(currentCurrency)&from=\(destinationCurrency)&amount=\(amount)&apikey=\(ApiKey.apiLayer)")
             }
         }
         
-        guard let url = exchangeRateUrl else { return callback(ServiceError.urlNotCorrect, nil) }
+        guard let url = urlBuilder else { return callback(ServiceError.urlNotCorrect, nil) }
         
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {

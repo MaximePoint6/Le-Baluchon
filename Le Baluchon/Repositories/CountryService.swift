@@ -19,7 +19,12 @@ class CountryService {
     
     private var task: URLSessionDataTask?
     
+    /// Function performing a network call in order to get the city country details.
+    /// - Parameters:
+    ///   - cityType: Desired city to retrieve his country details (type: current or destination).
+    ///   - callback: Callback returning ServiceError? and a City.CountryDetails?.
     func getCountryDetails(cityType: CityType, callback: @escaping (ServiceError?, City.CountryDetails?) -> Void) {
+        
         task?.cancel()
         
         var countryCode: String
@@ -37,12 +42,13 @@ class CountryService {
                 }
                 countryCode = destinationCityCountry
         }
-
-        var countryUrl: URL? {
+        
+        /// Construction of the url for the network call.
+        var urlBuilder: URL? {
             return URL(string: "https://restcountries.com/v2/alpha/\(countryCode)")
         }
 
-        guard let url = countryUrl else { return callback(ServiceError.urlNotCorrect, nil) }
+        guard let url = urlBuilder else { return callback(ServiceError.urlNotCorrect, nil) }
 
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {

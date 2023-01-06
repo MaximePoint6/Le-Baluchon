@@ -14,6 +14,9 @@ enum SegueIdentifiers: String {
     case segueToSearchCity
     case segueToSearchLanguage
     
+    
+    /// Function to compare a String and an SegueIdentifiers
+    /// - Returns: returns a boolean if the two parameters are equal
     static func == (lhs: String?, rhs: SegueIdentifiers) -> Bool {
         lhs == rhs.rawValue
     }

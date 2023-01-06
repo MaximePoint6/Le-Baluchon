@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Allows to decode, for example, a JSON file with SnakeCase format.
 class SnakeCaseJSONDecoder: JSONDecoder {
     override init() {
         super.init()

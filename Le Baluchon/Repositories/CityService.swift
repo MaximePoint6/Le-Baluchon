@@ -1,5 +1,5 @@
 //
-//  LocationService.swift
+//  CityService.swift
 //  Le Baluchon
 //
 //  Created by Maxime Point on 25/11/2022.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class LocationService {
+class CityService {
 
-    static var shared = LocationService()
+    static var shared = CityService()
     private init() {}
     
     private var session = URLSession(configuration: .default)
@@ -18,20 +18,27 @@ class LocationService {
     }
     
     private var task: URLSessionDataTask?
-
-    func getLocation(city: String, callback: @escaping (ServiceError?, [City]?) -> Void) {
-        task?.cancel()
+    
+    /// Function executing a network call in order to get a list of cities,
+    /// named according to the city sent in function parameters (or starting with the same letters).
+    /// - Parameters:
+    ///   - city: Part or full name of a city.
+    ///   - callback: Callback returning ServiceError? and a [City]?.
+    func getCities(city: String, callback: @escaping (ServiceError?, [City]?) -> Void) {
         
-        let numberOfLocation = 5
+        task?.cancel()
 
-        var locationUrl: URL? {
+        let numberOfCities = 5
+
+        /// Construction of the url for the network call (verification if the user data can be encoded for a url).
+        var urlBuilder: URL? {
             if let cityForUrl = city.encodingURL() {
-                return URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(cityForUrl)&limit=\(numberOfLocation)&appid=\(ApiKey.openWeather)")
-            }
-            return nil
+                let baseURL = "https://api.openweathermap.org/geo/1.0/direct?"
+                return URL(string: "\(baseURL)q=\(cityForUrl)&limit=\(numberOfCities)&appid=\(ApiKey.oWeather)")
+            } else { return nil }
         }
 
-        guard let url = locationUrl else { return callback(ServiceError.urlNotCorrect, nil) }
+        guard let url = urlBuilder else { return callback(ServiceError.urlNotCorrect, nil) }
         
         task = session.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {

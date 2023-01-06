@@ -45,6 +45,7 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         topBar.setupUI()
         // Notification for keyboard
         registerForKeyboardNotifications()

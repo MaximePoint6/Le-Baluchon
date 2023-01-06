@@ -41,7 +41,7 @@ class SearchCityViewController: UIViewController {
     }
     
     private func getCitiesList(city: String) {
-        LocationService.shared.getLocation(city: city) { error, cities in
+        CityService.shared.getCities(city: city) { error, cities in
             guard let cities = cities, error == nil else {
                 if error == ServiceError.noData {
                     return

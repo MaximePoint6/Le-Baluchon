@@ -44,40 +44,21 @@ struct City: Codable {
     }
     
     // MARK: Tools for ViewControllers
+
+    /// Variable returning the state and the country of the city (or just the not nil one, in that order).
     var stateAndCountryDetails: String {
-        if let stateOfTheCity = self.state {
-            if let countryOfTheCity = self.country {
-                return "\(stateOfTheCity), \(countryOfTheCity)"
-            } else {
-                return stateOfTheCity
-            }
-        } else {
-            if let countryOfTheCity = self.country {
-                return countryOfTheCity
-            } else {
-                return ""
-            }
-        }
+        return [self.state, self.country].compactMap { $0 }.joined(separator: ", ")
     }
     
+    /// Function returning the local name of the city, with its state and country (or just those not nil, in that order).
+    /// - Parameter languageKeys: Desired language of the result.
+    /// - Returns: Local name of the city, with its state and country.
     func getNameWithStateAndCountry(languageKeys: Languages) -> String {
         let localName = getLocalName(languageKeys: languageKeys)
-        
-        if let stateOfTheCity = self.state {
-            if let countryOfTheCity = self.country {
-                return "\(localName), \(stateOfTheCity), \(countryOfTheCity)"
-            } else {
-                return "\(localName), \(stateOfTheCity)"
-            }
-        } else {
-            if let countryOfTheCity = self.country {
-                return "\(localName), \(countryOfTheCity)"
-            } else {
-                return localName
-            }
-        }
+        return [localName, self.state, self.country].compactMap { $0 }.joined(separator: ", ")
     }
     
+    /// Variable returning the currency of the city (with its symbol).
     var getCurrency: String {
         guard let currency = self.countryDetails?.currencies?[0].name else {
             return "unknown.currency".localized()
@@ -88,6 +69,7 @@ struct City: Codable {
         return "\(currency) - \(currencySymbol)"
     }
     
+    /// Variable returning the language of the city (native name).
     var getLanguage: String {
         guard let language = self.countryDetails?.languages?[0].nativeName else {
             return "unknown.language".localized()
@@ -96,8 +78,8 @@ struct City: Codable {
     }
     
     /// Function that returns the city name based on the user's language.
-    /// - Parameter languageKeys: user's language key
-    /// - Returns: city name based on the user's language
+    /// - Parameter languageKeys: User's language key.
+    /// - Returns: City name based on the user's language.
     func getLocalName(languageKeys: Languages) -> String {
         guard let name = name else { return "no.city.name".localized() }
         var localName: String?

@@ -16,7 +16,7 @@
 		CA8E63F72930B23A00CF0440 /* SnakeCaseJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */; };
 		CA8E63F92930B9BC00CF0440 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63F82930B9BC00CF0440 /* City.swift */; };
 		CA8E63FB2930BC9B00CF0440 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63FA2930BC9B00CF0440 /* Languages.swift */; };
-		CA8E63FD2930C26800CF0440 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63FC2930C26800CF0440 /* LocationService.swift */; };
+		CA8E63FD2930C26800CF0440 /* CityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63FC2930C26800CF0440 /* CityService.swift */; };
 		CA8E63FF2931062A00CF0440 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63FE2931062A00CF0440 /* SettingsViewController.swift */; };
 		CA8E640129310EC400CF0440 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E640029310EC400CF0440 /* UserSettings.swift */; };
 		CA8E64052937931600CF0440 /* TemperatureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E64042937931600CF0440 /* TemperatureUnit.swift */; };
@@ -116,7 +116,7 @@
 		CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeCaseJSONDecoder.swift; sourceTree = "<group>"; };
 		CA8E63F82930B9BC00CF0440 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		CA8E63FA2930BC9B00CF0440 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
-		CA8E63FC2930C26800CF0440 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		CA8E63FC2930C26800CF0440 /* CityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityService.swift; sourceTree = "<group>"; };
 		CA8E63FE2931062A00CF0440 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CA8E640029310EC400CF0440 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		CA8E64042937931600CF0440 /* TemperatureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnit.swift; sourceTree = "<group>"; };
@@ -230,12 +230,12 @@
 		CA8E640A29394D1C00CF0440 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CAF07481293A1D4A00F0FC74 /* UIViewController+Extension.swift */,
+				CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */,
 				CA8E64062939338700CF0440 /* UIImageView+Extension.swift */,
 				CAF07483293A3DA800F0FC74 /* UIImage+Extension.swift */,
-				CAF07481293A1D4A00F0FC74 /* UIViewController+Extension.swift */,
 				CA8E6408293940B000CF0440 /* String+Extension.swift */,
 				CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */,
-				CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */,
 				CAE624D3296580C800E2FCDA /* NotificationName+extension.swift */,
 			);
 			path = Extensions;
@@ -290,16 +290,16 @@
 		CACE543F2927C25200A37F5A /* Le BaluchonTests */ = {
 			isa = PBXGroup;
 			children = (
-				CACE54402927C25200A37F5A /* WeatherServiceTests.swift */,
 				CAF0749329438C4800F0FC74 /* LocationServiceTests.swift */,
 				CAD9CDB52967692F00C73D88 /* CountryServiceTests.swift */,
+				CACE54402927C25200A37F5A /* WeatherServiceTests.swift */,
 				CAD9CDB72967694200C73D88 /* ExchangeRateServiceTests.swift */,
 				CAD9CDB92967694E00C73D88 /* TranslationServiceTests.swift */,
 				CAA2EBB129682116007DA518 /* LanguagesTest.swift */,
-				CAA2EBB529682B8F007DA518 /* TranslationTest.swift */,
-				CAA2EBB729682C99007DA518 /* ExchangeRateTest.swift */,
-				CAA2EBB3296823E8007DA518 /* WeatherTest.swift */,
 				CAA2EBB9296831C0007DA518 /* CityTest.swift */,
+				CAA2EBB3296823E8007DA518 /* WeatherTest.swift */,
+				CAA2EBB729682C99007DA518 /* ExchangeRateTest.swift */,
+				CAA2EBB529682B8F007DA518 /* TranslationTest.swift */,
 				CAF0748F29432B2300F0FC74 /* FakeResponseData.swift */,
 				CAF0749129433C2900F0FC74 /* URLSessionFake.swift */,
 				CAF0748D29432A8800F0FC74 /* Weather.json */,
@@ -314,18 +314,18 @@
 		CACE54592927C31400A37F5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CA8E640029310EC400CF0440 /* UserSettings.swift */,
+				CAAF442D2952F3830071BDD8 /* OnBoardingSlide.swift */,
 				CA8E63FA2930BC9B00CF0440 /* Languages.swift */,
-				CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */,
-				CA8E64042937931600CF0440 /* TemperatureUnit.swift */,
 				CAF07485293A9C6400F0FC74 /* CityType.swift */,
 				CA8E63F82930B9BC00CF0440 /* City.swift */,
-				CA8E640029310EC400CF0440 /* UserSettings.swift */,
+				CA8E64042937931600CF0440 /* TemperatureUnit.swift */,
 				CA8E63DF292AA67E00CF0440 /* Weather.swift */,
 				CAFF66CB2961FA4900CCA986 /* ExchangeRate.swift */,
 				CAF696272962E2480059779A /* Translation.swift */,
 				CAFD20C8294C55B600B96D52 /* Errors.swift */,
-				CAAF442D2952F3830071BDD8 /* OnBoardingSlide.swift */,
 				CAAF44342954A7E60071BDD8 /* UserDefaultsKeys.swift */,
+				CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */,
 				CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */,
 			);
 			path = Models;
@@ -361,9 +361,9 @@
 		CACE545C2927C33A00A37F5A /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				CAB83F8A292A6EDB00BB1D30 /* WeatherService.swift */,
-				CA8E63FC2930C26800CF0440 /* LocationService.swift */,
+				CA8E63FC2930C26800CF0440 /* CityService.swift */,
 				CAFF66C7295F3BEC00CCA986 /* CountryService.swift */,
+				CAB83F8A292A6EDB00BB1D30 /* WeatherService.swift */,
 				CAFF66C92961D12600CCA986 /* ExchangeRateService.swift */,
 				CAF696252962E1C40059779A /* TranslationService.swift */,
 				CA8E63F62930B23A00CF0440 /* SnakeCaseJSONDecoder.swift */,
@@ -602,7 +602,7 @@
 				CAFD20D0294CAD8C00B96D52 /* TopBarComponentView.swift in Sources */,
 				CA775AB82965DF070074E5F6 /* SpinnerViewController.swift in Sources */,
 				CA6635472964727900EE5152 /* CustomView.swift in Sources */,
-				CA8E63FD2930C26800CF0440 /* LocationService.swift in Sources */,
+				CA8E63FD2930C26800CF0440 /* CityService.swift in Sources */,
 				CAB83F852927CEC800BB1D30 /* UIColor+Extension.swift in Sources */,
 				CAAF44352954A7E60071BDD8 /* UserDefaultsKeys.swift in Sources */,
 				CA8E64072939338700CF0440 /* UIImageView+Extension.swift in Sources */,

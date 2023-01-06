@@ -42,6 +42,7 @@ class WeatherViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         topBar.setupUI()
         // Screen refresh every 15min or if a city changes (see notification)
         if let currentCityWeatherDateRefresh = currentCityWeatherDateRefresh,

@@ -32,7 +32,8 @@ final class ExchangeRateServiceTests: XCTestCase {
                                                                     error: FakeResponseData.error))
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        exchangeRateService.getExchangeRateService(conversionFrom: .destination, amount: amount) { error, exchangeRate in
+        exchangeRateService.getExchangeRateService(conversionFrom: .destination,
+                                                   amount: amount) { error, exchangeRate in
             // Then
             XCTAssertEqual(ServiceError.currencyNotFound, error)
             XCTAssertNil(exchangeRate)
