@@ -106,7 +106,7 @@ struct Weather: Decodable {
         guard let tempWithPreferredUnit = self.tempWithPreferredUnit else {
             return "-\(UserSettings.temperatureUnit.unit)"
         }
-        return "\(tempWithPreferredUnit)\(UserSettings.temperatureUnit.unit)"
+        return tempWithPreferredUnit + UserSettings.temperatureUnit.unit
     }
     
     /// Returns the date in the correct format according to the user language.

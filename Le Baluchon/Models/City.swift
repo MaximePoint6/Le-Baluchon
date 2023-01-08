@@ -62,20 +62,13 @@ struct City: Codable {
     
     /// Variable returning the currency of the city (with its symbol).
     var getCurrency: String {
-        guard let currency = self.countryDetails?.currencies?[0].name else {
-            return "unknown.currency".localized()
-        }
-        guard let currencySymbol = self.countryDetails?.currencies?[0].symbol else {
-            return currency
-        }
-        return "\(currency) - \(currencySymbol)"
+        guard let currency = self.countryDetails?.currencies?[0].name else { return "unknown.currency".localized() }
+        return [currency, self.countryDetails?.currencies?[0].symbol].compactMap { $0 }.joined(separator: " - ")
     }
     
     /// Variable returning the language of the city (native name).
     var getLanguage: String {
-        guard let language = self.countryDetails?.languages?[0].nativeName else {
-            return "unknown.language".localized()
-        }
+        guard let language = self.countryDetails?.languages?[0].nativeName else { return "unknown.language".localized() }
         return language.capitalized
     }
     
