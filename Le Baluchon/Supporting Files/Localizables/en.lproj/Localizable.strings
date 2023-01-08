@@ -67,7 +67,7 @@
 "onBoardingSlide.description4" = "To which city do you want to travel?";
 "search.city" = "Search for a city";
 "search.other.city" = "Search for a other city";
-"city.validated.label" = "The city of %@ has been registered";
+"city.validated.label" = " The city of %@ has been registered";
 "alert.onBoarding.title" = "Wow, you are in a hurry to travel! :)";
 "alert.onBoarding.message" = "We are missing information to be able to accompany you in your travel. Remember to tell us your nickname, your current city and your destination city.";
 
