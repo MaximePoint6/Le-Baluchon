@@ -22,7 +22,6 @@ final class CityTest: XCTestCase {
     func testWhenCountryVariableInCityObjectIsEmpty() {
         city![0].country = nil
         
-        let name = "Paris"
         let localName = "Paris"
         let state = "Ile-de-France"
         
@@ -38,7 +37,6 @@ final class CityTest: XCTestCase {
     func testWhenStateVariableInCityObjectIsEmpty() {
         city![0].state = nil
         
-        let name = "Paris"
         let localName = "Paris"
         let country = "FR"
         
@@ -55,7 +53,6 @@ final class CityTest: XCTestCase {
         city![0].country = nil
         city![0].state = nil
         
-        let name = "Paris"
         let localName = "Paris"
         
         let stateAndCountryDetails = ""

@@ -53,14 +53,20 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Button title
         button.setTitle("next".localized(), for: .normal)
-        
-        // Sliding the view when the keyboard appears
-        self.view.bindToKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Sliding the view when the keyboard appears
+        self.view.bindToKeyboard()
+        // Refresh
         refresh()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Sliding the view when the keyboard appears
+        self.view.unbindToKeyboard()
     }
     
     // Prepare Segue

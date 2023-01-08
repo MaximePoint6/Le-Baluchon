@@ -10,6 +10,12 @@ import UIKit
 
 extension UIViewController {
     
+    /// Function displaying a user alert on the screen.
+    /// - Parameters:
+    ///   - title: User Alert Title
+    ///   - message: User alert message
+    ///   - actions: User alert actions as an array of UIAlertAction
+    ///   - preferredStyle: Style of UIAlertController, by default .alert
     func alertUser(title: String,
                    message: String,
                    actions: [UIAlertAction]? = nil,
@@ -23,17 +29,18 @@ extension UIViewController {
         present(alert, animated: true)
     }
     
-    static var identifier: String {
-        return String(String(describing: self))
+    /// Transforms the class name of the ViewController into an Identifier (of type String).
+    static var viewControllerIdentifier: String {
+        return String(describing: self)
     }
     
-    // swiftlint:disable force_cast
+    /// Function to instantiate a ViewController
     static func instantiate() -> Self {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(identifier: identifier) as! Self
+        return storyboard.instantiateViewController(identifier: viewControllerIdentifier) as! Self
     }
-    // swiftlint:enable force_cast
     
+    /// Function performing a performSegue with a SegueIdentifier (enum)
     func performSegue(withIdentifier identifier: SegueIdentifiers, sender: Any?) {
         performSegue(withIdentifier: identifier.rawValue, sender: sender)
     }

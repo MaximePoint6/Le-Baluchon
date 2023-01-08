@@ -96,7 +96,8 @@ struct UserSettings {
         }
     }
     
-    /// Indicates if the user has already seen the application on boarding screen, and save it in the UserDefaults of the application.
+    /// Indicates if the user has already seen the application on boarding screen,
+    /// and save it in the UserDefaults of the application.
     static var onBoardingScreenWasShown: Bool {
         get { return UserDefaults.standard.bool(forKey: UserDefaultsKeys.onBoardingScreenWasShown.rawValue) }
         set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.onBoardingScreenWasShown.rawValue) }

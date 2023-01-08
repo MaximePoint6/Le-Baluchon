@@ -7,7 +7,6 @@
 
 import UIKit
 
-// swiftlint:disable force_cast
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -23,12 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         
-        // Allows you to launch the screen you want at startup (TabBar or OnBoarding)
+        // MARK: Launch screen choice
+        // Allows you to launch the desired screen at startup (for example here TabBar or OnBoarding)
         var controller: UIViewController!
         if UserSettings.onBoardingScreenWasShown {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            // homeTB = tabBar
-            controller = storyboard.instantiateViewController(identifier: "homeTB") as! UITabBarController
+            controller = TabBarController.instantiate()
         } else {
             controller = OnBoardingViewController.instantiate()
         }
@@ -67,5 +65,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
 }
-// swiftlint:enable force_cast
 

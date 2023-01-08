@@ -30,10 +30,8 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         currentTranslationTextView.delegate = self
         destinationTranslationTextView.delegate = self
         // UI & User Settings
-        setupUI()
-        addPlaceHolder()
-        languageCheck()
-        setupUserSettings()
+        uiSetup()
+        textViewTitleSetup()
         // Notification when the user has changed a city or language or temperature unit in his settings.
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.refreshAfterCityNotification(notification:)),
@@ -65,63 +63,84 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: private function
     @objc private func refreshAfterLanguageNotification(notification: Notification) {
-        setupUI()
+        uiSetup()
     }
     
     @objc private func refreshAfterCityNotification(notification: Notification) {
-        setupUI()
-        addPlaceHolder()
-        languageCheck()
-        setupUserSettings()
+        currentTranslationTextView.text = nil
+        destinationTranslationTextView.text = nil
+        placeHolderSetup()
+        textViewTitleSetup()
     }
     
-    private func setupUI() {
+    private func uiSetup() {
+        screenDescriptionSetup()
+        placeHolderSetup()
+    }
+    
+    private func screenDescriptionSetup() {
         screenDescription.text = "translation.description".localized()
     }
     
-    private func languageCheck() {
-        currentTranslationTextView.isEditable = true
-        destinationTranslationTextView.isEditable = true
-        if let currentCityLanguageCode = UserSettings.currentCity?.countryDetails?.languages?[0].iso6391,
-           !Translation.availableLanguages.contains(currentCityLanguageCode.uppercased()) {
-            currentTranslationTextView.text = "unavailable.language".localized()
-            currentTranslationTextView.isEditable = false
-            destinationTranslationTextView.text = "unavailable.translation".localized()
-            destinationTranslationTextView.isEditable = false
+    private func placeHolderSetup() {
+        if currentTranslationTextView.text.isEmpty ||
+            destinationTranslationTextView.text.isEmpty ||
+            currentTranslationTextView.textColor == UIColor.placeholderText ||
+            destinationTranslationTextView.textColor == UIColor.placeholderText {
+            // Current translation
+            currentTranslationTextView.text = "text.to.translate".localized()
+            currentTranslationTextView.textColor = UIColor.placeholderText
+            // Destination translation
+            destinationTranslationTextView.text = "text.to.translate".localized()
+            destinationTranslationTextView.textColor = UIColor.placeholderText
         }
-        if  let destinationCityLanguageCode = UserSettings.destinationCity?.countryDetails?.languages?[0].iso6391,
-            !Translation.availableLanguages.contains(destinationCityLanguageCode.uppercased()) {
-            destinationTranslationTextView.text = "unavailable.language".localized()
-            destinationTranslationTextView.isEditable = false
-            currentTranslationTextView.text = "unavailable.translation".localized()
-            currentTranslationTextView.isEditable = false
-        }
+        citiesLanguagesCheck()
     }
     
-    private func addPlaceHolder() {
-        // TextView
-        destinationTranslationTextView.text = nil
-        currentTranslationTextView.text = nil
-        // current translation
-        currentTranslationTextView.text = "text.to.translate".localized()
-        currentTranslationTextView.textColor = UIColor.placeholderText
-        // destination translation
-        destinationTranslationTextView.text = "text.to.translate".localized()
-        destinationTranslationTextView.textColor = UIColor.placeholderText
-    }
-    
-    private func setupUserSettings() {
-        // currentView and currentTextView
+    /// Function to refresh the title of textView with the updated userSettings
+    private func textViewTitleSetup() {
         currentTranslationView.title = UserSettings.currentCity?.getLanguage ?? "unknown.language".localized()
-        // destinationView and currentTextView
         destinationTranslationView.title = UserSettings.destinationCity?.getLanguage ?? "unknown.language".localized()
     }
     
+    /// Checks if city languages are available for translation,
+    /// if not, the function locks the edition of the textView and adds a message in the placeholder
+    private func citiesLanguagesCheck() {
+        currentTranslationTextView.isEditable = true
+        destinationTranslationTextView.isEditable = true
+        
+        // If the language of the current or destination city is not available,
+        // then we inform the user with a text in the textView and we lock the edition of the textView.
+        if let currentCityLanguageCode = UserSettings.currentCity?.countryDetails?.languages?[0].iso6391,
+           !Translation.availableLanguages.contains(currentCityLanguageCode.uppercased()) {
+            currentTranslationTextView.text = "unavailable.language".localized()
+            currentTranslationTextView.textColor = UIColor.placeholderText
+            currentTranslationTextView.isEditable = false
+            destinationTranslationTextView.text = "unavailable.translation".localized()
+            destinationTranslationTextView.textColor = UIColor.placeholderText
+            destinationTranslationTextView.isEditable = false
+        } else if let destinationCityLanguageCode = UserSettings.destinationCity?.countryDetails?.languages?[0].iso6391,
+            !Translation.availableLanguages.contains(destinationCityLanguageCode.uppercased()) {
+            destinationTranslationTextView.text = "unavailable.language".localized()
+            destinationTranslationTextView.textColor = UIColor.placeholderText
+            destinationTranslationTextView.isEditable = false
+            currentTranslationTextView.text = "unavailable.translation".localized()
+            currentTranslationTextView.textColor = UIColor.placeholderText
+            currentTranslationTextView.isEditable = false
+        }
+    }
+    
+    /// Dismiss Keyboard
     private func dismissKeyBoard() {
         currentTranslationTextView.resignFirstResponder()
         destinationTranslationTextView.resignFirstResponder()
     }
     
+    
+    /// Function performing another function that runs a network call in order to get the translation of a text.
+    /// - Parameters:
+    ///   - cityType: Indicate the city / language from which the translation must be done (current or destination).
+    ///   - text: Text to translate.
     private func getTranslationService(translationFrom cityType: CityType, text: String) {
         //         Function making network call
         TranslationService.shared.getTranslationService(translationFrom: cityType, text: text) { error, translation in
@@ -133,6 +152,7 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.alertUser(title: "error".localized(), message: error!.rawValue.localized(), actions: [retry, ok])
                 return
             }
+            // UI update
             switch cityType {
                 case .current:
                     self.destinationTranslationTextView.text = translation.resultText
@@ -149,7 +169,7 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
 
 // MARK: TOPBAR
 extension TranslationViewController: ContainsTopBar {
-    // Segue
+    // Perform Segue
     func didClickSettings() {
         performSegue(withIdentifier: .segueToSettingsView, sender: nil)
     }
@@ -167,15 +187,13 @@ extension TranslationViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         activeField = textView
         textView.text = ""
-        if textView.textColor == UIColor.placeholderText {
-            textView.textColor = UIColor.darkGreen
-        }
+        textView.textColor = UIColor.darkGreen
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         activeField = nil
         if textView.text.isEmpty {
-            addPlaceHolder()
+            placeHolderSetup()
         } else if textView.tag == 0, let text = textView.text {
             getTranslationService(translationFrom: .current, text: text)
         } else if textView.tag == 1, let text = textView.text {
@@ -184,6 +202,7 @@ extension TranslationViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // When the user clicks the return button
         if text == "\n" {
             textView.resignFirstResponder()
             return false
@@ -209,7 +228,7 @@ extension TranslationViewController {
     }
     
     func deregisterFromKeyboardNotifications() {
-        // Removing notifies on keyboard appearing
+        // Removing notifies on keyboard disappearing
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -231,10 +250,12 @@ extension TranslationViewController {
         }
         let bottomOfTextField = activeField.convert(activeField.bounds, to: self.view).maxY
         let topOfKeyboard = self.view.frame.height - keyboardSize.height
+        
         // if the bottom of Textfield is below the top of keyboard, move up
         if bottomOfTextField > topOfKeyboard {
             shouldMoveViewUp = true
         }
+        
         if shouldMoveViewUp {
             let heightTabBar = self.tabBarController?.tabBar.frame.height ?? 49.0
             self.view.frame.origin.y = 0 - keyboardSize.height + heightTabBar
@@ -251,7 +272,7 @@ extension TranslationViewController {
         self.scrollView.scrollIndicatorInsets = contentInsets
         self.view.endEditing(true)
         self.scrollView.isScrollEnabled = false
-
+        
         self.view.frame.origin.y = 0
     }
 }

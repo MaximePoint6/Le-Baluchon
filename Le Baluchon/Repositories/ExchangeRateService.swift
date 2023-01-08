@@ -22,7 +22,7 @@ class ExchangeRateService {
     
     /// Function performing a network call in order to obtain the conversion of an amount.
     /// - Parameters:
-    ///   - conversionFrom: Indicate the city / country from which the conversion must be done (type: current or destination).
+    ///   - conversionFrom: Indicate the city / country from which the conversion must be done (current or destination).
     ///   - amount: Amount to be converted.
     ///   - callback: Callback returning ServiceError? and a Weather?.
     func getExchangeRateService(conversionFrom: CityType,

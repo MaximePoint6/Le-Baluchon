@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */; };
 		CA36C24E2954BF3400F2952E /* TitledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24D2954BF3400F2952E /* TitledTextField.swift */; };
-		CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */; };
+		CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift */; };
 		CA6635472964727900EE5152 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6635462964727900EE5152 /* CustomView.swift */; };
 		CA775AB82965DF070074E5F6 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA775AB72965DF070074E5F6 /* SpinnerViewController.swift */; };
 		CA8E63E0292AA67E00CF0440 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63DF292AA67E00CF0440 /* Weather.swift */; };
@@ -89,7 +89,7 @@
 		CAFD20CD294C764600B96D52 /* WeatherComponentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAFD20CB294C764600B96D52 /* WeatherComponentView.xib */; };
 		CAFD20D0294CAD8C00B96D52 /* TopBarComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD20CF294CAD8C00B96D52 /* TopBarComponentView.swift */; };
 		CAFD20D2294CADA600B96D52 /* TopBarComponentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAFD20D1294CADA600B96D52 /* TopBarComponentView.xib */; };
-		CAFD20D5294CB8A600B96D52 /* ContainsTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD20D4294CB8A600B96D52 /* ContainsTopBar.swift */; };
+		CAFD20D5294CB8A600B96D52 /* ContainsTopBar+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD20D4294CB8A600B96D52 /* ContainsTopBar+Protocol.swift */; };
 		CAFF66C8295F3BEC00CCA986 /* CountryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFF66C7295F3BEC00CCA986 /* CountryService.swift */; };
 		CAFF66CA2961D12600CCA986 /* ExchangeRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFF66C92961D12600CCA986 /* ExchangeRateService.swift */; };
 		CAFF66CC2961FA4900CCA986 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFF66CB2961FA4900CCA986 /* ExchangeRate.swift */; };
@@ -109,7 +109,7 @@
 /* Begin PBXFileReference section */
 		CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 		CA36C24D2954BF3400F2952E /* TitledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledTextField.swift; sourceTree = "<group>"; };
-		CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainsOnBoardingCollectionView.swift; sourceTree = "<group>"; };
+		CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContainsOnBoardingCollectionView+Protocol.swift"; sourceTree = "<group>"; };
 		CA6635462964727900EE5152 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		CA775AB72965DF070074E5F6 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		CA8E63DF292AA67E00CF0440 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		CAFD20CB294C764600B96D52 /* WeatherComponentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherComponentView.xib; sourceTree = "<group>"; };
 		CAFD20CF294CAD8C00B96D52 /* TopBarComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarComponentView.swift; sourceTree = "<group>"; };
 		CAFD20D1294CADA600B96D52 /* TopBarComponentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopBarComponentView.xib; sourceTree = "<group>"; };
-		CAFD20D4294CB8A600B96D52 /* ContainsTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainsTopBar.swift; sourceTree = "<group>"; };
+		CAFD20D4294CB8A600B96D52 /* ContainsTopBar+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContainsTopBar+Protocol.swift"; sourceTree = "<group>"; };
 		CAFF66C7295F3BEC00CCA986 /* CountryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryService.swift; sourceTree = "<group>"; };
 		CAFF66C92961D12600CCA986 /* ExchangeRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateService.swift; sourceTree = "<group>"; };
 		CAFF66CB2961FA4900CCA986 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
@@ -428,8 +428,8 @@
 		CAFD20D3294CB83D00B96D52 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				CAFD20D4294CB8A600B96D52 /* ContainsTopBar.swift */,
-				CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView.swift */,
+				CAFD20D4294CB8A600B96D52 /* ContainsTopBar+Protocol.swift */,
+				CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -622,8 +622,8 @@
 				CAE624D4296580C800E2FCDA /* NotificationName+extension.swift in Sources */,
 				CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */,
 				CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */,
-				CAFD20D5294CB8A600B96D52 /* ContainsTopBar.swift in Sources */,
-				CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView.swift in Sources */,
+				CAFD20D5294CB8A600B96D52 /* ContainsTopBar+Protocol.swift in Sources */,
+				CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift in Sources */,
 				CAFF66CA2961D12600CCA986 /* ExchangeRateService.swift in Sources */,
 				CAAF442A295220140071BDD8 /* OnBoardingViewController.swift in Sources */,
 				CAF6962A2963561A0059779A /* TabBarController.swift in Sources */,

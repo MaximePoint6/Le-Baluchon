@@ -30,22 +30,17 @@ class OnBoardingCollectionViewCell: UICollectionViewCell {
         slideImageView.image = slide.image
         slideTitleLabel.text = slide.title
         slideDescriptionLabel.text = slide.description
-        
-        // textField
+        // TextField
         slideTextField.isHidden = slide.textFieldIsHidden
         slideTextField.placeholder = slide.placeholderTextField
         slideTextField.title = slide.placeholderTextField ?? ""
-        
         if UserSettings.userName != "the.traveler".localized() {
             slideTextField.text = UserSettings.userName
         }
-        
         // CityValidatedLabel
         slideCityValidatedLabel.isHidden = true
-        
         // Button
         slideSearchCityButton.isHidden = slide.searchCityButtonIsHidden
         slideSearchCityButton.setTitle(slide.textSearchCityButton, for: .normal)
     }
-    
 }

@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+// This file is used to replace the default system font with a custom font.
+
 struct AppFontName {
     static let regular = "Montserrat-Regular"
     static let bold = "Montserrat-Bold"
@@ -15,6 +17,7 @@ struct AppFontName {
     static let medium = "Montserrat-Medium"
     static let italic = "Montserrat-Italic"
 }
+
 // customise font
 extension UIFontDescriptor.AttributeName {
     static let nsctFontUIUsage = UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")

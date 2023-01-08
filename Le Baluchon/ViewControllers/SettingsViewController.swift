@@ -109,14 +109,14 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    /// Function to refresh the screen with the updated userPicture, userName, settingsTableView and temperatureUnit.
+    /// Function to refresh the screen with the updated userSettings
     private func setupUserSettings() {
         // UserPictureButton
         if let userPicture = UserSettings.userPicture {
             addImageInUserPicture(image: userPicture)
         } else {
             userPictureButton.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill"),
-                                                for: UIControl.State.normal)
+                                                 for: UIControl.State.normal)
         }
         // TextField
         userName.text = UserSettings.userName
@@ -217,22 +217,22 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
                        message: "image.picker.alert.user.message".localized(),
                        actions: [cameraAction, libraryAction, cancelAction], preferredStyle: .actionSheet)
     }
-
+    
     /// Function verifying and/or requesting authorizations for the use of the camera
     private func cameraAuthorization() {
         // Authorization for Camera
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized: // The user has previously granted access to the camera.
-            self.imagePicker(sourceType: .camera)
-        case .notDetermined: // The user has not yet been asked for camera access.
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    DispatchQueue.main.async {
-                        self.imagePicker(sourceType: .camera)
+            case .authorized: // The user has previously granted access to the camera.
+                self.imagePicker(sourceType: .camera)
+            case .notDetermined: // The user has not yet been asked for camera access.
+                AVCaptureDevice.requestAccess(for: .video) { granted in
+                    if granted {
+                        DispatchQueue.main.async {
+                            self.imagePicker(sourceType: .camera)
+                        }
                     }
                 }
-            }
-        case .denied: // The user has previously denied access.
+            case .denied: // The user has previously denied access.
                 let settingsAction = UIAlertAction(title: "settings".localized(), style: .default) { _ in
                     DispatchQueue.main.async {
                         if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
@@ -244,29 +244,23 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
                 self.alertUser(title: "settings".localized(),
                                message: "no.permission.access.camera.message".localized(),
                                actions: [settingsAction, cancelAction])
-        case .restricted: // The user can't grant access due to restrictions.
-            return
-        @unknown default:
-            return
+            case .restricted: // The user can't grant access due to restrictions.
+                return
+            @unknown default:
+                return
         }
     }
-
+    
     /// Function verifying and/or requesting authorizations for the use of the library
     private func photosAutorization() {
         // Authorization for Photos
-        var authorizationStatus: PHAuthorizationStatus
-        if #available(iOS 14, *) {
-            authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            authorizationStatus = PHPhotoLibrary.authorizationStatus()
-        }
+        let authorizationStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch authorizationStatus {
-        case .authorized: // The user has previously granted access to the photo.
-            self.imagePicker(sourceType: .photoLibrary)
-        case .limited:
-            self.imagePicker(sourceType: .photoLibrary)
-        case .notDetermined: // The user has not yet been asked for photos access.
-            if #available(iOS 14, *) {
+            case .authorized: // The user has previously granted access to the photo.
+                self.imagePicker(sourceType: .photoLibrary)
+            case .limited:
+                self.imagePicker(sourceType: .photoLibrary)
+            case .notDetermined: // The user has not yet been asked for photos access.
                 PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                     DispatchQueue.main.async {
                         if status == .authorized {
@@ -276,14 +270,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
                         }
                     }
                 }
-            } else {
-                PHPhotoLibrary.requestAuthorization { status in
-                    if status == .authorized {
-                        self.imagePicker(sourceType: .photoLibrary)
-                    }
-                }
-            }
-        case .denied: // The user has previously denied access.
+            case .denied: // The user has previously denied access.
                 let settingsAction = UIAlertAction(title: "settings".localized(), style: .default) { _ in
                     DispatchQueue.main.async {
                         if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
@@ -295,13 +282,13 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
                 self.alertUser(title: "settings".localized(),
                                message: "no.permission.access.library.message".localized(),
                                actions: [settingsAction, cancelAction])
-        case .restricted: // The user can't grant access due to restrictions.
-            return
-        @unknown default:
-            fatalError()
+            case .restricted: // The user can't grant access due to restrictions.
+                return
+            @unknown default:
+                return
         }
     }
-
+    
     private func imagePicker(sourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
@@ -324,5 +311,5 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
         userPictureButton.setImage(image, for: .normal)
         userPictureButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
     }
-
+    
 }

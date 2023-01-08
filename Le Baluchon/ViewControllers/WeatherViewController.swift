@@ -68,6 +68,8 @@ class WeatherViewController: UIViewController {
         screenDescription.text = "weather.description".localized()
     }
     
+    /// Function performing another function that runs a network call in order to get the city weather forecast.
+    /// - Parameter cityType: Desired city to retrieve his weather (type: current or destination).
     private func getWeatherCities(cityType: CityType) {
         // Add Spinner during loading
         let spinner = SpinnerViewController()

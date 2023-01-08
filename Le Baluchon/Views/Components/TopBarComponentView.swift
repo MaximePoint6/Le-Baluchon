@@ -31,17 +31,17 @@ class TopBarComponentView: UIView {
         delegate?.didClickSettings()
     }
     
-    // swiftlint:disable force_cast
     func viewInit() {
-        let viewFromXib = Bundle.main.loadNibNamed("TopBarComponentView", owner: self, options: nil)![0] as! UIView
+        let identifier = String(describing: TopBarComponentView.self)
+        let viewFromXib = Bundle.main.loadNibNamed(identifier, owner: self, options: nil)![0] as! UIView
         viewFromXib.frame = self.bounds
         addSubview(viewFromXib)
     }
-    // swiftlint:enable force_cast
     
     func setupUI() {
+        // userFisrtName
         userfirstName.text = UserSettings.userName.capitalized
-        
+        // userPicture
         if let userPicture = UserSettings.userPicture {
             self.userPicture.setImage(userPicture, for: .normal)
             self.userPicture.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
@@ -51,9 +51,7 @@ class TopBarComponentView: UIView {
         }
         userPicture.layer.masksToBounds = true
         userPicture.layer.cornerRadius = 25
-        //        userPicture.layer.borderColor = UIColor.navyBlue.cgColor
-        //        userPicture.layer.borderWidth = 1.0
-        
+        // welcome / greeting message
         let hour = Calendar.current.component(.hour, from: Date())
         if hour > 5 && hour <= 12 {
             helloLabel.text = "good.morning,".localized()

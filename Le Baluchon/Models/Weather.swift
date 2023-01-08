@@ -72,22 +72,20 @@ struct Weather: Decodable {
     
     /// Returns the main weather description as a String type. If this description does't exist, it returns "-".
     var mainWeatherDescription: String {
-        if self.weather.count > 0 {
-            if let weatherDescription = self.weather[0].description {
-                return weatherDescription
-            }
+        if self.weather.count > 0, let weatherDescription = self.weather[0].description {
+            return weatherDescription
+        } else {
+            return "-"
         }
-        return "-"
     }
     
     /// Returns the main weather icon as a optional String type. If this icon does't exist, it returns nil.
     var mainWeatherIcon: String? {
-        if self.weather.count > 0 {
-            if let weatherIcon = self.weather[0].icon {
-                return weatherIcon
-            }
+        if self.weather.count > 0, let weatherIcon = self.weather[0].icon {
+            return weatherIcon
+        } else {
+            return nil
         }
-        return nil
     }
     
     
@@ -108,7 +106,6 @@ struct Weather: Decodable {
         guard let tempWithPreferredUnit = self.tempWithPreferredUnit else {
             return "-\(UserSettings.temperatureUnit.unit)"
         }
-        // Temperature unit in "temp" variable is Kelvin by default
         return "\(tempWithPreferredUnit)\(UserSettings.temperatureUnit.unit)"
     }
     
@@ -120,6 +117,6 @@ struct Weather: Decodable {
             return "-"
         }
     }
-
+    
     
 }

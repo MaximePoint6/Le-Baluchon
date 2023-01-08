@@ -27,21 +27,17 @@ class WeatherComponentView: UIView {
         setupUI()
     }
     
-    // swiftlint:disable force_cast
     private func viewInit() {
-        let viewFromXib = Bundle.main.loadNibNamed("WeatherComponentView", owner: self, options: nil)![0] as! UIView
+        let identifier = String(describing: WeatherComponentView.self)
+        let viewFromXib = Bundle.main.loadNibNamed(identifier, owner: self, options: nil)![0] as! UIView
         viewFromXib.frame = self.bounds
         addSubview(viewFromXib)
     }
-    // swiftlint:enable force_cast
     
     private func setupUI() {
         // cornerRadius & border
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 20
-//        self.layer.borderColor = UIColor.black.cgColor
-//        self.layer.borderWidth = 1.0
-        
         // temperatureLabel
         temperatureLabel.adjustsFontSizeToFitWidth = true
         temperatureLabel.minimumScaleFactor = 0.5

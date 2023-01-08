@@ -8,20 +8,25 @@
 import Foundation
 import UIKit
 
-// swiftlint:disable force_cast
-
 extension UIView {
+    
     @IBInspectable var cornerRadius: CGFloat {
         get { return self.cornerRadius }
         set { self.layer.cornerRadius = newValue }
     }
     
-    // sliding the view depending on the keyboard
+    /// Function activating the reception of notifications when a keyboard appears, and executing another function to slide the view above the keyboard.
     func bindToKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillChange(_:)),
                                                name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
+    /// Function deactivating the reception of notifications when a keyboard appears.
+    func unbindToKeyboard() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    /// Sliding the view depending on the keyboard
     @objc func keyboardWillChange(_ notification: NSNotification) {
         let duration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
@@ -38,5 +43,3 @@ extension UIView {
     }
 
 }
-
-// swiftlint:enable force_cast
