@@ -19,6 +19,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     
     var activeField: UITextField?
     
+    // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -29,7 +30,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         // UI & User Settings
         setupUI()
         setupUserSettings()
-        // Notification when the user has changed a city or language in his settings
+        // Notification when the user has changed a city or language in his settings.
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.refreshAfterCityNotification(notification:)),
                                                name: .newCity, object: nil)
@@ -42,16 +43,17 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         topBar.setupUI()
-        // Notification for keyboard
+        // Add notification for keyboard
         registerForKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // Notification for remove keyboard
+        // Remove notification for remove keyboard
         deregisterFromKeyboardNotifications()
     }
     
+    // MARK: IBAction
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
         dismissKeyBoard()
     }
@@ -82,6 +84,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         }
     }
     
+    // MARK: private function
     @objc private func refreshAfterLanguageNotification(notification: Notification) {
         setupUI()
     }

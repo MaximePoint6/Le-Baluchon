@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CityType {
+enum CityType: CaseIterable {
     case current
     case destination
 }

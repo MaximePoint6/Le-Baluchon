@@ -21,6 +21,7 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var activeField: UITextView?
     
+    // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -33,7 +34,7 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         addPlaceHolder()
         languageCheck()
         setupUserSettings()
-        // Notification when the user has changed a city or language or temperature unit in his settings
+        // Notification when the user has changed a city or language or temperature unit in his settings.
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.refreshAfterCityNotification(notification:)),
                                                name: .newCity,
@@ -57,10 +58,12 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         deregisterFromKeyboardNotifications()
     }
     
+    // MARK: IBAction
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
         dismissKeyBoard()
     }
     
+    // MARK: private function
     @objc private func refreshAfterLanguageNotification(notification: Notification) {
         setupUI()
     }

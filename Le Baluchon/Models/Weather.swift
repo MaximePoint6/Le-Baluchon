@@ -9,6 +9,7 @@ import Foundation
 
 struct Weather: Decodable {
     
+    // MARK: Data retrieved from the network call
     var coord: Coord?
     var weather: [WeatherDescription]
     var base: String?
@@ -66,6 +67,9 @@ struct Weather: Decodable {
     
     
     // MARK: Tools for ViewControllers
+    /// Url base to get the weather icon
+    static var iconUrlBase = "https://openweathermap.org/img/wn/%@@2x.png"
+    
     /// Returns the main weather description as a String type. If this description does't exist, it returns "-".
     var mainWeatherDescription: String {
         if self.weather.count > 0 {
@@ -99,6 +103,7 @@ struct Weather: Decodable {
         }
     }
     
+    /// Returns the temperature with its unit according to the user's preference.
     var tempLabel: String {
         guard let tempWithPreferredUnit = self.tempWithPreferredUnit else {
             return "-\(UserSettings.temperatureUnit.unit)"
@@ -107,6 +112,7 @@ struct Weather: Decodable {
         return "\(tempWithPreferredUnit)\(UserSettings.temperatureUnit.unit)"
     }
     
+    /// Returns the date in the correct format according to the user language.
     var localDate: String {
         if let timeZone = self.timezone {
             return DateFormater.getDate(timeZone: timeZone)

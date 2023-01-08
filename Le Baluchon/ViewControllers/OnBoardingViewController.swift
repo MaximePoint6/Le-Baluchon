@@ -14,6 +14,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
+    /// Returns the current page / slide of OnBoarding Screen, and changes the button title of the slide
     private var currentPage = 0 {
         didSet {
             // The current page of the pageControl is equal to currentpage
@@ -26,6 +27,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    /// Checks if the information requested in all the slides is filled in, returns true or false
     private var slideInformationIsOk: Bool {
         if UserSettings.currentCity != nil &&
             UserSettings.destinationCity != nil &&
@@ -41,17 +43,18 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Delegate
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        // tapGestureRecognizer
         tapGestureRecognizer.delegate = self
+        
+        // TapGestureRecognizer
         self.collectionView?.addGestureRecognizer(tapGestureRecognizer)
         
-        // button
+        // Button title
         button.setTitle("next".localized(), for: .normal)
         
-        // sliding the view depending on the keyboard
+        // Sliding the view when the keyboard appears
         self.view.bindToKeyboard()
     }
     
@@ -60,6 +63,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         refresh()
     }
     
+    // Prepare Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == .segueToWeatherView {
             _ = segue.destination as? SettingsViewController
@@ -72,15 +76,17 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     // MARK: IBAction
+    /// When the user click on next button
     @IBAction func nextButtonClicked(_ sender: Any) {
         dismissKeyBoard()
         if currentPage < OnBoardingSlide.slides.count - 1 {
+            // User is not on last slide of onBoarding Screen :
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         } else {
             if slideInformationIsOk {
-                // go to next page
+                // If the information requested in all the slides is filled :
                 UserSettings.onBoardingScreenWasShown = true
                 performSegue(withIdentifier: .segueToWeatherView, sender: nil)
             } else {
@@ -89,16 +95,19 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    /// When the keyboard is displayed and the user taps elsewhere on the screen, the keyboard disappears.
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
         dismissKeyBoard()
     }
     
     
     // MARK: private function
+    /// Refresh the collection View with its new data
     private func refresh() {
         collectionView.reloadData()
     }
     
+    /// Dismiss Keyboard
     private func dismissKeyBoard() {
         collectionView.endEditing(true)
     }
@@ -114,32 +123,38 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
         return OnBoardingSlide.slides.count
     }
     
+    // creation of slides
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnBoardingCollectionViewCell.identifier,
                                                          for: indexPath) as? OnBoardingCollectionViewCell {
+            // Setup
             cell.setup(OnBoardingSlide.slides[indexPath.row])
+            
+            // Delegate
             cell.delegate = self
             cell.slideTextField.delegate = self
             
-            // CityValidatedLabel and button
+            // CityValidatedLabel and Button
             let checkmarkImage = NSTextAttachment()
             checkmarkImage.image = UIImage(systemName: "checkmark.circle")?.withTintColor(UIColor.darkGreen)
             var myLabel = ""
             let fullString = NSMutableAttributedString(string: "")
             
+            // If currentCity and destination is not nil, then we change the UI
             if indexPath.row == 2, UserSettings.currentCity != nil {
                 myLabel = String(format: "city.validated.label".localized(),
                                  UserSettings.currentCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
                 cell.slideCityValidatedLabel.isHidden = false
-                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal) // Button
+                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal)
             } else if indexPath.row == 3, UserSettings.destinationCity != nil {
                 myLabel = String(format: "city.validated.label".localized(),
                                  UserSettings.destinationCity?.getLocalName(languageKeys: UserSettings.userLanguage) ?? "-")
                 cell.slideCityValidatedLabel.isHidden = false
-                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal) // Button
+                cell.slideSearchCityButton.setTitle("search.other.city".localized(), for: .normal)
             }
             
+            // Add the text in slideCityValidatedLabel
             fullString.append(NSAttributedString(attachment: checkmarkImage))
             fullString.append(NSAttributedString(string: myLabel))
             cell.slideCityValidatedLabel.attributedText = fullString
@@ -154,9 +169,11 @@ extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Return the size of the collectionView
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
+    // When user scrolls
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         dismissKeyBoard()
         // Width of scrollview on screen
@@ -189,10 +206,9 @@ extension OnBoardingViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // Save username in UserSettings
         if let username = textField.text {
-            UserSettings.userName = username
-            refresh()
+            UserSettings.userName = username // Save username in UserSettings
+            refresh() // Refresh so that the following slides update
         }
     }
 }

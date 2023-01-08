@@ -29,16 +29,14 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     private var languagesList: [Languages] = (Languages.allCases.map { $0 }).sorted { $0.description < $1.description }
     
     
-    // MARK: override funcction
+    // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
-        // tapGestureRecognizer
+        // Delegate and DataSource
         tapGestureRecognizer.delegate = self
         tapGestureRecognizer.cancelsTouchesInView = false
-        // settings table view
         self.settingsTableView.dataSource = self
         self.settingsTableView.delegate = self
-        // userName
         userName.delegate = self
     }
     
@@ -71,6 +69,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         UserSettings.temperatureUnit = temperatureUnit
         NotificationCenter.default.post(name: .newTemperatureUnit, object: nil)
     }
+    
     @IBAction func didClickUserPictureButton(_ sender: Any) {
         showImagePickerOption()
     }
@@ -97,10 +96,10 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         // UserPicture
         userPictureButton.layer.masksToBounds = true
         userPictureButton.layer.cornerRadius = 50
-        // textField
+        // userNameTextField
         userName.placeholder = "username".localized()
         userName.title = "username".localized()
-        // SegmentControl
+        // temperature Unit, SegmentControl
         tempUnitLabel.text = "temp.unit.label".localized()
         temperatureUnitSegmentedControl.removeAllSegments()
         TemperatureUnit.allCases.forEach {
@@ -110,15 +109,16 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    /// Function to refresh the screen with the updated userPicture, userName, settingsTableView and temperatureUnit.
     private func setupUserSettings() {
-        // userPictureButton
+        // UserPictureButton
         if let userPicture = UserSettings.userPicture {
             addImageInUserPicture(image: userPicture)
         } else {
             userPictureButton.setBackgroundImage(UIImage(systemName: "person.crop.circle.fill"),
                                                 for: UIControl.State.normal)
         }
-        // textField
+        // TextField
         userName.text = UserSettings.userName
         // TableView
         settingsTableView.reloadData()
@@ -130,6 +130,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    /// Dismiss Keyboard
     private func dismissKeyBoard() {
         self.view.endEditing(true)
     }
@@ -141,16 +142,16 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
 // MARK: UITableView
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 1 // Number of sections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 3 // Number of cells in each section
     }
     
+    // Add cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
-        let cityNotSpecified = "city.not.specified".localized()
         
         if indexPath.row == 0 {
             cell.textLabel?.text = "language".localized()
@@ -161,7 +162,7 @@ extension SettingsViewController: UITableViewDataSource {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
                     languageKeys: UserSettings.userLanguage)
             } else {
-                cell.detailTextLabel?.text = cityNotSpecified
+                cell.detailTextLabel?.text = "city.not.specified".localized()
             }
         } else if indexPath.row == 2 {
             cell.textLabel?.text = "destination.city".localized()
@@ -169,7 +170,7 @@ extension SettingsViewController: UITableViewDataSource {
                 cell.detailTextLabel?.text = city.getNameWithStateAndCountry(
                     languageKeys: UserSettings.userLanguage)
             } else {
-                cell.detailTextLabel?.text = cityNotSpecified
+                cell.detailTextLabel?.text = "city.not.specified".localized()
             }
         } else { }
         return cell
@@ -178,6 +179,7 @@ extension SettingsViewController: UITableViewDataSource {
 }
 
 extension SettingsViewController: UITableViewDelegate {
+    // When user clicks on a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             performSegue(withIdentifier: .segueToSearchLanguage, sender: nil)

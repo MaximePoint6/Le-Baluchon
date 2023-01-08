@@ -9,6 +9,7 @@ import Foundation
 
 struct City: Codable {
 
+    // MARK: Data retrieved from the network call
     var name: String?
     var localNames: LocalNames?
     var lat: Double?
@@ -41,16 +42,17 @@ struct City: Codable {
         var ascii: String?
         var en: String?
         var fr: String?
+        var fi: String?
     }
     
+    
     // MARK: Tools for ViewControllers
-
     /// Variable returning the state and the country of the city (or just the not nil one, in that order).
     var stateAndCountryDetails: String {
         return [self.state, self.country].compactMap { $0 }.joined(separator: ", ")
     }
     
-    /// Function returning the local name of the city, with its state and country (or just those not nil, in that order).
+    /// Function returning the local name of the city, with its state and country (or just those not nil, in that order)
     /// - Parameter languageKeys: Desired language of the result.
     /// - Returns: Local name of the city, with its state and country.
     func getNameWithStateAndCountry(languageKeys: Languages) -> String {

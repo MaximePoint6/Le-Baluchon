@@ -12,6 +12,7 @@ enum TemperatureUnit: String, CaseIterable, Codable {
     case Celsius
     case Fahrenheit
     
+    /// Returns the temperature unit symbol.
     var unit: String {
         switch self {
             case .Kelvin: return "K"

@@ -19,29 +19,36 @@ class SearchCityViewController: UIViewController {
     private var datasOfCityTableView = [City]()
     var cityType: CityType = .current
     
+    // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Delegate and dataSource
         self.searchBar.delegate = self
-        // city table view
         self.cityTableView.dataSource = self
         self.cityTableView.delegate = self
         // UI
         setupUI()
     }
     
+    // MARK: IBAction
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
     }
     
+    // MARK: private function
     private func setupUI() {
-        // cancelButton
         cancelButton.setTitle("cancel".localized(), for: .normal)
-        // Searchbar
         searchBar.placeholder = "city".localized()
     }
     
+    
+    /// Function executing another function that runs a network call in order to get a list of cities,
+    /// named according to the city sent in function parameters (or starting with the same letters).
+    /// Finally, once the data is collected, it adds it to the tableView
+    /// - Parameter city: Part or full name of a city.
     private func getCitiesList(city: String) {
         CityService.shared.getCities(city: city) { error, cities in
+            // Get Cities or Alert
             guard let cities = cities, error == nil else {
                 if error == ServiceError.noData {
                     return
@@ -61,6 +68,8 @@ class SearchCityViewController: UIViewController {
         }
     }
     
+    /// Function performing another function that runs a network call in order to get the city country details.
+    /// - Parameter cityType: Desired city to retrieve his country details (type: current or destination).
     private func getCountryDetails(cityType: CityType) {
         CountryService.shared.getCountryDetails(cityType: cityType) { error, countryDetails in
             guard let countryDetails = countryDetails, error == nil else {
@@ -78,11 +87,13 @@ class SearchCityViewController: UIViewController {
                 }
             }
             self.saveCountryDetail(cityType: cityType, countryDetails: countryDetails)
-            // Notification when the user has changed a city in his settings
-            NotificationCenter.default.post(name: .newCity, object: nil)
         }
     }
     
+    /// Function saves the country details in UserSettings
+    /// - Parameters:
+    ///   - cityType: Desired city to save his country details (type: current or destination).
+    ///   - countryDetails: Country details data
     private func saveCountryDetail(cityType: CityType, countryDetails: City.CountryDetails) {
         switch cityType {
             case .current:
@@ -90,16 +101,19 @@ class SearchCityViewController: UIViewController {
             case .destination:
                 UserSettings.destinationCity?.countryDetails = countryDetails
         }
+        // Notification when the user has changed a city in his settings and when the saving is finished
+        NotificationCenter.default.post(name: .newCity, object: nil)
     }
     
 }
 
 // MARK: UISearchBar
 extension SearchCityViewController: UISearchBarDelegate {
+    // When user adds a text in searchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !(searchBar.text?.isEmpty ?? true) {
             getCitiesList(city: searchBar.text!)
-        } else { }
+        }
     }
 }
 
@@ -107,23 +121,23 @@ extension SearchCityViewController: UISearchBarDelegate {
 // MARK: UITableView
 extension SearchCityViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 1 // Number of sections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datasOfCityTableView.count // number of cells in each section
+        return datasOfCityTableView.count // Number of cells in each section
     }
     
+    // Add cells with cities
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var city: City
         var cell: UITableViewCell
         
         cell = tableView.dequeueReusableCell(withIdentifier: cityCellIdentifier, for: indexPath)
-        if datasOfCityTableView.count == 0 {
-            return cell
-        }
-        city = datasOfCityTableView[indexPath.row]
+        if datasOfCityTableView.count == 0 { return cell }
         
+        // UI
+        city = datasOfCityTableView[indexPath.row]
         cell.textLabel?.text = city.getLocalName(languageKeys: UserSettings.userLanguage)
         cell.detailTextLabel?.text = city.stateAndCountryDetails
         
@@ -132,16 +146,18 @@ extension SearchCityViewController: UITableViewDataSource {
 }
 
 extension SearchCityViewController: UITableViewDelegate {
+    // When user clicks on a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Save the city that the user has clicked
         switch cityType {
             case .current:
                 UserSettings.currentCity = datasOfCityTableView[indexPath.row]
-                getCountryDetails(cityType: cityType)
-                dismiss(animated: true)
             case .destination:
                 UserSettings.destinationCity = datasOfCityTableView[indexPath.row]
-                getCountryDetails(cityType: cityType)
-                dismiss(animated: true)
         }
+        // Get the country details of the city
+        getCountryDetails(cityType: cityType)
+        // Dismiss Screen
+        dismiss(animated: true)
     }
 }

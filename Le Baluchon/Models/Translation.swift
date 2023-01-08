@@ -8,6 +8,8 @@
 import Foundation
 
 struct Translation: Codable {
+    
+    // MARK: Data retrieved from the network call
     var translations: [TransalationDetails]
     
     struct TransalationDetails: Codable {

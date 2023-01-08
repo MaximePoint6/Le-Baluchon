@@ -15,18 +15,19 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var destinationCityWeather: WeatherComponentView!
     @IBOutlet weak var screenDescription: UILabel!
     
-    private var currentCityWeatherDateRefresh: Date?
-    private var destinationCityWeatherDateRefresh: Date?
+    private var lastRefreshOfCurrentCityWeather: Date?
+    private var lastRefreshOfDestinationCityWeather: Date?
     private let timeForRefreshInSeconds: Double = 15 * 60
     
+    // MARK: override function
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
         topBar.delegate = self
         // UI
         setupUI()
-        refreshScreen()
-        // Notification when the user has changed a city or language or temperature unit in his settings
+        refreshWeather()
+        // Notification when the user has changed a city, language or temperature unit in his settings.
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.refreshAfterNotification(notification:)),
                                                name: .newCity,
@@ -44,21 +45,22 @@ class WeatherViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         topBar.setupUI()
-        // Screen refresh every 15min or if a city changes (see notification)
-        if let currentCityWeatherDateRefresh = currentCityWeatherDateRefresh,
-           let destinationCityWeatherDateRefresh = destinationCityWeatherDateRefresh,
-           currentCityWeatherDateRefresh + timeForRefreshInSeconds < Date() ||
-            destinationCityWeatherDateRefresh + timeForRefreshInSeconds < Date() {
-            refreshScreen()
+        // Screen refreshes every 15min minimum, or if a city changes (see notification).
+        if let lastRefreshOfCurrentCityWeather = lastRefreshOfCurrentCityWeather,
+           let lastRefreshOfDestinationCityWeather = lastRefreshOfDestinationCityWeather,
+           lastRefreshOfCurrentCityWeather + timeForRefreshInSeconds < Date() ||
+            lastRefreshOfDestinationCityWeather + timeForRefreshInSeconds < Date() {
+            refreshWeather()
         }
     }
     
+    // MARK: private function
     @objc private func refreshAfterNotification(notification: Notification) {
         setupUI()
-        refreshScreen()
+        refreshWeather()
     }
     
-    private func refreshScreen() {
+    private func refreshWeather() {
         getWeatherCities(cityType: .current)
     }
     
@@ -71,25 +73,20 @@ class WeatherViewController: UIViewController {
         let spinner = SpinnerViewController()
         addSpinnerView(spinner: spinner)
         
+        // Get Current or Destination City
         var city: City
         switch cityType {
             case .current:
-                // Get Current City
-                guard let currentCity = UserSettings.currentCity else {
-                    return
-                }
+                guard let currentCity = UserSettings.currentCity else { return }
                 city = currentCity
             case .destination:
-                // Get Destination City
-                guard let destinationCity = UserSettings.destinationCity else {
-                    return
-                }
+                guard let destinationCity = UserSettings.destinationCity else { return }
                 city = destinationCity
         }
         
-        // Function making network call
+        // Function executing the network call
         WeatherService.shared.getWeather(cityType: cityType) { error, weather in
-            // Remove Spinner
+            // Remove Spinner because the network call was answered
             self.removeSpinnerView(spinner: spinner)
             
             // Get Weather or Alert
@@ -101,10 +98,14 @@ class WeatherViewController: UIViewController {
                 self.alertUser(title: "error".localized(), message: error!.rawValue.localized(), actions: [retry, ok])
                 return
             }
+            
+            // Save the date of last weather Refresh
             switch cityType {
-                case .current: self.currentCityWeatherDateRefresh = Date()
-                case .destination: self.destinationCityWeatherDateRefresh = Date()
+                case .current: self.lastRefreshOfCurrentCityWeather = Date()
+                case .destination: self.lastRefreshOfDestinationCityWeather = Date()
             }
+            
+            // UI
             self.updateUI(cityType: cityType, city: city, weather: weather)
         }
     }
@@ -113,20 +114,19 @@ class WeatherViewController: UIViewController {
     private func updateUI(cityType: CityType, city: City, weather: Weather) {
         switch cityType {
             case .current:
-                self.currentCityWeather.cityNameLabel.text = city.getLocalName(languageKeys:
-                                                                                UserSettings.userLanguage)
+                self.currentCityWeather.cityNameLabel.text = city.getLocalName(languageKeys: UserSettings.userLanguage)
                 self.currentCityWeather.skyLabel.text = weather.mainWeatherDescription.capitalizedSentence
                 self.currentCityWeather.temperatureLabel.text = weather.tempLabel
                 self.currentCityWeather.localDate.text = weather.localDate
                 
                 if let weatherIcon = weather.mainWeatherIcon {
                     self.currentCityWeather.iconWeather.downloaded(
-                        from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
+                        from: String(format: Weather.iconUrlBase, weatherIcon))
                 } else {
                     self.currentCityWeather.iconWeather.image = UIImage.emptyImage
                 }
                 
-                //  // Get Weather Destination City
+                // Get Weather Destination City
                 self.getWeatherCities(cityType: .destination)
                 
             case .destination:
@@ -138,7 +138,7 @@ class WeatherViewController: UIViewController {
                 
                 if let weatherIcon = weather.mainWeatherIcon {
                     self.destinationCityWeather.iconWeather.downloaded(
-                        from: String(format: "https://openweathermap.org/img/wn/%@@2x.png", weatherIcon))
+                        from: String(format: Weather.iconUrlBase, weatherIcon))
                 } else {
                     self.destinationCityWeather.iconWeather.image = UIImage.emptyImage
                 }
@@ -151,7 +151,6 @@ class WeatherViewController: UIViewController {
 
 // MARK: TOPBAR
 extension WeatherViewController: ContainsTopBar {
-    // Segue
     func didClickSettings() {
         performSegue(withIdentifier: .segueToSettingsView, sender: nil)
     }
@@ -166,14 +165,15 @@ extension WeatherViewController: ContainsTopBar {
 
 // MARK: SpinnerView
 extension WeatherViewController {
+    /// Add the spinner
     private func addSpinnerView(spinner: SpinnerViewController) {
-        // Add the spinner view controller
         addChild(spinner)
         spinner.view.frame = view.frame
         view.addSubview(spinner.view)
         spinner.didMove(toParent: self)
     }
     
+    /// Remove the spinner
     private func removeSpinnerView(spinner: SpinnerViewController) {
         spinner.willMove(toParent: nil)
         spinner.view.removeFromSuperview()

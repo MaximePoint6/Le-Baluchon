@@ -8,6 +8,7 @@
 import Foundation
 
 struct ExchangeRate: Codable {
+    // MARK: Data retrieved from the network call
     var date: String?
     var result: Double?
     var success: Bool?

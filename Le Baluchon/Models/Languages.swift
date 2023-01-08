@@ -11,6 +11,7 @@ enum Languages: String, CaseIterable, Codable {
     case en
     case fr
     
+    /// Returns the language name
     var description: String {
         switch self {
             case .en: return "English"
