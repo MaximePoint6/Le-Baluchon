@@ -30,6 +30,7 @@
 		CAA2EBB629682B8F007DA518 /* TranslationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA2EBB529682B8F007DA518 /* TranslationTest.swift */; };
 		CAA2EBB829682C99007DA518 /* ExchangeRateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA2EBB729682C99007DA518 /* ExchangeRateTest.swift */; };
 		CAA2EBBA296831C0007DA518 /* CityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA2EBB9296831C0007DA518 /* CityTest.swift */; };
+		CAAA6481296C26FA00F13645 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAAA6483296C26FA00F13645 /* InfoPlist.strings */; };
 		CAAF441C294E3AB00071BDD8 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */; };
 		CAAF44202950D5DD0071BDD8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAAF44222950D5DD0071BDD8 /* Localizable.strings */; };
 		CAAF44252950E4A40071BDD8 /* SearchLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF44242950E4A40071BDD8 /* SearchLanguageViewController.swift */; };
@@ -129,6 +130,8 @@
 		CAA2EBB529682B8F007DA518 /* TranslationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTest.swift; sourceTree = "<group>"; };
 		CAA2EBB729682C99007DA518 /* ExchangeRateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateTest.swift; sourceTree = "<group>"; };
 		CAA2EBB9296831C0007DA518 /* CityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTest.swift; sourceTree = "<group>"; };
+		CAAA6482296C26FA00F13645 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CAAA6484296C26FD00F13645 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CAAF44212950D5DD0071BDD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CAAF44232950D5EB0071BDD8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -245,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				CAAF44222950D5DD0071BDD8 /* Localizable.strings */,
+				CAAA6483296C26FA00F13645 /* InfoPlist.strings */,
 			);
 			path = Localizables;
 			sourceTree = "<group>";
@@ -536,6 +540,7 @@
 				CAE624CD29648AA800E2FCDA /* Montserrat-Thin.ttf in Resources */,
 				CAE624C129648AA800E2FCDA /* Montserrat-ExtraLight.ttf in Resources */,
 				CACE54362927C25200A37F5A /* LaunchScreen.storyboard in Resources */,
+				CAAA6481296C26FA00F13645 /* InfoPlist.strings in Resources */,
 				CAFD20CD294C764600B96D52 /* WeatherComponentView.xib in Resources */,
 				CAE624CE29648AA800E2FCDA /* Montserrat-Bold.ttf in Resources */,
 				CACE54332927C25200A37F5A /* Assets.xcassets in Resources */,
@@ -663,6 +668,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		CAAA6483296C26FA00F13645 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAAA6482296C26FA00F13645 /* fr */,
+				CAAA6484296C26FD00F13645 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CAAF44222950D5DD0071BDD8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

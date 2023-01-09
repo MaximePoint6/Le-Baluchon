@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Le Baluchon
+
+  Created by Maxime Point on 09/01/2023.
+  
+*/
+
+"NSPhotoLibraryUsageDescription" = "This application uses the photo library to add user picture.";
+"NSCameraUsageDescription" = "This application uses the camera to take pictures and add them to user picture.";
+
