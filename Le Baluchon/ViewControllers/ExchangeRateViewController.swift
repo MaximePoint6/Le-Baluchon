@@ -10,6 +10,7 @@ import UIKit
 
 class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Outlets
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var topBar: TopBarComponentView!
     @IBOutlet weak var screenDescription: UILabel!
@@ -17,9 +18,10 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
     @IBOutlet weak var destinationAmount: TitledTextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // MARK: - Properties
     var activeField: UITextField?
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -53,7 +55,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         deregisterFromKeyboardNotifications()
     }
     
-    // MARK: IBAction
+    // MARK: - Actions
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
         dismissKeyBoard()
     }
@@ -82,7 +84,7 @@ class ExchangeRateViewController: UIViewController, UIGestureRecognizerDelegate 
         }
     }
     
-    // MARK: private function
+    // MARK: - Private functions
     @objc private func refreshAfterLanguageNotification(notification: Notification) {
         uiSetup()
     }

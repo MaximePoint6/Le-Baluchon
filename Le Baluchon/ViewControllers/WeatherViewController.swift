@@ -10,16 +10,18 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var topBar: TopBarComponentView!
     @IBOutlet weak var currentCityWeather: WeatherComponentView!
     @IBOutlet weak var destinationCityWeather: WeatherComponentView!
     @IBOutlet weak var screenDescription: UILabel!
     
+    // MARK: - Properties
     private var lastRefreshOfCurrentCityWeather: Date?
     private var lastRefreshOfDestinationCityWeather: Date?
     private let timeForRefreshInSeconds: Double = 15 * 60
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -54,7 +56,7 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    // MARK: private function
+    // MARK: - Private functions
     @objc private func refreshAfterNotification(notification: Notification) {
         setupUI()
         refreshWeather()

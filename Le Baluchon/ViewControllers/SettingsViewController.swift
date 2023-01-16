@@ -12,6 +12,7 @@ import PhotosUI
 
 class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Outlets
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var temperatureUnitSegmentedControl: UISegmentedControl!
     @IBOutlet weak var settingsTableView: UITableView!
@@ -20,6 +21,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var tempUnitLabel: UILabel!
     @IBOutlet weak var validateButton: UIButton!
     
+    // MARK: - Properties
     private let settingCellIdentifier = "SettingCell"
     
     private var datasOfCurrentCityTableView = [City]()
@@ -29,7 +31,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     private var languagesList: [Languages] = (Languages.allCases.map { $0 }).sorted { $0.description < $1.description }
     
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate and DataSource
@@ -55,7 +57,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    // MARK: IBAction
+    // MARK: - Actions
     @IBAction func temperatureUnitChange(_ sender: Any) {
         let temperatureUnitIndex = temperatureUnitSegmentedControl.selectedSegmentIndex
         let temperatureUnit: TemperatureUnit
@@ -89,7 +91,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    // MARK: private function
+    // MARK: - Private functions
     private func setupUI() {
         // ValidateButton
         validateButton.setTitle("validate".localized(), for: .normal)

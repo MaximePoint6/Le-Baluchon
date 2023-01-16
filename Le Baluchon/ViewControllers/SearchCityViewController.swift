@@ -11,15 +11,17 @@ import UIKit
 
 class SearchCityViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    // MARK: - Properties
     private let cityCellIdentifier = "CityCell"
     private var datasOfCityTableView = [City]()
     var cityType: CityType = .current
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate and dataSource
@@ -30,12 +32,12 @@ class SearchCityViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: IBAction
+    // MARK: - Actions
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
     }
     
-    // MARK: private function
+    // MARK: - Private functions
     private func setupUI() {
         cancelButton.setTitle("cancel".localized(), for: .normal)
         searchBar.placeholder = "city".localized()

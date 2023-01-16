@@ -9,12 +9,15 @@ import UIKit
 
 class TopBarComponentView: UIView {
     
+    // MARK: - Outlets
     @IBOutlet weak var userPicture: UIButton!
     @IBOutlet weak var helloLabel: UILabel!
     @IBOutlet weak var userfirstName: UILabel!
     
+    // MARK: - Properties
     var delegate: ContainsTopBar?
     
+    // MARK: - Override functions
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewInit()
@@ -27,10 +30,12 @@ class TopBarComponentView: UIView {
         setupUI()
     }
     
+    // MARK: - Actions
     @IBAction func settingsButton(_ sender: Any) {
         delegate?.didClickSettings()
     }
     
+    // MARK: - Functions
     func viewInit() {
         let identifier = String(describing: TopBarComponentView.self)
         let viewFromXib = Bundle.main.loadNibNamed(identifier, owner: self, options: nil)![0] as! UIView

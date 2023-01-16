@@ -9,9 +9,7 @@ import UIKit
 
 class OnBoardingCollectionViewCell: UICollectionViewCell {
     
-    // This transforms OnBoarding CollectionViewCell into a string (this avoids throwing strings in the code)
-    static let identifier = String(describing: OnBoardingCollectionViewCell.self)
-    
+    // MARK: - Outlets
     @IBOutlet weak var slideImageView: UIImageView!
     @IBOutlet weak var slideTitleLabel: UILabel!
     @IBOutlet weak var slideDescriptionLabel: UILabel!
@@ -19,12 +17,18 @@ class OnBoardingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var slideSearchCityButton: UIButton!
     @IBOutlet weak var slideCityValidatedLabel: UILabel!
     
+    // MARK: - Properties
     var delegate: ContainsOnBoardingCollectionView?
     
+    // This transforms OnBoarding CollectionViewCell into a string (this avoids throwing strings in the code)
+    static let identifier = String(describing: OnBoardingCollectionViewCell.self)
+    
+    // MARK: - Actions
     @IBAction func searchCityButtonClicked(_ sender: Any) {
         delegate?.didClickSearchCityButton()
     }
     
+    // MARK: - Functions
     func setup(_ slide: OnBoardingSlide) {
         // Image, Title and Description
         slideImageView.image = slide.image

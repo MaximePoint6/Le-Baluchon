@@ -10,6 +10,7 @@ import UIKit
 
 class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Outlets
     @IBOutlet weak var currentTranslationView: CustomView!
     @IBOutlet weak var currentTranslationTextView: UITextView!
     @IBOutlet weak var destinationTranslationView: CustomView!
@@ -19,9 +20,10 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // MARK: - Properties
     var activeField: UITextView?
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -56,12 +58,12 @@ class TranslationViewController: UIViewController, UIGestureRecognizerDelegate {
         deregisterFromKeyboardNotifications()
     }
     
-    // MARK: IBAction
+    // MARK: - Actions
     @IBAction func dismissKeyBoardAfterGestureRecognizer(_ sender: Any) {
         dismissKeyBoard()
     }
     
-    // MARK: private function
+    // MARK: - Private functions
     @objc private func refreshAfterLanguageNotification(notification: Notification) {
         uiSetup()
     }

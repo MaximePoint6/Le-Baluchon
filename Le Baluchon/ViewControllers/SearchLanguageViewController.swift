@@ -11,17 +11,19 @@ import UIKit
 
 class SearchLanguageViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var languageTableView: UITableView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    // MARK: - Properties
     private let languageCellIdentifier = "LanguageCell"
     // Languages that will be added in the tableView
     private var datasOfLanguageTableView = [Languages]()
     /// Array of Language Enum with alphabetical sorting
     private var languages: [Languages] = (Languages.allCases.map { $0 }).sorted { $0.description < $1.description }
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate and dataSource
@@ -34,12 +36,12 @@ class SearchLanguageViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: IBAction
+    // MARK: - Actions
     @IBAction func closeButton(_ sender: Any) {
         dismiss(animated: true)
     }
     
-    // MARK: private function
+    // MARK: - Private functions
     private func setupUI() {
         cancelButton.setTitle("cancel".localized(), for: .normal)
         searchBar.placeholder = "language".localized()

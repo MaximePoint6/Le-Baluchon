@@ -10,13 +10,13 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
     }
     
-    // MARK: private function
+    // MARK: - Private functions
     private func setupUI() {
         tabBar.items?[0].title = "weather".localized()
         tabBar.items?[1].title = "exchange.rate".localized()

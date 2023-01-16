@@ -9,12 +9,14 @@ import UIKit
 
 class WeatherComponentView: UIView {
     
+    // MARK: - Outlets
     @IBOutlet weak var skyLabel: UILabel!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var iconWeather: UIImageView!
     @IBOutlet weak var localDate: UILabel!
     
+    // MARK: - Override functions
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewInit()
@@ -27,6 +29,7 @@ class WeatherComponentView: UIView {
         setupUI()
     }
     
+    // MARK: - Functions
     private func viewInit() {
         let identifier = String(describing: WeatherComponentView.self)
         let viewFromXib = Bundle.main.loadNibNamed(identifier, owner: self, options: nil)![0] as! UIView

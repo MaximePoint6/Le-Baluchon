@@ -11,9 +11,10 @@ import UIKit
 // Spinner screen during loading
 class SpinnerViewController: UIViewController {
 
+    // MARK: - Properties
     var spinner = UIActivityIndicatorView(style: .large)
 
-    // MARK: override function
+    // MARK: - Override functions
     override func loadView() {
         view = UIView()
         view.backgroundColor = UIColor(white: 0, alpha: 0.7)

@@ -9,11 +9,13 @@ import UIKit
 
 class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var button: UIButton!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     
+    // MARK: - Properties
     /// Returns the current page / slide of OnBoarding Screen, and changes the button title of the slide
     private var currentPage = 0 {
         didSet {
@@ -40,7 +42,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    // MARK: override function
+    // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -81,7 +83,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    // MARK: IBAction
+    // MARK: - Actions
     /// When the user click on next button
     @IBAction func nextButtonClicked(_ sender: Any) {
         dismissKeyBoard()
@@ -107,7 +109,7 @@ class OnBoardingViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    // MARK: private function
+    // MARK: - Private functions
     /// Refresh the collection View with its new data
     private func refresh() {
         collectionView.reloadData()
