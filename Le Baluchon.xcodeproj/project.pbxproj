@@ -38,7 +38,6 @@
 		CAAF442C2952F0000071BDD8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */; };
 		CAAF442E2952F3830071BDD8 /* OnBoardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF442D2952F3830071BDD8 /* OnBoardingSlide.swift */; };
 		CAAF44312952F5A60071BDD8 /* OnBoardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF44302952F5A60071BDD8 /* OnBoardingCollectionViewCell.swift */; };
-		CAAF44352954A7E60071BDD8 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAF44342954A7E60071BDD8 /* UserDefaultsKeys.swift */; };
 		CAB83F852927CEC800BB1D30 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */; };
 		CAB83F89292A686700BB1D30 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F88292A686700BB1D30 /* ApiKey.swift */; };
 		CAB83F8B292A6EDB00BB1D30 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB83F8A292A6EDB00BB1D30 /* WeatherService.swift */; };
@@ -140,7 +139,6 @@
 		CAAF442B2952F0000071BDD8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CAAF442D2952F3830071BDD8 /* OnBoardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingSlide.swift; sourceTree = "<group>"; };
 		CAAF44302952F5A60071BDD8 /* OnBoardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCollectionViewCell.swift; sourceTree = "<group>"; };
-		CAAF44342954A7E60071BDD8 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		CAB83F7F2927C89000BB1D30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Le Baluchon/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		CAB83F842927CEC800BB1D30 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CAB83F88292A686700BB1D30 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 				CAFF66CB2961FA4900CCA986 /* ExchangeRate.swift */,
 				CAF696272962E2480059779A /* Translation.swift */,
 				CAFD20C8294C55B600B96D52 /* ServiceError.swift */,
-				CAAF44342954A7E60071BDD8 /* UserDefaultsKeys.swift */,
 				CAAF441B294E3AB00071BDD8 /* DateFormatter.swift */,
 				CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */,
 			);
@@ -609,7 +606,6 @@
 				CA6635472964727900EE5152 /* CustomView.swift in Sources */,
 				CA8E63FD2930C26800CF0440 /* CityService.swift in Sources */,
 				CAB83F852927CEC800BB1D30 /* UIColor+Extension.swift in Sources */,
-				CAAF44352954A7E60071BDD8 /* UserDefaultsKeys.swift in Sources */,
 				CA8E64072939338700CF0440 /* UIImageView+Extension.swift in Sources */,
 				CAFF66C8295F3BEC00CCA986 /* CountryService.swift in Sources */,
 				CAF074882940BEF100F0FC74 /* SearchCityViewController.swift in Sources */,

@@ -10,6 +10,16 @@ import UIKit
 
 struct UserSettings {
     
+    private enum UserDefaultsKeys: String {
+        case userName
+        case userPicture
+        case userLanguage
+        case currentCity
+        case destinationCity
+        case temperatureUnit
+        case onBoardingScreenWasShown
+    }
+    
     /// User Name recorded in the UserDefaults of the application.
     static var userName: String {
         get {

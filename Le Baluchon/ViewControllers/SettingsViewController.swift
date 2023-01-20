@@ -24,9 +24,6 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Properties
     private let settingCellIdentifier = "SettingCell"
     
-    private var datasOfCurrentCityTableView = [City]()
-    private var datasOfDestinationCityTableView = [City]()
-    
     /// List of Language Enum with alphabetical sorting
     private var languagesList: [Languages] = (Languages.allCases.map { $0 }).sorted { $0.description < $1.description }
     
