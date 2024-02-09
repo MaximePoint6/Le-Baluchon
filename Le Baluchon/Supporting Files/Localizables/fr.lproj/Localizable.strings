@@ -44,6 +44,7 @@
 "language" = "Langue";
 "temp.unit.label" = "Température";
 "validate" = "Valider";
+"swiftUIView" = "Navigation vers la SwiftUIView";
 
 // SearchCityViewController
 "city" = "Ville";

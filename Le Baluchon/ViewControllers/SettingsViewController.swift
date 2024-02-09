@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Photos
 import PhotosUI
+import SwiftUI
 
 class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -20,6 +21,7 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var userPictureButton: UIButton!
     @IBOutlet weak var tempUnitLabel: UILabel!
     @IBOutlet weak var validateButton: UIButton!
+    @IBOutlet weak var navigationToTheSwiftUIViewButton: UIButton!
     
     // MARK: - Properties
     private let settingCellIdentifier = "SettingCell"
@@ -52,7 +54,6 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
             VC?.cityType = cityType ?? .current
         }
     }
-    
     
     // MARK: - Actions
     @IBAction func temperatureUnitChange(_ sender: Any) {
@@ -87,6 +88,17 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
         dismissKeyBoard()
     }
     
+    @IBAction func navigationToTheSwiftUIViewButton(_ sender: Any) {
+        let viewModel = SwiftUIViewViewModel()
+        let swiftUIVC = UIHostingController(rootView: SwiftUITestView(viewModel: viewModel))
+        
+        // Modal :
+        present(swiftUIVC, animated: true, completion: nil)
+        
+        // navigation (/!\ add navigationController in storyboard)
+//        navigationController?.pushViewController(swiftUIVC, animated: true)
+    }
+    
     
     // MARK: - Private functions
     private func setupUI() {
@@ -105,6 +117,8 @@ class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
             temperatureUnitSegmentedControl.insertSegment(withTitle: $0.rawValue,
                                                           at: temperatureUnitSegmentedControl.numberOfSegments,
                                                           animated: false)
+        // navigationToTheSwiftUIViewButton
+        navigationToTheSwiftUIViewButton.setTitle("swiftUIView".localized(), for: .normal)
         }
     }
     
@@ -148,6 +162,7 @@ extension SettingsViewController: UITableViewDataSource {
         return 3 // Number of cells in each section
     }
     
+    
     // Add cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: settingCellIdentifier, for: indexPath)
@@ -174,6 +189,7 @@ extension SettingsViewController: UITableViewDataSource {
         } else { }
         return cell
     }
+
     
 }
 

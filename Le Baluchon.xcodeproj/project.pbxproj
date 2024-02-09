@@ -10,6 +10,8 @@
 		CA101B73295CA9C000D938FA /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */; };
 		CA36C24E2954BF3400F2952E /* TitledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24D2954BF3400F2952E /* TitledTextField.swift */; };
 		CA36C2502954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift */; };
+		CA5800FC2B7668AF00E717FF /* SwiftUITestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5800FB2B7668AF00E717FF /* SwiftUITestView.swift */; };
+		CA5800FF2B7675ED00E717FF /* SwiftUIViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5800FE2B7675ED00E717FF /* SwiftUIViewViewModel.swift */; };
 		CA6635472964727900EE5152 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6635462964727900EE5152 /* CustomView.swift */; };
 		CA775AB82965DF070074E5F6 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA775AB72965DF070074E5F6 /* SpinnerViewController.swift */; };
 		CA8E63E0292AA67E00CF0440 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E63DF292AA67E00CF0440 /* Weather.swift */; };
@@ -110,6 +112,8 @@
 		CA101B72295CA9C000D938FA /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 		CA36C24D2954BF3400F2952E /* TitledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledTextField.swift; sourceTree = "<group>"; };
 		CA36C24F2954F64300F2952E /* ContainsOnBoardingCollectionView+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContainsOnBoardingCollectionView+Protocol.swift"; sourceTree = "<group>"; };
+		CA5800FB2B7668AF00E717FF /* SwiftUITestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITestView.swift; sourceTree = "<group>"; };
+		CA5800FE2B7675ED00E717FF /* SwiftUIViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewViewModel.swift; sourceTree = "<group>"; };
 		CA6635462964727900EE5152 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		CA775AB72965DF070074E5F6 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		CA8E63DF292AA67E00CF0440 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -226,6 +230,15 @@
 				CA6635462964727900EE5152 /* CustomView.swift */,
 			);
 			path = UIClass;
+			sourceTree = "<group>";
+		};
+		CA5800FD2B7675E200E717FF /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				CA5800FB2B7668AF00E717FF /* SwiftUITestView.swift */,
+				CA5800FE2B7675ED00E717FF /* SwiftUIViewViewModel.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		CA8E640A29394D1C00CF0440 /* Extensions */ = {
@@ -351,6 +364,7 @@
 		CACE545B2927C32D00A37F5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CA5800FD2B7675E200E717FF /* SwiftUI */,
 				CACE54342927C25200A37F5A /* LaunchScreen.storyboard */,
 				CACE542F2927C25100A37F5A /* Main.storyboard */,
 				CAAF442F2952F5720071BDD8 /* OnBoarding */,
@@ -608,10 +622,12 @@
 				CAB83F852927CEC800BB1D30 /* UIColor+Extension.swift in Sources */,
 				CA8E64072939338700CF0440 /* UIImageView+Extension.swift in Sources */,
 				CAFF66C8295F3BEC00CCA986 /* CountryService.swift in Sources */,
+				CA5800FC2B7668AF00E717FF /* SwiftUITestView.swift in Sources */,
 				CAF074882940BEF100F0FC74 /* SearchCityViewController.swift in Sources */,
 				CAB83F8D292A875300BB1D30 /* WeatherViewController.swift in Sources */,
 				CAAF441C294E3AB00071BDD8 /* DateFormatter.swift in Sources */,
 				CAFD20C9294C55B600B96D52 /* ServiceError.swift in Sources */,
+				CA5800FF2B7675ED00E717FF /* SwiftUIViewViewModel.swift in Sources */,
 				CAFF66CE2961FDFA00CCA986 /* ExchangeRateViewController.swift in Sources */,
 				CACE542C2927C25100A37F5A /* SceneDelegate.swift in Sources */,
 				CAF07482293A1D4A00F0FC74 /* UIViewController+Extension.swift in Sources */,
@@ -824,7 +840,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = NavyBlueColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3SQYF6L285;
+				DEVELOPMENT_TEAM = 575WV224GB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Le Baluchon/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Travel Buddy";
@@ -858,7 +874,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = NavyBlueColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3SQYF6L285;
+				DEVELOPMENT_TEAM = 575WV224GB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Le Baluchon/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Travel Buddy";
